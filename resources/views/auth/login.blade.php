@@ -68,7 +68,7 @@
             @if(\App\Utils::config(\App\Enums\ConfigKey::OauthEnable))
             <div class="pt-1">
                 <a href="{{ route('oauth.redirect') }}"
-                    class="w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 flex items-center justify-center gap-2 border-2 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50">
+                    class="w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 flex items-center justify-center gap-2 border-2 border-slate-200 text-slate-700 hover:border-slate-300">
                     <i class="fas fa-shield-alt"></i>
                     <span>{{ \App\Utils::config(\App\Enums\ConfigKey::OauthProviderName) ?: 'OAuth 2.0' }} 登录</span>
                 </a>

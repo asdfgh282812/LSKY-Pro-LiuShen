@@ -74,7 +74,7 @@
 </div>
 </body>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}?t=20220817"></script>
+<script src="{{ asset('js/app.js') }}?t=20260513"></script>
 @include('common.notice')
 <script>
     // 开关组件默认值
