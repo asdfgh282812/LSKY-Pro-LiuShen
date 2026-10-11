@@ -128,7 +128,7 @@
                     <span id="date-range-label">全部时间</span>
                     <i class="fas fa-calendar-alt text-emerald-400"></i>
                 </button>
-                <div id="date-range-panel" class="hidden absolute right-0 mt-2 z-[6] w-[19rem] p-3 rounded-xl" style="background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: 0 12px 32px rgba(0,0,0,0.18);">
+                <div id="date-range-panel" class="hidden absolute right-0 mt-2 z-[6] p-3 rounded-xl" style="width: min(19rem, calc(100vw - 1.5rem)); background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: 0 12px 32px rgba(0,0,0,0.18);">
                     <div class="flex items-end gap-2">
                         <div class="flex-1">
                             <label for="date-start" class="block text-xs font-medium text-slate-500 mb-1">开始日期</label>
