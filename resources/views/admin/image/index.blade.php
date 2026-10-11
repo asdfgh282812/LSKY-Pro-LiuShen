@@ -8,11 +8,87 @@
             </div>
             <h2 class="font-bold text-lg text-slate-800">图片管理</h2>
         </div>
-        <form class="w-full flex items-center justify-center py-3 md:py-5 lg:py-7" action="{{ route('admin.images') }}" method="get">
-            <div class="w-full md:w-[70%] lg:w-[60%] flex flex-col">
-                <input class="px-4 py-2.5 text-sm rounded-xl bg-white border border-slate-200 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 shadow-sm" name="keywords" placeholder="输入关键字回车搜索..." value="{{ request('keywords') }}" />
-                <div class="w-full flex justify-end">
-                    <a href="javascript:void(0)" id="grammar" class="inline-block mt-2 text-xs text-gray-600">高级搜索语法</a>
+        <form class="w-full flex items-center justify-center py-3 md:py-5 lg:py-7 px-2" action="{{ route('admin.images') }}" method="get" id="image-filter-form">
+            <div class="w-full md:w-[80%] lg:w-[70%] flex flex-col gap-2">
+                <div class="flex gap-2">
+                    <div class="relative flex-1">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input class="w-full pl-8 pr-4 py-2.5 text-sm rounded-xl bg-white border border-slate-200 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 shadow-sm" name="keywords" placeholder="输入关键字搜索，支持高级语法..." value="{{ request('keywords') }}" />
+                    </div>
+                    <x-button type="submit" class="whitespace-nowrap">搜索</x-button>
+                    <x-button type="button" id="filter-toggle" class="whitespace-nowrap">
+                        <i class="fas fa-filter text-xs"></i> 筛选
+                    </x-button>
+                    <x-button type="button" id="filter-reset" class="whitespace-nowrap">
+                        <i class="fas fa-undo text-xs"></i> 重置
+                    </x-button>
+                </div>
+                <div id="filter-panel" class="rounded-xl bg-white border border-slate-200 shadow-sm p-3" @if(!$filtersActive) style="display: none" @endif>
+                    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+                        <div>
+                            <label for="filter-permission" class="block text-xs font-medium text-slate-500 mb-1">权限</label>
+                            <select id="filter-permission" name="filter[permission]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="">全部</option>
+                                <option value="public" {{ request('filter.permission') === 'public' ? 'selected' : '' }}>公开</option>
+                                <option value="private" {{ request('filter.permission') === 'private' ? 'selected' : '' }}>私有</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-user-type" class="block text-xs font-medium text-slate-500 mb-1">用户类型</label>
+                            <select id="filter-user-type" name="filter[user_type]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="">全部</option>
+                                <option value="user" {{ request('filter.user_type') === 'user' ? 'selected' : '' }}>注册用户</option>
+                                <option value="guest" {{ request('filter.user_type') === 'guest' ? 'selected' : '' }}>游客</option>
+                                <option value="adminer" {{ request('filter.user_type') === 'adminer' ? 'selected' : '' }}>管理员</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-unhealthy" class="block text-xs font-medium text-slate-500 mb-1">违规状态</label>
+                            <select id="filter-unhealthy" name="filter[unhealthy]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="">全部</option>
+                                <option value="1" {{ request('filter.unhealthy') === '1' ? 'selected' : '' }}>仅违规</option>
+                                <option value="0" {{ request('filter.unhealthy') === '0' ? 'selected' : '' }}>仅正常</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-album" class="block text-xs font-medium text-slate-500 mb-1">相册</label>
+                            <select id="filter-album" name="filter[album_id]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="">全部</option>
+                                <option value="none" {{ request('filter.album_id') === 'none' ? 'selected' : '' }}>未归档</option>
+                                @foreach($albums as $album)
+                                    <option value="{{ $album->id }}" {{ (string) request('filter.album_id') === (string) $album->id ? 'selected' : '' }}>{{ $album->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-group" class="block text-xs font-medium text-slate-500 mb-1">角色组</label>
+                            <select id="filter-group" name="filter[group_id]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="">全部</option>
+                                @foreach($groups as $group)
+                                    <option value="{{ $group->id }}" {{ (string) request('filter.group_id') === (string) $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-strategy" class="block text-xs font-medium text-slate-500 mb-1">储存策略</label>
+                            <select id="filter-strategy" name="filter[strategy_id]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="">全部</option>
+                                @foreach($strategies as $strategy)
+                                    <option value="{{ $strategy->id }}" {{ (string) request('filter.strategy_id') === (string) $strategy->id ? 'selected' : '' }}>{{ $strategy->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-span-2 md:col-span-3 xl:col-span-6">
+                            <label for="filter-order" class="block text-xs font-medium text-slate-500 mb-1">排序</label>
+                            <select id="filter-order" name="order" class="w-full md:w-1/3 rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
+                                <option value="newest" {{ request('order', 'newest') === 'newest' ? 'selected' : '' }}>最新上传</option>
+                                <option value="earliest" {{ request('order') === 'earliest' ? 'selected' : '' }}>最早上传</option>
+                                <option value="utmost" {{ request('order') === 'utmost' ? 'selected' : '' }}>从大到小</option>
+                                <option value="least" {{ request('order') === 'least' ? 'selected' : '' }}>从小到大</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-400"><a href="javascript:void(0)" id="grammar" class="underline">高级搜索语法</a> 仍可在关键字中使用</p>
                 </div>
             </div>
         </form>
@@ -355,6 +431,22 @@
             $('#grammar').click(function () {
                 $('#modal-content').html($('#search-grammar-tpl').html());
                 modal.open('content-modal')
+            });
+
+            $('#filter-toggle').click(function () {
+                $('#filter-panel').toggle();
+            });
+
+            // 筛选项变更后自动提交，无需再点搜索
+            $('#filter-panel select').change(function () {
+                $('#image-filter-form').submit();
+            });
+
+            $('#filter-reset').click(function () {
+                $('#image-filter-form select').val('');
+                $('#image-filter-form select[name="order"]').val('newest');
+                $('#image-filter-form input[name="keywords"]').val('');
+                $('#image-filter-form').submit();
             });
 
             $('.item').click(function () {
