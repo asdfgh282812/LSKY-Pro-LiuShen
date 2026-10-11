@@ -26,6 +26,11 @@
                     <x-input type="text" name="icp_no" id="icp_no" value="{{ $configs->get('icp_no') }}" placeholder="请输入备案号"/>
                 </div>
                 <div>
+                    <label for="avatar_mirror_url" class="block text-sm font-medium text-slate-700">头像镜像地址</label>
+                    <p class="text-xs text-slate-400 mb-1.5">基于邮箱 MD5 的 Gravatar 兼容头像服务地址，末尾斜杠可写可不写，留空使用默认 weavatar.com</p>
+                    <x-input type="url" name="avatar_mirror_url" id="avatar_mirror_url" value="{{ $configs->get('avatar_mirror_url') }}" placeholder="https://weavatar.com/avatar/"/>
+                </div>
+                <div>
                     <label for="site_notice" class="block text-sm font-medium text-slate-700">网站公告</label>
                     <x-textarea type="text" name="site_notice" id="site_notice" placeholder="首页弹出公告，支持Markdown，不设置请留空" rows="7">{{ $configs->get('site_notice') }}</x-textarea>
                 </div>

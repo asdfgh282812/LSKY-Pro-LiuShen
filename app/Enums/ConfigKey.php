@@ -46,6 +46,9 @@ final class ConfigKey
     /** @var string 角色组默认配置 */
     const Group = 'group';
 
+    /** @var string 头像镜像地址 */
+    const AvatarMirrorUrl = 'avatar_mirror_url';
+
     /** @var string 自定义 CSS */
     const CustomCss = 'custom_css';
 

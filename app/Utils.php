@@ -32,7 +32,8 @@ class Utils
      */
     public static function getAvatar($email, int $s = 96, string $d = 'mp', string $r = 'g'): string
     {
-        $url = 'https://cravatar.cn/avatar/';
+        $mirror = trim((string) Utils::config(ConfigKey::AvatarMirrorUrl, ''));
+        $url = ($mirror === '' ? 'https://weavatar.com/avatar/' : rtrim($mirror, '/').'/');
         $url .= md5(strtolower(trim($email)));
         $url .= "?s=$s&d=$d&r=$r";
         return $url;
