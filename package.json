@@ -23,6 +23,7 @@
         "deepmerge": "^4.2.2",
         "dragselect": "^2.3.0",
         "echarts": "^5.2.2",
+        "flatpickr": "^4.6.13",
         "github-markdown-css": "^5.1.0",
         "imagesloaded": "^4.1.4",
         "jquery": "^3.6.0",

@@ -58,3 +58,7 @@ mix.copy('node_modules/imagesloaded/imagesloaded.pkgd.min.js', 'public/js/images
 mix.copy('node_modules/github-markdown-css/github-markdown.css', 'public/css/markdown-css')
 mix.copy('node_modules/github-markdown-css/github-markdown-light.css', 'public/css/markdown-css')
 
+// flatpickr date picker
+mix.copy('node_modules/flatpickr/dist/flatpickr.min.css', 'public/css/flatpickr')
+mix.copy('node_modules/flatpickr/dist/flatpickr.min.js', 'public/js/flatpickr')
+mix.copy('node_modules/flatpickr/dist/l10n/zh.js', 'public/js/flatpickr')

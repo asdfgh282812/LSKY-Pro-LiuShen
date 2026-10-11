@@ -126,6 +126,9 @@ class Image extends Model
 
     public function scopeFilter(Builder $builder, Request $request)
     {
+        $startDate = $this->parseDateFilter($request->query('start_date'));
+        $endDate = $this->parseDateFilter($request->query('end_date'))?->endOfDay();
+
         return $builder->when($request->query('order') ?: 'newest', function (Builder $builder, $order) {
             switch ($order) {
                 case 'earliest':
@@ -150,12 +153,36 @@ class Image extends Model
                     break;
             }
         })->when($request->query('keyword'), function (Builder $builder, $keyword) {
-            $builder->where('origin_name', 'like', "%{$keyword}%")->orWhere('alias_name', 'like', "%{$keyword}%");
+            // 分组包裹，避免 orWhere 泄漏到其他筛选条件上
+            $builder->where(function (Builder $builder) use ($keyword) {
+                $builder->where('origin_name', 'like', "%{$keyword}%")
+                    ->orWhere('alias_name', 'like', "%{$keyword}%");
+            });
+        })->when($startDate, function (Builder $builder, Carbon $startDate) {
+            $builder->where('created_at', '>=', $startDate);
+        })->when($endDate, function (Builder $builder, Carbon $endDate) {
+            $builder->where('created_at', '<=', $endDate);
         })->when((int) $request->query('album_id'), function (Builder $builder, $albumId) {
             $builder->where('album_id', $albumId);
         }, function (Builder $builder) {
             $builder->whereNull('album_id');
         });
+    }
+
+    /**
+     * 解析日期筛选参数，非法或空值返回 null
+     */
+    private function parseDateFilter(mixed $value): ?Carbon
+    {
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        try {
+            return Carbon::parse($value)->startOfDay();
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     public function filename(): Attribute

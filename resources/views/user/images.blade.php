@@ -4,10 +4,58 @@
     <link rel="stylesheet" href="{{ asset('css/justified-gallery/justifiedGallery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/viewer-js/viewer.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/context-js/context-js.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flatpickr/flatpickr.min.css') }}">
+    <style>
+        /* flatpickr 主题适配亮/暗色变量 */
+        .flatpickr-calendar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+        .flatpickr-calendar.arrowTop:before { border-bottom-color: var(--border-strong); }
+        .flatpickr-calendar.arrowTop:after { border-bottom-color: var(--card-bg); }
+        .flatpickr-calendar.arrowBottom:before { border-top-color: var(--border-strong); }
+        .flatpickr-calendar.arrowBottom:after { border-top-color: var(--card-bg); }
+        .flatpickr-months .flatpickr-month,
+        .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month,
+        .flatpickr-weekdays, .flatpickr-weekday, .flatpickr-current-month .flatpickr-monthDropdown-months {
+            color: var(--text-primary);
+            fill: var(--text-primary);
+            background: transparent;
+        }
+        .flatpickr-day {
+            color: var(--text-primary);
+            border-color: transparent;
+        }
+        .flatpickr-day.flatpickr-disabled, .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay {
+            color: var(--text-secondary);
+            opacity: 0.45;
+        }
+        .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover {
+            background: var(--input-bg);
+            border-color: var(--input-border);
+        }
+        .flatpickr-day.today { border-color: #10b981; }
+        .flatpickr-day.today:hover { background: rgba(16, 185, 129, 0.16); color: var(--text-primary); }
+        .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange,
+        .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover,
+        .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus {
+            background: linear-gradient(135deg, #059669, #0d9488);
+            border-color: #059669;
+            color: #fff;
+        }
+        .flatpickr-day.inRange, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.nextMonthDay.inRange {
+            background: rgba(16, 185, 129, 0.14);
+            border-color: transparent;
+            box-shadow: -5px 0 0 rgba(16, 185, 129, 0.14), 5px 0 0 rgba(16, 185, 129, 0.14);
+            color: var(--text-primary);
+        }
+        .flatpickr-input[readonly] { cursor: pointer; background: var(--input-bg); }
+    </style>
 @endpush
 
 <x-app-layout>
-    <div class="relative flex justify-between items-center px-3 py-2 z-[3] top-0 left-0 right-0 bg-white/95 backdrop-blur-sm" style="border-bottom: 1px solid var(--toolbar-border); box-shadow: 0 1px 8px rgba(0,0,0,0.04);">
+    <div class="relative flex flex-wrap justify-between items-center gap-y-2 px-3 py-2 z-[3] top-0 left-0 right-0 bg-white/95 backdrop-blur-sm" style="border-bottom: 1px solid var(--toolbar-border); box-shadow: 0 1px 8px rgba(0,0,0,0.04);">
         <div class="flex items-center gap-1">
             <button class="flex items-center gap-1.5 text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" onclick="getAlbums()">
                 <i class="fas fa-layer-group text-emerald-400 text-xs"></i>相册
@@ -64,17 +112,41 @@
             <x-dropdown direction="left">
                 <x-slot name="trigger">
                     <button id="permission" class="flex items-center gap-1.5 text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium border border-slate-200">
-                        <span>全部</span>
+                        <span>可见</span>
                         <i class="fas fa-filter text-emerald-400"></i>
                     </button>
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('all')">全部</x-dropdown-link>
+                    <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('all')">可见</x-dropdown-link>
                     <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('public')">公开</x-dropdown-link>
                     <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('private')">私有</x-dropdown-link>
                 </x-slot>
             </x-dropdown>
+            <div class="relative">
+                <button type="button" id="date-range-toggle" class="flex items-center gap-1.5 text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium border border-slate-200">
+                    <span id="date-range-label">全部时间</span>
+                    <i class="fas fa-calendar-alt text-emerald-400"></i>
+                </button>
+                <div id="date-range-panel" class="hidden absolute right-0 mt-2 z-[6] w-[19rem] p-3 rounded-xl" style="background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: 0 12px 32px rgba(0,0,0,0.18);">
+                    <div class="flex items-end gap-2">
+                        <div class="flex-1">
+                            <label for="date-start" class="block text-xs font-medium text-slate-500 mb-1">开始日期</label>
+                            <input type="text" id="date-start" readonly placeholder="不限" class="w-full text-sm px-2.5 py-1.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400" style="border-color: var(--input-border); color: var(--text-primary);">
+                        </div>
+                        <span class="text-slate-400 text-xs pb-2">至</span>
+                        <div class="flex-1">
+                            <label for="date-end" class="block text-xs font-medium text-slate-500 mb-1">结束日期</label>
+                            <input type="text" id="date-end" readonly placeholder="不限" class="w-full text-sm px-2.5 py-1.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400" style="border-color: var(--input-border); color: var(--text-primary);">
+                        </div>
+                    </div>
+                    <p class="mt-2 text-[11px] text-slate-400">开始日期不能晚于结束日期</p>
+                    <div class="flex justify-end gap-2 mt-2">
+                        <button type="button" id="date-range-clear" class="text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-all duration-150 border border-slate-200">清除</button>
+                        <button type="button" id="date-range-apply" class="text-xs py-1.5 px-3 rounded-lg text-white font-medium transition-all duration-150" style="background: linear-gradient(135deg, #059669, #0d9488);">应用</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="relative inset-0 h-full overflow-hidden">
@@ -205,6 +277,8 @@
         <script src="{{ asset('js/context-js/context-js.js') }}"></script>
         <script src="{{ asset('js/clipboard/index.browser.js') }}"></script>
         <script src="{{ asset('js/clipboard/clipboard.min.js') }}"></script>
+        <script src="{{ asset('js/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ asset('js/flatpickr/zh.js') }}"></script>
         <script>
             let gridConfigs = {
                 rowHeight: 180,
@@ -452,8 +526,76 @@
 
             const setPermission = function (permission) {
                 resetImages({page: 1, permission: permission})
-                $('#permission span').text({public: '公开', private: '私有', all: '全部'}[permission]);
+                $('#permission span').text({public: '公开', private: '私有', all: '可见'}[permission]);
             };
+
+            // 时间范围筛选（flatpickr）
+            const dateStartPicker = flatpickr('#date-start', {
+                locale: 'zh',
+                dateFormat: 'Y-m-d',
+                disableMobile: true,
+                onChange: function (selectedDates, dateStr) {
+                    // 开始日期限制结束日期可选的最小值
+                    dateEndPicker.set('minDate', dateStr || null);
+                },
+            });
+
+            const dateEndPicker = flatpickr('#date-end', {
+                locale: 'zh',
+                dateFormat: 'Y-m-d',
+                disableMobile: true,
+                onChange: function (selectedDates, dateStr) {
+                    // 结束日期限制开始日期可选的最大值
+                    dateStartPicker.set('maxDate', dateStr || null);
+                },
+            });
+
+            const updateDateRangeLabel = function (start, end) {
+                if (start && end) {
+                    $('#date-range-label').text(`${start} ~ ${end}`);
+                } else if (start) {
+                    $('#date-range-label').text(`${start} 之后`);
+                } else if (end) {
+                    $('#date-range-label').text(`${end} 之前`);
+                } else {
+                    $('#date-range-label').text('全部时间');
+                }
+            };
+
+            $('#date-range-toggle').click(function (e) {
+                e.stopPropagation();
+                $('#date-range-panel').toggleClass('hidden');
+            });
+
+            $(document).click(function (e) {
+                // flatpickr 的日历挂载在 body 上，需单独排除，避免选择日期时收起面板
+                if (!$(e.target).closest('#date-range-panel, #date-range-toggle, .flatpickr-calendar').length) {
+                    $('#date-range-panel').addClass('hidden');
+                }
+            });
+
+            $('#date-range-apply').click(function () {
+                const start = $('#date-start').val();
+                const end = $('#date-end').val();
+
+                // 前者不得晚于后者
+                if (start && end && start > end) {
+                    return toastr.error('开始日期不能晚于结束日期');
+                }
+
+                resetImages({page: 1, start_date: start || '', end_date: end || ''});
+                updateDateRangeLabel(start, end);
+                $('#date-range-panel').addClass('hidden');
+            });
+
+            $('#date-range-clear').click(function () {
+                dateStartPicker.clear();
+                dateEndPicker.clear();
+                dateStartPicker.set('maxDate', null);
+                dateEndPicker.set('minDate', null);
+                resetImages({page: 1, start_date: '', end_date: ''});
+                updateDateRangeLabel('', '');
+            });
 
             $('#search').keydown(function (e) {
                 if (e.keyCode === 13) {

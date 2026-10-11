@@ -678,6 +678,16 @@
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
                             <td class="px-3 py-2 whitespace-nowrap">筛选关键字</td>
                         </tr>
+                        <tr>
+                            <td class="px-3 py-2 whitespace-nowrap">start_date</td>
+                            <td class="px-3 py-2 whitespace-nowrap">Date</td>
+                            <td class="px-3 py-2 whitespace-nowrap">开始日期，格式 Y-m-d，筛选该日期（含）之后上传的图片</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2 whitespace-nowrap">end_date</td>
+                            <td class="px-3 py-2 whitespace-nowrap">Date</td>
+                            <td class="px-3 py-2 whitespace-nowrap">结束日期，格式 Y-m-d，筛选该日期（含）之前上传的图片</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
