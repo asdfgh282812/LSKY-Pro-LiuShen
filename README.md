@@ -105,7 +105,7 @@
 
 ### 前置要求
 
-- PHP >= 8.0.2
+- PHP >= 8.0.2（强烈建议使用最新安全版本，如 8.5.12 / 8.4.27 / 8.3.36；8.1 及更早版本已停止维护，不会获得安全修复）
 - MySQL 5.7+ / PostgreSQL 9.6+ / SQLite 3.8.8+
 - BCMath, Ctype, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, Imagick 扩展
 - `exec`, `shell_exec`, `readlink`, `symlink`, `putenv`, `getenv`, `chmod`, `chown`, `fileperms` 函数可用
