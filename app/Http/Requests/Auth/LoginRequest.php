@@ -70,13 +70,9 @@ class LoginRequest extends FormRequest
      */
     public function ensureSsoIsNotRequired()
     {
-        if (! app(OAuthService::class)->isForceLogin()) {
-            return;
-        }
-
         $user = User::query()->where('email', $this->input('email'))->first();
 
-        if ($user && $user->oauthAccounts()->exists() && Hash::check((string) $this->input('password'), $user->password)) {
+        if ($user && app(OAuthService::class)->requiresSsoLogin($user) && Hash::check((string) $this->input('password'), $user->password)) {
             throw ValidationException::withMessages([
                 'email' => '網站已啟用強制 SSO 登入，該帳號已綁定 SSO，請使用 SSO 登入',
             ]);

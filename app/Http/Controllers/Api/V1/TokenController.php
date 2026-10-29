@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Concerns\InteractsWithTokenAbilities;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\OAuth\OAuthService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,10 @@ class TokenController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return $this->fail('The email address or password is incorrect.');
+        }
+
+        if (app(OAuthService::class)->requiresSsoLogin($user)) {
+            return $this->fail('網站已啟用強制 SSO 登入，該帳號請改至網頁端登入後於「API」頁面建立 Token');
         }
 
         $abilities = $this->normalizedRequestedAbilities($request->input('abilities'));

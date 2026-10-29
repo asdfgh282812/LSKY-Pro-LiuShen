@@ -94,6 +94,30 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticated();
     }
 
+    public function test_bound_users_can_not_get_api_token_with_password_when_sso_is_forced()
+    {
+        $this->forceSso(true);
+        $user = User::factory()->create();
+        $user->oauthAccounts()->create([
+            'provider' => 'custom-oauth',
+            'provider_user_id' => 'sso-3',
+        ]);
+
+        $this->postJson('/api/v1/tokens', ['email' => $user->email, 'password' => 'password'])
+            ->assertJsonPath('status', false);
+
+        $this->assertDatabaseCount('personal_access_tokens', 0);
+    }
+
+    public function test_unbound_users_can_still_get_api_token_with_password_when_sso_is_forced()
+    {
+        $this->forceSso(true);
+        $user = User::factory()->create();
+
+        $this->postJson('/api/v1/tokens', ['email' => $user->email, 'password' => 'password'])
+            ->assertJsonPath('status', true);
+    }
+
     private function forceSso(bool $force): void
     {
         foreach ([ConfigKey::OauthEnable => 1, ConfigKey::OauthForceLogin => (int) $force] as $name => $value) {

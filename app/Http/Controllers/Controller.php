@@ -32,7 +32,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, Result;
 
-    protected function forbidden(string $message = null): Response
+    protected function forbidden(?string $message = null): Response
     {
         return $this->response(false, $message ?: config('token_abilities.forbidden_message'), [], 403);
     }

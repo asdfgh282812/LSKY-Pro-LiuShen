@@ -6,8 +6,8 @@
 
 <div align="center">
 
-[![PHP](https://img.shields.io/badge/PHP-%3E%3D8.0-777bb4?logo=php)](http://php.net)
-[![Laravel](https://img.shields.io/badge/Laravel-9.x-ff2d20?logo=laravel)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-%3E%3D8.3-777bb4?logo=php)](http://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-ff2d20?logo=laravel)](https://laravel.com)
 [![License](https://img.shields.io/badge/License-GPL%20v3-yellowgreen)](https://github.com/lsky-org/lsky-pro/blob/master/LICENSE)
 [![Docker](https://img.shields.io/badge/Docker-willowgod%2Flsky--liushen-2496ed?logo=docker)](https://hub.docker.com/r/willowgod/lsky-liushen)
 [![Original](https://img.shields.io/badge/上游-lsky--org%2Flsky--pro-8b5cf6)](https://github.com/lsky-org/lsky-pro)
@@ -105,7 +105,7 @@
 
 ### 前置要求
 
-- PHP >= 8.0.2（强烈建议使用 8.3.36：当前依赖可兼容的最新安全版本，已修复 2026-10 的严重漏洞；8.4 / 8.5 需先升级 Laravel 与相关依赖；8.1 及更早版本已停止维护，不会获得安全修复）
+- PHP >= 8.3（强烈建议使用当前最新的安全版本，目前为 8.5.12；8.2 及更早版本已不再支持。若需在反向代理后运行，请在 `.env` 中设置 `TRUSTED_PROXIES`）
 - MySQL 5.7+ / PostgreSQL 9.6+ / SQLite 3.8.8+
 - BCMath, Ctype, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, Imagick 扩展
 - `exec`, `shell_exec`, `readlink`, `symlink`, `putenv`, `getenv`, `chmod`, `chown`, `fileperms` 函数可用
@@ -243,7 +243,7 @@ php artisan migrate
 
 | 类型 | 技术 |
 |------|------|
-| 后端框架 | Laravel 9.x |
+| 后端框架 | Laravel 13.x |
 | 前端框架 | Alpine.js + jQuery |
 | CSS 方案 | Tailwind CSS 3 + Less |
 | 构建工具 | Laravel Mix |

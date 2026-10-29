@@ -3,6 +3,7 @@
 namespace App\Services\OAuth;
 
 use App\Enums\ConfigKey;
+use App\Models\User;
 use App\Utils;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
@@ -24,6 +25,12 @@ class OAuthService
     public function isForceLogin(): bool
     {
         return $this->isEnabled() && (bool) Utils::config(ConfigKey::OauthForceLogin, false);
+    }
+
+    /** 強制 SSO 時，已綁定 SSO 的帳號不得以密碼取得登入狀態或 Token */
+    public function requiresSsoLogin(User $user): bool
+    {
+        return $this->isForceLogin() && $user->oauthAccounts()->exists();
     }
 
     public function canRegister(): bool

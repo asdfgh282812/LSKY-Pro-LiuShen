@@ -56,6 +56,12 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    /*
+    | 受信任的反向代理（逗號分隔的 IP / CIDR，* 為全部信任，空值為不信任任何代理）
+    */
+
+    'trusted_proxies' => env('TRUSTED_PROXIES', '*'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

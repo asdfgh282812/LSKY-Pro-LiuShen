@@ -212,6 +212,7 @@ class TokenAbilityTest extends TestCase
             ->assertJsonPath('message', config('token_abilities.forbidden_message'));
 
         $deleteToken = $user->createToken('delete-only', ['albums.delete'])->plainTextToken;
+        $this->app['auth']->forgetGuards();
 
         $this->withToken($deleteToken)
             ->deleteJson("/api/v1/albums/{$album->id}")
@@ -315,7 +316,7 @@ class TokenAbilityTest extends TestCase
         /** @var Strategy $strategy */
         $strategy = $group->strategies()->firstOrFail();
 
-        return Image::query()->create([
+        $image = (new Image())->forceFill([
             'user_id' => $user->id,
             'group_id' => $group->id,
             'strategy_id' => $strategy->id,
@@ -336,5 +337,8 @@ class TokenAbilityTest extends TestCase
             'is_unhealthy' => false,
             'uploaded_ip' => '127.0.0.1',
         ]);
+        $image->save();
+
+        return $image;
     }
 }
