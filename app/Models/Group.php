@@ -43,21 +43,21 @@ class Group extends Model
         'top-left' => '左上角',
         'top' => '上中',
         'top-right' => '右上角',
-        'left' => '左边',
-        'center' => '中间',
-        'right' => '右边',
+        'left' => '左邊',
+        'center' => '中間',
+        'right' => '右邊',
         'bottom-left' => '左下角',
         'bottom' => '下中',
         'bottom-right' => '右下角',
-        'tiled' => '平铺',
+        'tiled' => '平鋪',
     ];
 
     const SCENES = [
-        'porn' => '智能鉴黄',
+        'porn' => '智慧鑑黃',
         'terrorism' => '暴恐涉政',
-        'ad' => '图文违规',
-        'qrcode' => '二维码',
-        'live' => '不良场景',
+        'ad' => '圖文違規',
+        'qrcode' => '二維碼',
+        'live' => '不良場景',
         'logo' => 'Logo',
     ];
 
@@ -75,7 +75,7 @@ class Group extends Model
     }
 
     /**
-     * 获取组默认配置
+     * 取得組預設設定
      *
      * @return Collection
      */

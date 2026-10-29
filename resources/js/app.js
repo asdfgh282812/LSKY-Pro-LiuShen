@@ -26,9 +26,9 @@ window.utils = {
         return parseFloat((bytes / Math.pow(c, f)).toFixed(d)) + " " + e[f];
     },
     /**
-     * 更新进度条
-     * @param size 增加的字节(kb)
-     * @param total 总共有多少字节(kb)
+     * 更新進度條
+     * @param size 增加的位元組(kb)
+     * @param total 總共有多少位元組(kb)
      */
     setCapacityProgress(size, total) {
         let $progress = $('#capacity-progress');
@@ -66,9 +66,9 @@ window.utils = {
     infiniteScroll(selector, options) {
         if ($(selector).length > 0) {
             let classes = options.classes || {};
-            let loadingText = options.loadingText || '加载中...';
-            let finishedText = options.finishedText || '我也是有底线的~';
-            let errorText = options.errorText || '加载失败';
+            let loadingText = options.loadingText || '載入中...';
+            let finishedText = options.finishedText || '我也是有底線的~';
+            let errorText = options.errorText || '載入失敗';
             let offset = options.offset || 30;
             let props = {
                 loading: false,
@@ -99,7 +99,7 @@ window.utils = {
                         // no more
                         $btn.text(finishedText).addClass('disabled')
                     } else {
-                        $btn.text('加载更多').removeClass('disabled')
+                        $btn.text('載入更多').removeClass('disabled')
                     }
                     if (opts.data.page !== undefined) {
                         opts.data.page++;
@@ -129,7 +129,7 @@ window.utils = {
                 axios.get(opts.url, {params: opts.data}).then(opts.success).catch(opts.error).finally(opts.complete);
             };
 
-            // 首次加载
+            // 首次載入
             load();
             $(selector).off('click').on('click', 'span:not(.disabled)', () => load());
 

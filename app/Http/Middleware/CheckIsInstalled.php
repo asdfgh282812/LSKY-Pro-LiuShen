@@ -12,7 +12,7 @@ class CheckIsInstalled
 
     public function handle(Request $request, Closure $next)
     {
-        // 检测程序是否安装
+        // 檢測程式是否安裝
         if (! file_exists(base_path('installed.lock'))) {
             if (! $request->expectsJson()) {
                 return redirect('install');

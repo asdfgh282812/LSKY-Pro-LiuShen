@@ -4,7 +4,7 @@ namespace App\Enums\Strategy;
 
 final class KodoOption
 {
-    /** @var string 访问地址 */
+    /** @var string 存取位址 */
     const Url = 'url';
 
     /** @var string AccessKey */

@@ -1,4 +1,4 @@
-@section('title', '系统控制台')
+@section('title', '系統主控台')
 
 @push('styles')
     <style>
@@ -33,55 +33,55 @@
     @if(config('app.debug'))
         <p class="mt-4 p-2 rounded-md text-sm bg-red-500 text-white">
             <i class="fas fa-exclamation-triangle"></i>
-            当前系统 debug 已被打开，敏感信息暴露在外，可能会被利用从而影响系统稳定性，生产环境中请务必关闭！
+            當前系統 debug 已被開啟，敏感資訊暴露在外，可能會被利用從而影響系統穩定性，生產環境中請務必關閉！
         </p>
     @endif
     <div class="my-6 md:my-9">
-        <p class="admin-section-title">概览</p>
+        <p class="admin-section-title">概覽</p>
         <div class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {{-- 图片数量 --}}
+            {{-- 圖片數量 --}}
             <div class="stat-card rounded-2xl p-5 flex items-center gap-4 relative overflow-hidden" style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1px solid rgba(16,185,129,0.2); box-shadow: 0 4px 20px rgba(16,185,129,0.1);">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(16,185,129,0.15);">
                     <i class="fas fa-images text-xl" style="color: #059669;"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-medium" style="color: #6b7280;">图片数量</p>
+                    <p class="text-xs font-medium" style="color: #6b7280;">圖片數量</p>
                     <p class="font-bold text-2xl mt-0.5" style="color: #065f46;">{{ \App\Utils::shortenNumber(\App\Models\Image::query()->count()) }}</p>
                 </div>
             </div>
-            {{-- 相册数量 --}}
+            {{-- 相簿數量 --}}
             <div class="stat-card rounded-2xl p-5 flex items-center gap-4 relative overflow-hidden" style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1px solid rgba(14,165,233,0.2); box-shadow: 0 4px 20px rgba(14,165,233,0.1);">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(14,165,233,0.15);">
                     <i class="fas fa-tags text-xl" style="color: #0284c7;"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-medium" style="color: #6b7280;">相册数量</p>
+                    <p class="text-xs font-medium" style="color: #6b7280;">相簿數量</p>
                     <p class="font-bold text-2xl mt-0.5" style="color: #0c4a6e;">{{ \App\Utils::shortenNumber(\App\Models\Album::query()->count()) }}</p>
                 </div>
             </div>
-            {{-- 用户数量 --}}
+            {{-- 使用者數量 --}}
             <div class="stat-card rounded-2xl p-5 flex items-center gap-4 relative overflow-hidden" style="background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid rgba(20,184,166,0.2); box-shadow: 0 4px 20px rgba(20,184,166,0.1);">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(20,184,166,0.15);">
                     <i class="fas fa-users text-xl" style="color: #0d9488;"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-medium" style="color: #6b7280;">用户数量</p>
+                    <p class="text-xs font-medium" style="color: #6b7280;">使用者數量</p>
                     <p class="font-bold text-2xl mt-0.5" style="color: #134e4a;">{{ \App\Utils::shortenNumber(\App\Models\User::query()->count()) }}</p>
                 </div>
             </div>
-            {{-- 占用储存 --}}
+            {{-- 佔用儲存 --}}
             <div class="stat-card rounded-2xl p-5 flex items-center gap-4 relative overflow-hidden" style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px solid rgba(100,116,139,0.18); box-shadow: 0 4px 20px rgba(100,116,139,0.1);">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(100,116,139,0.1);">
                     <i class="fas fa-server text-xl" style="color: #64748b;"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-medium" style="color: #6b7280;">占用储存</p>
+                    <p class="text-xs font-medium" style="color: #6b7280;">佔用儲存</p>
                     <p class="font-bold text-xl mt-0.5 leading-tight" style="color: #1e293b;">{{ \App\Utils::formatSize(\App\Models\Image::query()->sum('size') * 1024) }}</p>
                 </div>
             </div>
 
-            {{-- 上传统计 4 项 --}}
-            @foreach([['today','今日上传'],['yesterday','昨日上传'],['week','本周上传'],['month','本月上传']] as [$key,$label])
+            {{-- 上傳統計 4 項 --}}
+            @foreach([['today','今日上傳'],['yesterday','昨日上傳'],['week','本週上傳'],['month','本月上傳']] as [$key,$label])
             <div class="stat-card flex items-center gap-4 rounded-xl bg-white p-4 shadow-custom" style="transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);">
                 <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(16,185,129,0.08);">
                     <i class="fas fa-upload text-emerald-500"></i>
@@ -94,22 +94,22 @@
             @endforeach
         </div>
 
-        <p class="admin-section-title">趋势</p>
+        <p class="admin-section-title">趨勢</p>
         <div class="admin-section h-80 p-4" id="chart">
             <canvas></canvas>
         </div>
 
-        <p class="admin-section-title">系统情况</p>
+        <p class="admin-section-title">系統情況</p>
         <div class="admin-section !p-0 overflow-hidden">
             <dl>
                 <div class="bg-slate-50/60 px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">操作系统</dt>
+                    <dt class="text-sm font-medium text-slate-500">作業系統</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         {{ php_uname() }}
                     </dd>
                 </div>
                 <div class="bg-white px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">运行环境</dt>
+                    <dt class="text-sm font-medium text-slate-500">執行環境</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         {{ request()->server('SERVER_SOFTWARE') }}
                     </dd>
@@ -121,13 +121,13 @@
                     </dd>
                 </div>
                 <div class="bg-white px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">文件上传限制</dt>
+                    <dt class="text-sm font-medium text-slate-500">檔案上傳限制</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         {{ ini_get("upload_max_filesize") }}
                     </dd>
                 </div>
                 <div class="bg-slate-50/60 px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">POST 数据最大限制</dt>
+                    <dt class="text-sm font-medium text-slate-500">POST 資料最大限制</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         {{ ini_get('post_max_size') }}
                     </dd>
@@ -135,27 +135,27 @@
             </dl>
         </div>
 
-        <p class="admin-section-title">软件信息</p>
+        <p class="admin-section-title">軟體資訊</p>
         <div class="admin-section !p-0 overflow-hidden">
             <dl>
                 <div class="bg-slate-50/60 px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">软件版本</dt>
+                    <dt class="text-sm font-medium text-slate-500">軟體版本</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">{{ \App\Utils::config(\App\Enums\ConfigKey::AppVersion) }}</dd>
                 </div>
                 <div class="bg-white px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">官方网站</dt>
+                    <dt class="text-sm font-medium text-slate-500">官方網站</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         <a target="_blank" class="text-emerald-500 hover:text-emerald-600" href="https://www.lsky.pro">https://www.lsky.pro</a>
                     </dd>
                 </div>
                 <div class="bg-white px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">使用手册</dt>
+                    <dt class="text-sm font-medium text-slate-500">使用手冊</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         <a target="_blank" class="text-emerald-500 hover:text-emerald-600" href="https://docs.lsky.pro">https://docs.lsky.pro</a>
                     </dd>
                 </div>
                 <div class="bg-slate-50/60 px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-slate-500">仓库地址</dt>
+                    <dt class="text-sm font-medium text-slate-500">倉庫位址</dt>
                     <dd class="mt-1 text-sm text-slate-700 sm:mt-0 sm:col-span-2">
                         <a target="_blank" class="text-emerald-500 hover:text-emerald-600" href="https://github.com/lsky-org/lsky-pro">https://github.com/lsky-org/lsky-pro</a>
                     </dd>
@@ -176,7 +176,7 @@
                 options = {
                     responsive: true,
                     title: {
-                        text: '近 30 天内统计'
+                        text: '近 30 天內統計'
                     },
                     tooltip: {
                         trigger: 'axis'

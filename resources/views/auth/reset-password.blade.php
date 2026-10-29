@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <div class="mb-8">
-            <h3 class="text-2xl font-bold text-slate-800">重置密码</h3>
-            <p class="text-slate-500 text-sm mt-1">设置您的新密码</p>
+            <h3 class="text-2xl font-bold text-slate-800">重置密碼</h3>
+            <p class="text-slate-500 text-sm mt-1">設定您的新密碼</p>
         </div>
 
         <!-- Validation Errors -->
@@ -16,7 +16,7 @@
 
             <!-- Email Address -->
             <div>
-                <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">邮箱地址</label>
+                <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">電子郵件位址</label>
                 <div class="relative">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-envelope text-sm"></i></span>
                     <input id="email" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus
@@ -26,23 +26,23 @@
 
             <!-- Password -->
             <div>
-                <label for="password" class="block text-sm font-medium text-slate-700 mb-1.5">新密码</label>
+                <label for="password" class="block text-sm font-medium text-slate-700 mb-1.5">新密碼</label>
                 <div class="relative">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-lock text-sm"></i></span>
                     <input id="password" type="password" name="password" required
                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 focus:bg-white transition-all duration-200"
-                        placeholder="至少 8 位字符">
+                        placeholder="至少 8 位字元">
                 </div>
             </div>
 
             <!-- Confirm Password -->
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-slate-700 mb-1.5">确认新密码</label>
+                <label for="password_confirmation" class="block text-sm font-medium text-slate-700 mb-1.5">確認新密碼</label>
                 <div class="relative">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-lock text-sm"></i></span>
                     <input id="password_confirmation" type="password" name="password_confirmation" required
                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 focus:bg-white transition-all duration-200"
-                        placeholder="再次输入新密码">
+                        placeholder="再次輸入新密碼">
                 </div>
             </div>
 

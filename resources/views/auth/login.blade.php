@@ -3,10 +3,10 @@
         <div class="mb-8">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-4" style="background: rgba(16,185,129,0.08); color: #059669; border: 1px solid rgba(16,185,129,0.18);">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                欢迎回来
+                歡迎回來
             </div>
-            <h3 class="text-2xl font-extrabold text-slate-800 tracking-tight">登录账号</h3>
-            <p class="text-slate-500 text-sm mt-1.5">请输入您的账号和密码继续</p>
+            <h3 class="text-2xl font-extrabold text-slate-800 tracking-tight">登入帳號</h3>
+            <p class="text-slate-500 text-sm mt-1.5">請輸入您的帳號和密碼繼續</p>
         </div>
 
         <!-- Session Status -->
@@ -20,7 +20,7 @@
 
             <!-- Email Address -->
             <div>
-                <label for="email" class="block text-sm font-semibold text-slate-700 mb-1.5">邮箱地址</label>
+                <label for="email" class="block text-sm font-semibold text-slate-700 mb-1.5">電子郵件位址</label>
                 <div class="relative group">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors duration-200"><i class="fas fa-envelope text-sm"></i></span>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
@@ -31,7 +31,7 @@
 
             <!-- Password -->
             <div>
-                <label for="password" class="block text-sm font-semibold text-slate-700 mb-1.5">密码</label>
+                <label for="password" class="block text-sm font-semibold text-slate-700 mb-1.5">密碼</label>
                 <div class="relative group">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors duration-200"><i class="fas fa-lock text-sm"></i></span>
                     <input id="password" type="password" name="password" required autocomplete="current-password"
@@ -46,11 +46,11 @@
                     <input id="remember_me" type="checkbox"
                         class="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 focus:ring-offset-0 cursor-pointer"
                         name="remember">
-                    <span class="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">记住我</span>
+                    <span class="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">記住我</span>
                 </label>
                 @if (Route::has('password.request'))
                     <a class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold transition-colors" href="{{ route('password.request') }}">
-                        忘记密码？
+                        忘記密碼？
                     </a>
                 @endif
             </div>
@@ -61,16 +61,20 @@
                     class="w-full py-3 px-4 rounded-xl text-white text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 flex items-center justify-center gap-2"
                     style="background: linear-gradient(135deg, #059669, #0d9488); box-shadow: 0 4px 16px rgba(16,185,129,0.35);">
                     <i class="fas fa-sign-in-alt"></i>
-                    <span>立即登录</span>
+                    <span>立即登入</span>
                 </button>
             </div>
+
+            @if(app(\App\Services\OAuth\OAuthService::class)->isForceLogin())
+            <p class="text-xs text-slate-500 text-center">本站已啟用強制 SSO 登入，已綁定 SSO 的帳號請使用下方按鈕登入。</p>
+            @endif
 
             @if(\App\Utils::config(\App\Enums\ConfigKey::OauthEnable))
             <div class="pt-1">
                 <a href="{{ route('oauth.redirect') }}"
                     class="w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 flex items-center justify-center gap-2 border-2 border-slate-200 text-slate-700 hover:border-slate-300">
                     <i class="fas fa-shield-alt"></i>
-                    <span>{{ \App\Utils::config(\App\Enums\ConfigKey::OauthProviderName) ?: 'OAuth 2.0' }} 登录</span>
+                    <span>{{ \App\Utils::config(\App\Enums\ConfigKey::OauthProviderName) ?: 'OAuth 2.0' }} 登入</span>
                 </a>
             </div>
             @endif
@@ -81,9 +85,9 @@
                 <div class="relative flex justify-center"><span class="px-3 bg-white text-xs text-slate-400">或者</span></div>
             </div>
             <p class="text-center text-sm text-slate-500">
-                还没有账号？
+                還沒有帳號？
                 <a href="{{ route('register') }}" class="text-emerald-600 hover:text-emerald-700 font-semibold transition-colors">
-                    免费注册 <i class="fas fa-arrow-right text-xs"></i>
+                    免費註冊 <i class="fas fa-arrow-right text-xs"></i>
                 </a>
             </p>
             @endif

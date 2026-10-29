@@ -1,6 +1,6 @@
 <?php
 
-// 惯例配置
+// 慣例設定
 
 use App\Enums\ConfigKey;
 use App\Enums\GroupConfigKey;
@@ -19,7 +19,7 @@ return [
     'app' => [
         ConfigKey::AppName => 'Lsky Pro',
         ConfigKey::AppVersion => 'V 2.1',
-        ConfigKey::SiteKeywords => 'Lsky Pro,lsky,兰空图床',
+        ConfigKey::SiteKeywords => 'Lsky Pro,lsky,蘭空圖床',
         ConfigKey::SiteDescription => 'Lsky Pro, Your photo album on the cloud.',
         ConfigKey::SiteNotice => '',
         ConfigKey::IcpNo => '',
@@ -32,6 +32,7 @@ return [
         ConfigKey::CustomCss => '',
         ConfigKey::CustomJs => '',
         ConfigKey::OauthEnable => 0,
+        ConfigKey::OauthForceLogin => 0,
         ConfigKey::OauthAllowRegister => 0,
         ConfigKey::OauthProviderName => 'OAuth 2.0',
         ConfigKey::OauthClientId => '',

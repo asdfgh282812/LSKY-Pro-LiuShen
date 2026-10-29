@@ -28,19 +28,19 @@ class InstallSeeder extends Seeder
         })->values()->toArray();
         DB::transaction(function () use ($array) {
             DB::table('configs')->insert($array);
-            // 创建默认组和默认策略
+            // 建立預設組和預設策略
             /** @var Group $group */
             $group = Group::query()->create([
-                'name' => '系统默认组&游客组',
+                'name' => '系統預設組&訪客組',
                 'is_default' => true,
                 'is_guest' => true,
                 'configs' => config('convention.group'),
             ]);
-            // 创建默认策略
+            // 建立預設策略
             $group->strategies()->create([
                 'key' => StrategyKey::Local,
-                'name' => '默认本地策略',
-                'intro' => '系统默认的本地策略',
+                'name' => '預設本地策略',
+                'intro' => '系統預設的本地策略',
                 'configs' => config('filesystems.disks.uploads'),
             ]);
         });

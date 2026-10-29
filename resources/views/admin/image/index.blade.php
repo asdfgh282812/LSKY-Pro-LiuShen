@@ -1,4 +1,4 @@
-@section('title', '图片管理')
+@section('title', '圖片管理')
 
 <x-app-layout>
     <div class="p-2">
@@ -6,18 +6,18 @@
             <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(13,148,136,0.15));">
                 <i class="fas fa-photo-video text-sm" style="color: #059669;"></i>
             </div>
-            <h2 class="font-bold text-lg text-slate-800">图片管理</h2>
+            <h2 class="font-bold text-lg text-slate-800">圖片管理</h2>
         </div>
         <form class="w-full flex items-center justify-center py-3 md:py-5 lg:py-7 px-2" action="{{ route('admin.images') }}" method="get" id="image-filter-form">
             <div class="w-full md:w-[80%] lg:w-[70%] flex flex-col gap-2">
                 <div class="flex gap-2">
                     <div class="relative flex-1">
                         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input class="w-full pl-8 pr-4 py-2.5 text-sm rounded-xl bg-white border border-slate-200 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 shadow-sm" name="keywords" placeholder="输入关键字搜索，支持高级语法..." value="{{ request('keywords') }}" />
+                        <input class="w-full pl-8 pr-4 py-2.5 text-sm rounded-xl bg-white border border-slate-200 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 shadow-sm" name="keywords" placeholder="輸入關鍵字搜尋，支援進階語法..." value="{{ request('keywords') }}" />
                     </div>
-                    <x-button type="submit" class="whitespace-nowrap">搜索</x-button>
+                    <x-button type="submit" class="whitespace-nowrap">搜尋</x-button>
                     <x-button type="button" id="filter-toggle" class="whitespace-nowrap">
-                        <i class="fas fa-filter text-xs"></i> 筛选
+                        <i class="fas fa-filter text-xs"></i> 篩選
                     </x-button>
                     <x-button type="button" id="filter-reset" class="whitespace-nowrap">
                         <i class="fas fa-undo text-xs"></i> 重置
@@ -26,42 +26,42 @@
                 <div id="filter-panel" class="rounded-xl bg-white border border-slate-200 shadow-sm p-3" @if(!$filtersActive) style="display: none" @endif>
                     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
                         <div>
-                            <label for="filter-permission" class="block text-xs font-medium text-slate-500 mb-1">权限</label>
+                            <label for="filter-permission" class="block text-xs font-medium text-slate-500 mb-1">權限</label>
                             <select id="filter-permission" name="filter[permission]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
                                 <option value="">全部</option>
-                                <option value="public" {{ request('filter.permission') === 'public' ? 'selected' : '' }}>公开</option>
+                                <option value="public" {{ request('filter.permission') === 'public' ? 'selected' : '' }}>公開</option>
                                 <option value="private" {{ request('filter.permission') === 'private' ? 'selected' : '' }}>私有</option>
                             </select>
                         </div>
                         <div>
-                            <label for="filter-user-type" class="block text-xs font-medium text-slate-500 mb-1">用户类型</label>
+                            <label for="filter-user-type" class="block text-xs font-medium text-slate-500 mb-1">使用者類型</label>
                             <select id="filter-user-type" name="filter[user_type]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
                                 <option value="">全部</option>
-                                <option value="user" {{ request('filter.user_type') === 'user' ? 'selected' : '' }}>注册用户</option>
-                                <option value="guest" {{ request('filter.user_type') === 'guest' ? 'selected' : '' }}>游客</option>
-                                <option value="adminer" {{ request('filter.user_type') === 'adminer' ? 'selected' : '' }}>管理员</option>
+                                <option value="user" {{ request('filter.user_type') === 'user' ? 'selected' : '' }}>註冊使用者</option>
+                                <option value="guest" {{ request('filter.user_type') === 'guest' ? 'selected' : '' }}>訪客</option>
+                                <option value="adminer" {{ request('filter.user_type') === 'adminer' ? 'selected' : '' }}>管理員</option>
                             </select>
                         </div>
                         <div>
-                            <label for="filter-unhealthy" class="block text-xs font-medium text-slate-500 mb-1">违规状态</label>
+                            <label for="filter-unhealthy" class="block text-xs font-medium text-slate-500 mb-1">違規狀態</label>
                             <select id="filter-unhealthy" name="filter[unhealthy]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
                                 <option value="">全部</option>
-                                <option value="1" {{ request('filter.unhealthy') === '1' ? 'selected' : '' }}>仅违规</option>
-                                <option value="0" {{ request('filter.unhealthy') === '0' ? 'selected' : '' }}>仅正常</option>
+                                <option value="1" {{ request('filter.unhealthy') === '1' ? 'selected' : '' }}>僅違規</option>
+                                <option value="0" {{ request('filter.unhealthy') === '0' ? 'selected' : '' }}>僅正常</option>
                             </select>
                         </div>
                         <div>
-                            <label for="filter-album" class="block text-xs font-medium text-slate-500 mb-1">相册</label>
+                            <label for="filter-album" class="block text-xs font-medium text-slate-500 mb-1">相簿</label>
                             <select id="filter-album" name="filter[album_id]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
                                 <option value="">全部</option>
-                                <option value="none" {{ request('filter.album_id') === 'none' ? 'selected' : '' }}>未归档</option>
+                                <option value="none" {{ request('filter.album_id') === 'none' ? 'selected' : '' }}>未歸檔</option>
                                 @foreach($albums as $album)
                                     <option value="{{ $album->id }}" {{ (string) request('filter.album_id') === (string) $album->id ? 'selected' : '' }}>{{ $album->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div>
-                            <label for="filter-group" class="block text-xs font-medium text-slate-500 mb-1">角色组</label>
+                            <label for="filter-group" class="block text-xs font-medium text-slate-500 mb-1">角色組</label>
                             <select id="filter-group" name="filter[group_id]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
                                 <option value="">全部</option>
                                 @foreach($groups as $group)
@@ -70,7 +70,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="filter-strategy" class="block text-xs font-medium text-slate-500 mb-1">储存策略</label>
+                            <label for="filter-strategy" class="block text-xs font-medium text-slate-500 mb-1">儲存策略</label>
                             <select id="filter-strategy" name="filter[strategy_id]" class="w-full rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
                                 <option value="">全部</option>
                                 @foreach($strategies as $strategy)
@@ -81,14 +81,14 @@
                         <div class="col-span-2 md:col-span-3 xl:col-span-6">
                             <label for="filter-order" class="block text-xs font-medium text-slate-500 mb-1">排序</label>
                             <select id="filter-order" name="order" class="w-full md:w-1/3 rounded-lg border text-sm px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 text-[var(--text-primary)]" style="background: var(--input-bg); border-color: var(--input-border);">
-                                <option value="newest" {{ request('order', 'newest') === 'newest' ? 'selected' : '' }}>最新上传</option>
-                                <option value="earliest" {{ request('order') === 'earliest' ? 'selected' : '' }}>最早上传</option>
-                                <option value="utmost" {{ request('order') === 'utmost' ? 'selected' : '' }}>从大到小</option>
-                                <option value="least" {{ request('order') === 'least' ? 'selected' : '' }}>从小到大</option>
+                                <option value="newest" {{ request('order', 'newest') === 'newest' ? 'selected' : '' }}>最新上傳</option>
+                                <option value="earliest" {{ request('order') === 'earliest' ? 'selected' : '' }}>最早上傳</option>
+                                <option value="utmost" {{ request('order') === 'utmost' ? 'selected' : '' }}>從大到小</option>
+                                <option value="least" {{ request('order') === 'least' ? 'selected' : '' }}>從小到大</option>
                             </select>
                         </div>
                     </div>
-                    <p class="mt-2 text-xs text-slate-400"><a href="javascript:void(0)" id="grammar" class="underline">高级搜索语法</a> 仍可在关键字中使用</p>
+                    <p class="mt-2 text-xs text-slate-400"><a href="javascript:void(0)" id="grammar" class="underline">進階搜尋語法</a> 仍可在關鍵字中使用</p>
                 </div>
             </div>
         </form>
@@ -99,7 +99,7 @@
                 <div data-json='{{ $image->toJson() }}' class="item relative flex flex-col items-center justify-center overflow-hidden rounded-md cursor-pointer group">
                     <div class="flex absolute top-1 left-1 z-[1] space-x-1">
                         @if($image->is_unhealthy)
-                            <span class="bg-red-500 text-white rounded-md text-sm px-1 py-0">违规</span>
+                            <span class="bg-red-500 text-white rounded-md text-sm px-1 py-0">違規</span>
                         @endif
                         @if($image->extension === 'gif')
                             <span class="bg-white rounded-md text-sm px-1 py-0">Gif</span>
@@ -121,7 +121,7 @@
                             <div class="w-6 h-6 rounded-full overflow-hidden">
                                 <x-default-avatar/>
                             </div>
-                            <span class="ml-2">游客</span>
+                            <span class="ml-2">訪客</span>
                         @endif
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                 {{ $images->links() }}
             </div>
         @else
-            <x-no-data message="这里还是空的～" />
+            <x-no-data message="這裡還是空的～" />
         @endif
     </div>
 
@@ -149,55 +149,55 @@
             <div class="relative rounded-md bg-white mb-8 overflow-hidden">
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">上传用户</dt>
+                        <dt class="text-sm font-medium text-gray-500">上傳使用者</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__user_name__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">相册</dt>
+                        <dt class="text-sm font-medium text-gray-500">相簿</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__album_name__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">角色组</dt>
+                        <dt class="text-sm font-medium text-gray-500">角色組</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__group_name__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">储存策略</dt>
+                        <dt class="text-sm font-medium text-gray-500">儲存策略</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__strategy_name__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">图片名称</dt>
+                        <dt class="text-sm font-medium text-gray-500">圖片名稱</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__name__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">原始名称</dt>
+                        <dt class="text-sm font-medium text-gray-500">原始名稱</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__origin_name__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">物理路径</dt>
+                        <dt class="text-sm font-medium text-gray-500">物理路徑</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__pathname__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">图片大小</dt>
+                        <dt class="text-sm font-medium text-gray-500">圖片大小</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__size__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">图片类型</dt>
+                        <dt class="text-sm font-medium text-gray-500">圖片類型</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__mimetype__</dd>
                     </div>
                 </dl>
@@ -221,7 +221,7 @@
                 </dl>
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">权限</dt>
+                        <dt class="text-sm font-medium text-gray-500">權限</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__permission__</dd>
                     </div>
                 </dl>
@@ -233,20 +233,20 @@
                 </dl>
                 <dl>
                     <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">上传 IP</dt>
+                        <dt class="text-sm font-medium text-gray-500">上傳 IP</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__uploaded_ip__</dd>
                     </div>
                 </dl>
                 <dl>
                     <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">上传时间</dt>
+                        <dt class="text-sm font-medium text-gray-500">上傳時間</dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__created_at__</dd>
                     </div>
                 </dl>
             </div>
 
             <a href="javascript:void(0)" data-id="__id__" class="delete inline-flex justify-center py-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 float-right bg-red-500">
-                删除
+                刪除
             </a>
         </div>
     </script>
@@ -258,19 +258,19 @@
         <div class="relative rounded-md bg-white mb-8 overflow-hidden">
             <dl>
                 <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">用户名</dt>
+                    <dt class="text-sm font-medium text-gray-500">使用者名稱</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__name__</dd>
                 </div>
             </dl>
             <dl>
                 <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">邮箱</dt>
+                    <dt class="text-sm font-medium text-gray-500">電子郵件</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__email__</dd>
                 </div>
             </dl>
             <dl>
                 <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">总容量</dt>
+                    <dt class="text-sm font-medium text-gray-500">總容量</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__capacity__</dd>
                 </div>
             </dl>
@@ -282,31 +282,31 @@
             </dl>
             <dl>
                 <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">图片数量</dt>
+                    <dt class="text-sm font-medium text-gray-500">圖片數量</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__image_num__</dd>
                 </div>
             </dl>
             <dl>
                 <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">相册数量</dt>
+                    <dt class="text-sm font-medium text-gray-500">相簿數量</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__album_num__</dd>
                 </div>
             </dl>
             <dl>
                 <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">注册 IP</dt>
+                    <dt class="text-sm font-medium text-gray-500">註冊 IP</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__registered_ip__</dd>
                 </div>
             </dl>
             <dl>
                 <div class="bg-gray-50 px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">邮箱验证时间</dt>
+                    <dt class="text-sm font-medium text-gray-500">電子郵件驗證時間</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__email_verified_at__</dd>
                 </div>
             </dl>
             <dl>
                 <div class="bg-white px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">注册时间</dt>
+                    <dt class="text-sm font-medium text-gray-500">註冊時間</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 truncate">__created_at__</dd>
                 </div>
             </dl>
@@ -314,8 +314,8 @@
     </script>
 
     <script type="text/html" id="search-grammar-tpl">
-        <p class="text-gray-600">默认输入关键字搜索会根据图片的别名、原始名称进行匹配，你也可以使用下面的搜索语法进行高级搜索，并可以以任意组合使用这些搜索限定符来缩小结果范围。例如查找用户名为张三，邮箱为 a@qq.com 且图片拓展名为 jpg 的所有图片：</p>
-        <p class="text-gray-600 mb-2"><b>name:张三 email:a@qq.com extension:jpg</b></p>
+        <p class="text-gray-600">預設輸入關鍵字搜尋會根據圖片的別名、原始名稱進行匹配，你也可以使用下面的搜尋語法進行進階搜尋，並可以以任意組合使用這些搜尋限定符來縮小結果範圍。例如查詢使用者名稱為張三，電子郵件為 a@qq.com 且圖片擴充名為 jpg 的所有圖片：</p>
+        <p class="text-gray-600 mb-2"><b>name:張三 email:a@qq.com extension:jpg</b></p>
         <table class="min-w-full w-full">
             <thead>
             <tr style="background: var(--card-header-bg); border-bottom: 1px solid var(--border-strong);">
@@ -330,71 +330,71 @@
             <tbody style="background: var(--card-bg);" class="divide-y">
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">name:<span class="italic">USERNAME</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配用户名为 USERNAME 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配使用者名稱為 USERNAME 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">album:<span class="italic">ALBUM_NAME</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配所在相册名称为 ALBUM_NAME 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配所在相簿名稱為 ALBUM_NAME 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">group:<span class="italic">GROUP_NAME</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配图片所属组名称为 GROUP_NAME 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配圖片所屬組名稱為 GROUP_NAME 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">strategy:<span class="italic">STRATEGY_NAME</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配图片所属策略名称为 STRATEGY_NAME 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配圖片所屬策略名稱為 STRATEGY_NAME 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">email:<span class="italic">EMAIL</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配用户邮箱为 EMAIL 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配使用者電子郵件為 EMAIL 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">extension:<span class="italic">EXTENSION</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配图片拓展名为 EXTENSION 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配圖片擴充名為 EXTENSION 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">md5:<span class="italic">FILE_MD5</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配图片文件 md5 值名为 FILE_MD5 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配圖片檔案 md5 值名為 FILE_MD5 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">sha1:<span class="italic">FILE_SHA1</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配图片文件 sha1 值名为 FILE_SHA1 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配圖片檔案 sha1 值名為 FILE_SHA1 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">ip:<span class="italic">UPLOAD_IP</span></td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配上传 IP 为 UPLOAD_IP 的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配上傳 IP 為 UPLOAD_IP 的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">is:public</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配公开的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配公開的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">is:private</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配私有的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配私有的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">is:unhealthy</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配不健康的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配不健康的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">is:guest</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配游客上传的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配訪客上傳的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">is:adminer</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配管理员上传的图片</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">匹配管理員上傳的圖片</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">order:earliest</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">按最早上传的进行排序</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">按最早上傳的進行排序</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">order:utmost</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">按图片大小，从大到小进行排序</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">按圖片大小，從大到小進行排序</td>
             </tr>
             <tr>
                 <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">order:least</td>
-                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">按图片大小，从小到大进行排序</td>
+                <td class="px-3 py-2 text-sm text-[var(--text-primary)]">按圖片大小，從小到大進行排序</td>
             </tr>
             </tbody>
         </table>
@@ -406,11 +406,11 @@
 
             function del(id) {
                 Swal.fire({
-                    title: `确认删除该图片吗?`,
-                    text: "记录与物理文件将会一起删除。",
+                    title: `確認刪除該圖片嗎?`,
+                    text: "記錄與物理檔案將會一起刪除。",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: '确认删除',
+                    confirmButtonText: '確認刪除',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         axios.delete(`/admin/images/${id}`).then(response => {
@@ -437,7 +437,7 @@
                 $('#filter-panel').toggle();
             });
 
-            // 筛选项变更后自动提交，无需再点搜索
+            // 篩選項變更後自動提交，無需再點搜尋
             $('#filter-panel select').change(function () {
                 $('#image-filter-form').submit();
             });
@@ -455,7 +455,7 @@
                 let html = $('#image-tpl').html()
                     .replace(/__id__/g, image.id)
                     .replace(/__url__/g, previewUrl)
-                    .replace(/__user_name__/g, image.user ? image.user.name+'('+image.user.email+')' : '游客')
+                    .replace(/__user_name__/g, image.user ? image.user.name+'('+image.user.email+')' : '訪客')
                     .replace(/__user_email__/g, image.user ? image.user.email : '-')
                     .replace(/__album_name__/g, image.album ? image.album.name : '-')
                     .replace(/__group_name__/g, image.group ? image.group.name : '-')
@@ -469,7 +469,7 @@
                     .replace(/__sha1__/g, image.sha1)
                     .replace(/__width__/g, image.width)
                     .replace(/__height__/g, image.height)
-                    .replace(/__permission__/g, image.permission === {{ \App\Enums\ImagePermission::Public }} ? '<i class="fas fa-eye text-red-500"></i> 公开' : '<i class="fas fa-eye-slash text-green-500"></i> 私有')
+                    .replace(/__permission__/g, image.permission === {{ \App\Enums\ImagePermission::Public }} ? '<i class="fas fa-eye text-red-500"></i> 公開' : '<i class="fas fa-eye-slash text-green-500"></i> 私有')
                     .replace(/__is_unhealthy__/g, image.is_unhealthy ? '<span class="text-red-500"><i class="fas fa-exclamation-triangle"></i> 是</span>' : '否')
                     .replace(/__uploaded_ip__/g, image.uploaded_ip)
                     .replace(/__created_at__/g, image.created_at);
@@ -491,7 +491,7 @@
                     .replace(/__image_num__/g, user.image_num)
                     .replace(/__album_num__/g, user.album_num)
                     .replace(/__registered_ip__/g, user.registered_ip || '-')
-                    .replace(/__status__/g, user.status === 1 ? '<span class="text-green-500">正常</span>' : '<span class="text-red-500">冻结</span>')
+                    .replace(/__status__/g, user.status === 1 ? '<span class="text-green-500">正常</span>' : '<span class="text-red-500">凍結</span>')
                     .replace(/__email_verified_at__/g, user.email_verified_at || '-')
                     .replace(/__created_at__/g, user.created_at);
 

@@ -17,7 +17,7 @@ class TokenController extends Controller
     use InteractsWithTokenAbilities;
 
     /**
-     * 获取当前用户的 Token 列表
+     * 取得當前使用者的 Token 列表
      */
     public function index(): Response
     {
@@ -43,7 +43,7 @@ class TokenController extends Controller
     }
 
     /**
-     * 创建 Token（API 方式，需验证密码）
+     * 建立 Token（API 方式，需驗證密碼）
      */
     public function store(Request $request): Response
     {
@@ -76,7 +76,7 @@ class TokenController extends Controller
     }
 
     /**
-     * Web 端创建 Token（已登录用户，需验证当前密码）
+     * Web 端建立 Token（已登入使用者，需驗證當前密碼）
      */
     public function createWebToken(Request $request): Response
     {
@@ -95,14 +95,14 @@ class TokenController extends Controller
         $user = Auth::user();
 
         if (! Hash::check($request->password, $user->password)) {
-            return $this->fail('密码错误，请重新输入');
+            return $this->fail('密碼錯誤，請重新輸入');
         }
 
         $name = $request->input('name') ?: $user->email;
         $abilities = $this->normalizedRequestedAbilities($request->input('abilities'));
         $token = $user->createToken($name, $abilities)->plainTextToken;
 
-        return $this->success('创建成功', [
+        return $this->success('建立成功', [
             'token' => $token,
             'abilities' => $abilities,
             'ability_groups' => $this->tokenAbilitiesForDisplay($abilities),
@@ -110,7 +110,7 @@ class TokenController extends Controller
     }
 
     /**
-     * 修改 Token 名称（仅允许修改 name 字段）
+     * 修改 Token 名稱（僅允許修改 name 欄位）
      */
     public function update(Request $request, int $id): Response
     {
@@ -139,7 +139,7 @@ class TokenController extends Controller
     }
 
     /**
-     * 删除单个 Token（严格校验所有权，需验证当前密码）
+     * 刪除單個 Token（嚴格校驗所有權，需驗證當前密碼）
      */
     public function destroy(Request $request, int $id): Response
     {
@@ -155,7 +155,7 @@ class TokenController extends Controller
         $user = Auth::user();
 
         if (! Hash::check($request->password, $user->password)) {
-            return $this->fail('密码错误，请重新输入');
+            return $this->fail('密碼錯誤，請重新輸入');
         }
 
         $token = $user->tokens()->find($id);
@@ -166,11 +166,11 @@ class TokenController extends Controller
 
         $token->delete();
 
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 
     /**
-     * 清空当前用户的所有 Token
+     * 清空當前使用者的所有 Token
      */
     public function clear(): Response
     {

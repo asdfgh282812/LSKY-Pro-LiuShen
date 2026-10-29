@@ -47,36 +47,36 @@ class Controller extends BaseController
         }
 
         $extensions = collect([
-            ['name' => 'BCMath', 'intro' => '数学精度处理拓展'],
-            ['name' => 'Ctype', 'intro' => '字符类型检测拓展'],
-            ['name' => 'DOM', 'intro' => 'DOM 对象模型，用于处理文档元素'],
-            ['name' => 'Fileinfo', 'intro' => '获取文件信息拓展'],
-            ['name' => 'JSON', 'intro' => 'JavaScript 对象符号（JSON）'],
-            ['name' => 'Mbstring', 'intro' => '多字节字符串处理拓展'],
-            ['name' => 'OpenSSL', 'intro' => '加密拓展'],
-            ['name' => 'PCRE', 'intro' => '正则表达式拓展'],
-            ['name' => 'PDO', 'intro' => '数据库拓展'],
-            ['name' => 'Tokenizer', 'intro' => '令牌处理拓展'],
+            ['name' => 'BCMath', 'intro' => '數學精度處理擴充'],
+            ['name' => 'Ctype', 'intro' => '字元類型檢測擴充'],
+            ['name' => 'DOM', 'intro' => 'DOM 物件模型，用於處理文件元素'],
+            ['name' => 'Fileinfo', 'intro' => '取得檔案資訊擴充'],
+            ['name' => 'JSON', 'intro' => 'JavaScript 物件符號（JSON）'],
+            ['name' => 'Mbstring', 'intro' => '多位元組字串處理擴充'],
+            ['name' => 'OpenSSL', 'intro' => '加密擴充'],
+            ['name' => 'PCRE', 'intro' => '正則表示式擴充'],
+            ['name' => 'PDO', 'intro' => '資料庫擴充'],
+            ['name' => 'Tokenizer', 'intro' => '令牌處理擴充'],
             ['name' => 'XML', 'intro' => 'Xml 解析器'],
-            ['name' => 'Imagick', 'intro' => '高性能图片处理拓展'],
+            ['name' => 'Imagick', 'intro' => '高效能圖片處理擴充'],
         ])->transform(function ($item) {
             $item['result'] = extension_loaded(strtolower($item['name']));
             return $item;
         })->push([
-            'name' => 'readlink、symlink 函数',
-            'intro' => '读取、创建符号链接函数',
+            'name' => 'readlink、symlink 函式',
+            'intro' => '讀取、建立符號連結函式',
             'result' => function_exists('readlink') && function_exists('symlink'),
         ])->push([
-            'name' => 'putenv、getenv 函数',
-            'intro' => '设置和获取环境变量函数',
+            'name' => 'putenv、getenv 函式',
+            'intro' => '設定和取得環境變數函式',
             'result' => function_exists('putenv') && function_exists('getenv'),
         ])->push([
-            'name' => 'exec、shell_exec 函数',
-            'intro' => '执行外部命令',
+            'name' => 'exec、shell_exec 函式',
+            'intro' => '執行外部命令',
             'result' => function_exists('exec') && function_exists('shell_exec'),
         ])->push([
-            'name' => 'chmod、chown、fileperms 函数',
-            'intro' => '设置和获取文件、文件夹权限函数',
+            'name' => 'chmod、chown、fileperms 函式',
+            'intro' => '設定和取得檔案、資料夾權限函式',
             'result' => function_exists('chmod') && function_exists('chown') && function_exists('fileperms'),
         ])->push([
             'name' => 'PHP >= 8.0.2',
@@ -92,8 +92,8 @@ class Controller extends BaseController
                     'account.email' => 'required|email',
                     'account.password' => 'required|between:6,32'
                 ], [], [
-                    'account.email' => '管理员账号邮箱',
-                    'account.password' => '管理员账号密码'
+                    'account.email' => '管理員帳號電子郵件',
+                    'account.password' => '管理員帳號密碼'
                 ]);
 
                 $data = collect($request->only([
@@ -105,7 +105,7 @@ class Controller extends BaseController
                     throw new \Exception(str_replace(PHP_EOL, '<br/>', $output->fetch()));
                 }
                 $user = new User([
-                    'name' => '超级管理员',
+                    'name' => '超級管理員',
                     'email' => $request->input('account.email'),
                     'password' => Hash::make($request->input('account.password')),
                     'registered_ip' => $request->ip(),
@@ -118,7 +118,7 @@ class Controller extends BaseController
                 $user->save();
             } catch (\Throwable $e) {
                 @unlink(base_path('installed.lock'));
-                Utils::e($e, '执行安装程序时出现异常');
+                Utils::e($e, '執行安裝程式時出現異常');
                 return $this->fail($e->getMessage());
             }
             return $this->success();
@@ -134,13 +134,13 @@ class Controller extends BaseController
         } catch (UploadException $e) {
             return $this->fail($e->getMessage());
         } catch (\Throwable $e) {
-            Utils::e($e, 'Web 上传文件时发生异常');
+            Utils::e($e, 'Web 上傳檔案時發生異常');
             if (config('app.debug')) {
                 return $this->fail($e->getMessage());
             }
-            return $this->fail('服务异常，请稍后再试');
+            return $this->fail('服務異常，請稍後再試');
         }
-        return $this->success('上传成功', $image->setAppends(['pathname', 'links'])->only(
+        return $this->success('上傳成功', $image->setAppends(['pathname', 'links'])->only(
             'id', 'pathname', 'origin_name', 'size', 'mimetype', 'md5', 'sha1', 'links'
         ));
     }
@@ -181,7 +181,7 @@ class Controller extends BaseController
                 }
             }
         } catch (FilesystemException $e) {
-            Utils::e($e, '图片输出时出现异常');
+            Utils::e($e, '圖片輸出時出現異常');
             abort(404);
         }
 

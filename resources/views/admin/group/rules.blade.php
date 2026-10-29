@@ -5,10 +5,10 @@
                 <thead>
                 <tr style="background: var(--card-header-bg); border-bottom: 1px solid var(--border-strong);">
                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider whitespace-nowrap text-[var(--text-secondary)]">
-                        规则
+                        規則
                     </th>
                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider whitespace-nowrap text-[var(--text-secondary)]">
-                        说明
+                        說明
                     </th>
                 </tr>
                 </thead>
@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{y}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">两位数年份(22)</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">兩位數年份(22)</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{m}</td>
@@ -27,39 +27,39 @@
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{d}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">当月的第几号(04)</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">當月的第幾號(04)</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{timestamp}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">时间戳(秒)</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">時間戳(秒)</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{uniqid}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">唯一字符串</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">唯一字串</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{md5}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">随机 md5 值</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">隨機 md5 值</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{md5-16}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">16位随机 md5 值</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">16位隨機 md5 值</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{str-random-16}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">16位随机字符串</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">16位隨機字串</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{str-random-10}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">10位随机字符串</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">10位隨機字串</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{filename}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">文件原始名称</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">檔案原始名稱</td>
                 </tr>
                 <tr>
                     <td class="px-3 py-2 text-sm text-[var(--text-secondary)]">{uid}</td>
-                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">用户 ID，游客为 0</td>
+                    <td class="px-3 py-2 text-sm text-[var(--text-primary)]">使用者 ID，訪客為 0</td>
                 </tr>
                 </tbody>
             </table>

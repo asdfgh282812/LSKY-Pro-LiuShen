@@ -1,36 +1,36 @@
-@section('title', '接口')
+@section('title', 'API')
 
 <x-app-layout>
     <div class="my-6 md:my-9">
-        <p class="text-xl mb-2 text-gray-800 font-semibold">接口说明</p>
+        <p class="text-xl mb-2 text-gray-800 font-semibold">API說明</p>
         <div class="space-y-4 bg-white p-3 rounded-md mb-10 shadow-custom">
             <div>
-                <p class="text-lg text-gray-700 font-semibold">接口URL</p>
+                <p class="text-lg text-gray-700 font-semibold">APIURL</p>
                 <x-code>{{ request()->getSchemeAndHttpHost() }}/api/v1</x-code>
             </div>
 
             <div>
-                <p class="text-lg text-gray-700 font-semibold">验证方式</p>
+                <p class="text-lg text-gray-700 font-semibold">驗證方式</p>
                 <div class="my-2 text-sm bg-white rounded-md p-4 overflow-x-auto">
-                    当前版本接口采用 「HTTP 基本验证」的方式验证授权，获取到 token 后，通过设置请求 header 标头来验证请求(Bearer Token)，例如：
+                    當前版本API採用 「HTTP 基本驗證」的方式驗證授權，取得到 token 後，透過設定請求 header 標頭來驗證請求(Bearer Token)，例如：
                     <b class="block my-2 text-gray-600 text-sm">"Authorization": "Bearer 1|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5"</b>
-                    <p class="text-sm">如果未设置 Authorization 的情况下请求上传接口，将会被视为游客上传。</p>
+                    <p class="text-sm">如果未設定 Authorization 的情況下請求上傳API，將會被視為訪客上傳。</p>
                 </div>
             </div>
 
             <div class="my-4 overflow-x-auto">
-                <p class="text-sm mb-2">公共请求 headers 说明</p>
+                <p class="text-sm mb-2">公共請求 headers 說明</p>
                 <table class="min-w-full">
                     <thead class="bg-white border">
                     <tr>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            字段
+                            欄位
                         </th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            类型
+                            類型
                         </th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            说明
+                            說明
                         </th>
                     </tr>
                     </thead>
@@ -38,30 +38,30 @@
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">Authorization</td>
                         <td class="px-3 py-2 whitespace-nowrap">String</td>
-                        <td class="px-3 py-2 whitespace-nowrap">授权 Token，例如：Bearer 1|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5</td>
+                        <td class="px-3 py-2 whitespace-nowrap">授權 Token，例如：Bearer 1|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5</td>
                     </tr>
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>Accept</td>
                         <td class="px-3 py-2 whitespace-nowrap">String</td>
-                        <td class="px-3 py-2 whitespace-nowrap">必须设置为 application/json</td>
+                        <td class="px-3 py-2 whitespace-nowrap">必須設定為 application/json</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="my-4 overflow-x-auto">
-                <p class="text-sm mb-2">公共响应 headers 说明</p>
+                <p class="text-sm mb-2">公共響應 headers 說明</p>
                 <table class="min-w-full">
                     <thead class="bg-white border">
                     <tr>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            字段
+                            欄位
                         </th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            类型
+                            類型
                         </th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            说明
+                            說明
                         </th>
                     </tr>
                     </thead>
@@ -69,73 +69,73 @@
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">X-RateLimit-Limit</td>
                         <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                        <td class="px-3 py-2 whitespace-nowrap">当前客户端一分钟内请求配额</td>
+                        <td class="px-3 py-2 whitespace-nowrap">當前客戶端一分鐘內請求配額</td>
                     </tr>
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">X-RateLimit-Remaining</td>
                         <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                        <td class="px-3 py-2 whitespace-nowrap">当前客户端剩余请求配额</td>
+                        <td class="px-3 py-2 whitespace-nowrap">當前客戶端剩餘請求配額</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="my-4 overflow-x-auto">
-                <p class="text-sm mb-2">响应状态码 HTTP Status Code 说明</p>
+                <p class="text-sm mb-2">響應狀態碼 HTTP Status Code 說明</p>
                 <table class="min-w-full">
                     <thead class="bg-white border">
                     <tr>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            状态码
+                            狀態碼
                         </th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            说明
+                            說明
                         </th>
                     </tr>
                     </thead>
                     <tbody class="bg-white border divide-y text-sm">
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">401</td>
-                        <td class="px-3 py-2 whitespace-nowrap">未登录或授权失败</td>
+                        <td class="px-3 py-2 whitespace-nowrap">未登入或授權失敗</td>
                     </tr>
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">403</td>
-                        <td class="px-3 py-2 whitespace-nowrap">管理员关闭了接口功能</td>
+                        <td class="px-3 py-2 whitespace-nowrap">管理員關閉了API功能</td>
                     </tr>
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">429</td>
-                        <td class="px-3 py-2 whitespace-nowrap">超出请求配额，请求受限</td>
+                        <td class="px-3 py-2 whitespace-nowrap">超出請求配額，請求受限</td>
                     </tr>
                     <tr>
                         <td class="px-3 py-2 whitespace-nowrap">500</td>
-                        <td class="px-3 py-2 whitespace-nowrap">服务端出现异常</td>
+                        <td class="px-3 py-2 whitespace-nowrap">服務端出現異常</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
-            <p class="text-sm my-2 text-red-500">文档中接口的请求参数，使用红色「*」符号标注，则表示为必传项。</p>
+            <p class="text-sm my-2 text-red-500">文件中API的請求參數，使用紅色「*」符號標註，則表示為必傳項。</p>
         </div>
 
-        <p class="text-xl mb-2 text-gray-800 font-semibold">授权相关</p>
+        <p class="text-xl mb-2 text-gray-800 font-semibold">授權相關</p>
         <div class="space-y-4 bg-white p-3 rounded-md mb-10 shadow-custom">
             <div>
                 <p class="text-lg text-gray-700 font-semibold">生成 Token</p>
                 <x-code><span class="text-green-500 select-none">POST </span>/tokens</x-code>
-                <p class="text-sm text-slate-500 mt-2">支持通过 <span class="font-medium">abilities</span> 指定密钥权限；未传时默认授予全部权限。</p>
+                <p class="text-sm text-slate-500 mt-2">支援透過 <span class="font-medium">abilities</span> 指定金鑰權限；未傳時預設授予全部權限。</p>
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Body)</p>
+                    <p class="text-sm mb-2">請求參數(Body)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -143,69 +143,69 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>email</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">邮箱</td>
+                            <td class="px-3 py-2 whitespace-nowrap">電子郵件</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>password</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">密码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">密碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">abilities</td>
                             <td class="px-3 py-2 whitespace-nowrap">String[]</td>
-                            <td class="px-3 py-2 whitespace-nowrap">可选权限数组，未传时默认为全部权限</td>
+                            <td class="px-3 py-2 whitespace-nowrap">可選權限陣列，未傳時預設為全部權限</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">images.read</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">获取图片列表</td>
+                            <td class="px-3 py-2 whitespace-nowrap">取得圖片列表</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">images.upload</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">上传图片</td>
+                            <td class="px-3 py-2 whitespace-nowrap">上傳圖片</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">images.delete</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">删除图片</td>
+                            <td class="px-3 py-2 whitespace-nowrap">刪除圖片</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">albums.read</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">获取相册列表</td>
+                            <td class="px-3 py-2 whitespace-nowrap">取得相簿列表</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">albums.delete</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">删除相册</td>
+                            <td class="px-3 py-2 whitespace-nowrap">刪除相簿</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">profile.read</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">获取用户资料</td>
+                            <td class="px-3 py-2 whitespace-nowrap">取得使用者資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">strategies.read</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">获取可用策略</td>
+                            <td class="px-3 py-2 whitespace-nowrap">取得可用策略</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -213,17 +213,17 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">token</td>
@@ -233,7 +233,7 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">abilities</td>
                             <td class="px-3 py-2 whitespace-nowrap">String[]</td>
-                            <td class="px-3 py-2 whitespace-nowrap">已授予的权限列表</td>
+                            <td class="px-3 py-2 whitespace-nowrap">已授予的權限列表</td>
                         </tr>
                         </tbody>
                     </table>
@@ -243,18 +243,18 @@
                 <p class="text-lg text-gray-700 font-semibold">清空 Token</p>
                 <x-code><span class="text-red-300 select-none">DELETE </span>/tokens</x-code>
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -262,39 +262,39 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div>
-                <p class="text-lg text-gray-700 font-semibold">用户资料</p>
+                <p class="text-lg text-gray-700 font-semibold">使用者資料</p>
                 <x-code><span class="text-sky-500 select-none">GET </span>/profile</x-code>
-                <p class="text-sm text-slate-500 mt-2">所需权限：<span class="font-medium">profile.read</span></p>
+                <p class="text-sm text-slate-500 mt-2">所需權限：<span class="font-medium">profile.read</span></p>
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -302,37 +302,37 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">用户名</td>
+                            <td class="px-3 py-2 whitespace-nowrap">使用者名稱</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">avatar</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">头像地址</td>
+                            <td class="px-3 py-2 whitespace-nowrap">頭像位址</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">email</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">邮箱地址</td>
+                            <td class="px-3 py-2 whitespace-nowrap">電子郵件位址</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">capacity</td>
                             <td class="px-3 py-2 whitespace-nowrap">Float</td>
-                            <td class="px-3 py-2 whitespace-nowrap">总容量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">總容量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">used_capacity</td>
@@ -342,22 +342,22 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">url</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">个人主页地址</td>
+                            <td class="px-3 py-2 whitespace-nowrap">個人主頁位址</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">image_num</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片數量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">album_num</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿數量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">registered_ip</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">注册 IP</td>
+                            <td class="px-3 py-2 whitespace-nowrap">註冊 IP</td>
                         </tr>
                         </tbody>
                     </table>
@@ -365,26 +365,26 @@
             </div>
         </div>
 
-        <p class="text-xl mb-2 text-gray-800 font-semibold">策略相关</p>
+        <p class="text-xl mb-2 text-gray-800 font-semibold">策略相關</p>
         <div class="space-y-4 bg-white p-3 rounded-md mb-10 shadow-custom">
             <div>
                 <p class="text-lg text-gray-700 font-semibold">策略列表</p>
                 <x-code><span class="text-sky-500 select-none">GET </span>/strategies</x-code>
-                <p class="text-sm text-slate-500 mt-2">游客访问保持不变；携带 Token 请求时所需权限：<span class="font-medium">strategies.read</span></p>
+                <p class="text-sm text-slate-500 mt-2">訪客存取保持不變；攜帶 Token 請求時所需權限：<span class="font-medium">strategies.read</span></p>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Query)</p>
+                    <p class="text-sm mb-2">請求參數(Query)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -392,25 +392,25 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">keyword</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">筛选关键字</td>
+                            <td class="px-3 py-2 whitespace-nowrap">篩選關鍵字</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -418,22 +418,22 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">strategies</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object[]</td>
-                            <td class="px-3 py-2 whitespace-nowrap">策略数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">策略資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">id</td>
@@ -443,7 +443,7 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">策略名称</td>
+                            <td class="px-3 py-2 whitespace-nowrap">策略名稱</td>
                         </tr>
                         </tbody>
                     </table>
@@ -451,12 +451,12 @@
             </div>
         </div>
 
-        <p class="text-xl mb-2 text-gray-800 font-semibold">图片相关</p>
+        <p class="text-xl mb-2 text-gray-800 font-semibold">圖片相關</p>
         <div class="space-y-4 bg-white p-3 rounded-md mb-10 shadow-custom">
             <div>
-                <p class="text-lg text-gray-700 font-semibold">上传图片</p>
+                <p class="text-lg text-gray-700 font-semibold">上傳圖片</p>
                 <x-code><span class="text-green-500 select-none">POST </span>/upload</x-code>
-                <p class="text-sm text-slate-500 mt-2">游客上传保持不变；携带 Token 请求时所需权限：<span class="font-medium">images.upload</span></p>
+                <p class="text-sm text-slate-500 mt-2">訪客上傳保持不變；攜帶 Token 請求時所需權限：<span class="font-medium">images.upload</span></p>
 
                 <div class="my-4 overflow-x-auto">
                     <p class="text-sm mb-2">Headers</p>
@@ -464,13 +464,13 @@
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -478,25 +478,25 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>Content-Type</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">需要设置为 multipart/form-data</td>
+                            <td class="px-3 py-2 whitespace-nowrap">需要設定為 multipart/form-data</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Body)</p>
+                    <p class="text-sm mb-2">請求參數(Body)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -504,30 +504,30 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>file</td>
                             <td class="px-3 py-2 whitespace-nowrap">File</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片文件</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片檔案</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">strategy_id</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">储存策略ID</td>
+                            <td class="px-3 py-2 whitespace-nowrap">儲存策略ID</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -535,72 +535,72 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">key</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片唯一密钥</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片唯一金鑰</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片名称</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片名稱</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">pathname</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片路径名</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片路徑名</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">origin_name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片原始名</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片原始名</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">size</td>
                             <td class="px-3 py-2 whitespace-nowrap">Float</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片大小，单位 KB</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片大小，單位 KB</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">mimetype</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片类型</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片類型</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">extension</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片拓展名</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片擴充名</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">md5</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片 md5 值</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片 md5 值</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">sha1</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片 sha1 值</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片 sha1 值</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">links</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">链接</td>
+                            <td class="px-3 py-2 whitespace-nowrap">連結</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">url</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片访问 url</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片存取 url</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">html</td>
@@ -625,30 +625,30 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">thumbnail_url</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">缩略图 url</td>
+                            <td class="px-3 py-2 whitespace-nowrap">縮圖 url</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div>
-                <p class="text-lg text-gray-700 font-semibold">图片列表</p>
+                <p class="text-lg text-gray-700 font-semibold">圖片列表</p>
                 <x-code><span class="text-sky-500 select-none">GET </span>/images</x-code>
-                <p class="text-sm text-slate-500 mt-2">所需权限：<span class="font-medium">images.read</span></p>
+                <p class="text-sm text-slate-500 mt-2">所需權限：<span class="font-medium">images.read</span></p>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Query)</p>
+                    <p class="text-sm mb-2">請求參數(Query)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -656,7 +656,7 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">页码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">頁碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">order</td>
@@ -666,45 +666,45 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">permission</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">权限，public=公开的，private=私有的</td>
+                            <td class="px-3 py-2 whitespace-nowrap">權限，public=公開的，private=私有的</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">album_id</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册 ID</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿 ID</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">keyword</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">筛选关键字</td>
+                            <td class="px-3 py-2 whitespace-nowrap">篩選關鍵字</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">start_date</td>
                             <td class="px-3 py-2 whitespace-nowrap">Date</td>
-                            <td class="px-3 py-2 whitespace-nowrap">开始日期，格式 Y-m-d，筛选该日期（含）之后上传的图片</td>
+                            <td class="px-3 py-2 whitespace-nowrap">開始日期，格式 Y-m-d，篩選該日期（含）之後上傳的圖片</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">end_date</td>
                             <td class="px-3 py-2 whitespace-nowrap">Date</td>
-                            <td class="px-3 py-2 whitespace-nowrap">结束日期，格式 Y-m-d，筛选该日期（含）之前上传的图片</td>
+                            <td class="px-3 py-2 whitespace-nowrap">結束日期，格式 Y-m-d，篩選該日期（含）之前上傳的圖片</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -712,125 +712,125 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">current_page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">当前所在页页码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">當前所在頁頁碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">last_page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">最后一页页码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">最後一頁頁碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">per_page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">每页展示数据数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">每頁展示資料數量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">total</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片总数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片總數量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object[]</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片列表</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片列表</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">key</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片唯一密钥</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片唯一金鑰</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片名称</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片名稱</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">origin_name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片原始名称</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片原始名稱</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">pathname</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片路径名</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片路徑名</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">size</td>
                             <td class="px-3 py-2 whitespace-nowrap">Float</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片大小，单位 KB</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片大小，單位 KB</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">width</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片宽度</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片寬度</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">height</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片高度</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片高度</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">md5</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片 md5 值</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片 md5 值</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">sha1</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片 sha1 值</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片 sha1 值</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">human_date</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">上传时间(友好格式)</td>
+                            <td class="px-3 py-2 whitespace-nowrap">上傳時間(友好格式)</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">date</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">上传日期(yyyy-MM-dd HH:mm:ss)</td>
+                            <td class="px-3 py-2 whitespace-nowrap">上傳日期(yyyy-MM-dd HH:mm:ss)</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">links</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">链接，与上传接口返回参数中的 links 相同</td>
+                            <td class="px-3 py-2 whitespace-nowrap">連結，與上傳API回傳參數中的 links 相同</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div>
-                <p class="text-lg text-gray-700 font-semibold">删除图片</p>
+                <p class="text-lg text-gray-700 font-semibold">刪除圖片</p>
                 <x-code><span class="text-red-300 select-none">DELETE </span>/images/:key</x-code>
-                <p class="text-sm text-slate-500 mt-2">所需权限：<span class="font-medium">images.delete</span></p>
+                <p class="text-sm text-slate-500 mt-2">所需權限：<span class="font-medium">images.delete</span></p>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Params)</p>
+                    <p class="text-sm mb-2">請求參數(Params)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -838,25 +838,25 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>key</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片密钥</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片金鑰</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -864,17 +864,17 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         </tbody>
                     </table>
@@ -882,26 +882,26 @@
             </div>
         </div>
 
-        <p class="text-xl mb-2 text-gray-800 font-semibold">相册相关</p>
+        <p class="text-xl mb-2 text-gray-800 font-semibold">相簿相關</p>
         <div class="space-y-4 bg-white p-3 rounded-md mb-10 shadow-custom">
             <div>
-                <p class="text-lg text-gray-700 font-semibold">相册列表</p>
+                <p class="text-lg text-gray-700 font-semibold">相簿列表</p>
                 <x-code><span class="text-sky-500 select-none">GET </span>/albums</x-code>
-                <p class="text-sm text-slate-500 mt-2">所需权限：<span class="font-medium">albums.read</span></p>
+                <p class="text-sm text-slate-500 mt-2">所需權限：<span class="font-medium">albums.read</span></p>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Query)</p>
+                    <p class="text-sm mb-2">請求參數(Query)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -909,35 +909,35 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">页码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">頁碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">order</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">排序方式，newest=最新，earliest=最早，most=图片最多，least=图片最少</td>
+                            <td class="px-3 py-2 whitespace-nowrap">排序方式，newest=最新，earliest=最早，most=圖片最多，least=圖片最少</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">keyword</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">筛选关键字</td>
+                            <td class="px-3 py-2 whitespace-nowrap">篩選關鍵字</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -945,85 +945,85 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">current_page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">当前所在页页码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">當前所在頁頁碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">last_page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">最后一页页码</td>
+                            <td class="px-3 py-2 whitespace-nowrap">最後一頁頁碼</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">per_page</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">每页展示数据数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">每頁展示資料數量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">total</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">图片总数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">圖片總數量</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-6">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object[]</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册列表</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿列表</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">id</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册自增 ID</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿自增 ID</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">name</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册名称</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿名稱</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">intro</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册简介</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿簡介</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap pl-10">image_num</td>
                             <td class="px-3 py-2 whitespace-nowrap">Integer</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册图片数量</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿圖片數量</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div>
-                <p class="text-lg text-gray-700 font-semibold">删除相册</p>
+                <p class="text-lg text-gray-700 font-semibold">刪除相簿</p>
                 <x-code><span class="text-red-300 select-none">DELETE </span>/albums/:id</x-code>
-                <p class="text-sm text-slate-500 mt-2">所需权限：<span class="font-medium">albums.delete</span></p>
+                <p class="text-sm text-slate-500 mt-2">所需權限：<span class="font-medium">albums.delete</span></p>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">请求参数(Params)</p>
+                    <p class="text-sm mb-2">請求參數(Params)</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -1031,25 +1031,25 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap"><span class="text-red-500">*</span>id</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">相册自增 ID</td>
+                            <td class="px-3 py-2 whitespace-nowrap">相簿自增 ID</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="my-4 overflow-x-auto">
-                    <p class="text-sm mb-2">返回参数</p>
+                    <p class="text-sm mb-2">回傳參數</p>
                     <table class="min-w-full">
                         <thead class="bg-white border">
                         <tr>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                字段
+                                欄位
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                类型
+                                類型
                             </th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                说明
+                                說明
                             </th>
                         </tr>
                         </thead>
@@ -1057,17 +1057,17 @@
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">status</td>
                             <td class="px-3 py-2 whitespace-nowrap">Boolean</td>
-                            <td class="px-3 py-2 whitespace-nowrap">状态，true 或 false</td>
+                            <td class="px-3 py-2 whitespace-nowrap">狀態，true 或 false</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">message</td>
                             <td class="px-3 py-2 whitespace-nowrap">String</td>
-                            <td class="px-3 py-2 whitespace-nowrap">描述信息</td>
+                            <td class="px-3 py-2 whitespace-nowrap">描述資訊</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2 whitespace-nowrap">data</td>
                             <td class="px-3 py-2 whitespace-nowrap">Object</td>
-                            <td class="px-3 py-2 whitespace-nowrap">数据</td>
+                            <td class="px-3 py-2 whitespace-nowrap">資料</td>
                         </tr>
                         </tbody>
                     </table>

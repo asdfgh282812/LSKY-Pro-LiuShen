@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
+use App\Services\OAuth\OAuthService;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -44,6 +47,7 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
+        $this->ensureSsoIsNotRequired();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
@@ -54,6 +58,29 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+    }
+
+    /**
+     * 網站啟用強制 SSO 登入時，已綁定 SSO 的帳號不允許使用密碼登入。
+     * 僅在密碼正確時才提示，避免洩漏帳號是否綁定 SSO。
+     *
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function ensureSsoIsNotRequired()
+    {
+        if (! app(OAuthService::class)->isForceLogin()) {
+            return;
+        }
+
+        $user = User::query()->where('email', $this->input('email'))->first();
+
+        if ($user && $user->oauthAccounts()->exists() && Hash::check((string) $this->input('password'), $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => '網站已啟用強制 SSO 登入，該帳號已綁定 SSO，請使用 SSO 登入',
+            ]);
+        }
     }
 
     /**

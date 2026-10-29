@@ -45,7 +45,7 @@ class StrategyController extends Controller
             $strategy->save();
             $strategy->groups()->attach($validated['groups'] ?? []);
         });
-        return $this->success('创建成功');
+        return $this->success('建立成功');
     }
 
     public function update(StrategyRequest $request): Response
@@ -58,7 +58,7 @@ class StrategyController extends Controller
             $strategy->save();
             $strategy->groups()->sync($validated['groups'] ?? []);
         });
-        return $this->success('保存成功');
+        return $this->success('儲存成功');
     }
 
     public function delete(Request $request): Response
@@ -70,6 +70,6 @@ class StrategyController extends Controller
                 $strategy->delete();
             });
         }
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 }

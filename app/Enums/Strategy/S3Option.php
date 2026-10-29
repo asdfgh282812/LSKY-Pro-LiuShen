@@ -4,7 +4,7 @@ namespace App\Enums\Strategy;
 
 final class S3Option
 {
-    /** @var string 访问url */
+    /** @var string 存取url */
     const Url = 'url';
 
     /** @var string AccessKeyId */
@@ -16,7 +16,7 @@ final class S3Option
     /** @var string Endpoint */
     const Endpoint = 'endpoint';
 
-    /** @var string 区域 */
+    /** @var string 區域 */
     const Region = 'region';
 
     /** @var string Bucket */

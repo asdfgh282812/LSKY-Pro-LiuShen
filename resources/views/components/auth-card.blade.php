@@ -20,19 +20,19 @@
             </div>
 
             <h2 class="text-4xl xl:text-5xl font-extrabold leading-tight mb-5 tracking-tight">
-                轻盈存储<br>
-                <span style="background: linear-gradient(135deg, #a7f3d0, #99f6e4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">无限可能</span>
+                輕盈儲存<br>
+                <span style="background: linear-gradient(135deg, #a7f3d0, #99f6e4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">無限可能</span>
             </h2>
             <p class="text-white/65 text-base leading-relaxed mb-10 max-w-sm">
-                安全、快速地托管您的每一张图片，支持多种储存策略与灵活分享。
+                安全、快速地託管您的每一張圖片，支援多種儲存策略與靈活分享。
             </p>
 
             <div class="flex flex-col gap-3.5">
                 @foreach([
-                    ['fa-shield-alt', '端到端安全加密，保障数据隐私'],
-                    ['fa-bolt', '极速上传，支持 WebP / GIF / RAW 等'],
-                    ['fa-share-alt', 'BBCode / Markdown / 直链多格式分享'],
-                    ['fa-layer-group', '多储存策略，本地 / OSS / S3 自由选择'],
+                    ['fa-shield-alt', '端到端安全加密，保障資料隱私'],
+                    ['fa-bolt', '極速上傳，支援 WebP / GIF / RAW 等'],
+                    ['fa-share-alt', 'BBCode / Markdown / 直鏈多格式分享'],
+                    ['fa-layer-group', '多儲存策略，本地 / OSS / S3 自由選擇'],
                 ] as $f)
                 <div class="flex items-center gap-3.5" style="animation: fadeInLeft 0.5s ease both;">
                     <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);">
@@ -62,9 +62,9 @@
             {{ $slot }}
         </div>
         <p class="mt-10 text-xs text-center relative z-10 text-[var(--text-muted)]">
-            初始项目:&nbsp;<a href="https://github.com/lsky-org/lsky-pro" target="_blank" rel="noreferrer" class="hover:text-emerald-400 transition-colors">兰空图床</a>
+            初始專案:&nbsp;<a href="https://github.com/lsky-org/lsky-pro" target="_blank" rel="noreferrer" class="hover:text-emerald-400 transition-colors">蘭空圖床</a>
             &nbsp;|&nbsp;
-            UI设计:&nbsp;<a href="https://github.com/willow-god/LSKY-Pro-LiuShen" target="_blank" rel="noreferrer" class="hover:text-emerald-400 transition-colors">清羽飞扬</a>
+            UI設計:&nbsp;<a href="https://github.com/willow-god/LSKY-Pro-LiuShen" target="_blank" rel="noreferrer" class="hover:text-emerald-400 transition-colors">清羽飛揚</a>
         </p>
         <p class="mt-1 text-xs text-center relative z-10 text-[var(--text-muted)]">
             &copy; {{ date('Y') }} {{ \App\Utils::config(\App\Enums\ConfigKey::AppName) }}

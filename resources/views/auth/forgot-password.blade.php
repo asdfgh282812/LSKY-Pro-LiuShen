@@ -2,10 +2,10 @@
     <x-auth-card>
         <div class="mb-8">
             <a href="{{ route('login') }}" class="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-emerald-600 transition-colors mb-5">
-                <i class="fas fa-arrow-left text-xs"></i> 返回登录
+                <i class="fas fa-arrow-left text-xs"></i> 返回登入
             </a>
-            <h3 class="text-2xl font-bold text-slate-800">找回密码</h3>
-            <p class="text-slate-500 text-sm mt-1">输入注册邮箱，我们将发送密码重置链接</p>
+            <h3 class="text-2xl font-bold text-slate-800">找回密碼</h3>
+            <p class="text-slate-500 text-sm mt-1">輸入註冊電子郵件，我們將傳送密碼重置連結</p>
         </div>
 
         <!-- Session Status -->
@@ -19,7 +19,7 @@
 
             <!-- Email Address -->
             <div>
-                <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">邮箱地址</label>
+                <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">電子郵件位址</label>
                 <div class="relative">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-envelope text-sm"></i></span>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus

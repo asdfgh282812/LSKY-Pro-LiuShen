@@ -4,7 +4,7 @@ window.toastr = require('toastr');
 window.Swal = require('sweetalert2')
 window.Swal = window.Swal.mixin({
     showCancelButton: true,
-    confirmButtonText: '确认',
+    confirmButtonText: '確認',
     cancelButtonText: '取消',
 })
 
@@ -37,10 +37,10 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     if (401 === error.response.status) {
-        toastr.warning('状态失效，请先登录账号');
+        toastr.warning('狀態失效，請先登入帳號');
     }
     if (500 === error.response.status) {
-        toastr.warning('服务出现异常，请稍后再试');
+        toastr.warning('服務出現異常，請稍後再試');
     }
     return Promise.reject(error);
 });

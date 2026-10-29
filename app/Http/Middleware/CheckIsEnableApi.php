@@ -16,7 +16,7 @@ class CheckIsEnableApi
     {
         if (! Utils::config(ConfigKey::IsEnableApi)) {
             if ($request->expectsJson()) {
-                return $this->fail('管理员未启用 API')->setStatusCode(403);
+                return $this->fail('管理員未啟用 API')->setStatusCode(403);
             }
             abort(404);
         }

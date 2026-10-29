@@ -30,11 +30,11 @@ class ImageRenameRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.required' => '请选择一张图片',
-            'id.numeric' => '图片选择异常',
-            'name.required' => '请输入名称',
-            'name.max' => '名称长度不能超过 50 个字符',
-            'name.string' => '名称格式不正确',
+            'id.required' => '請選擇一張圖片',
+            'id.numeric' => '圖片選擇異常',
+            'name.required' => '請輸入名稱',
+            'name.max' => '名稱長度不能超過 50 個字元',
+            'name.string' => '名稱格式不正確',
         ];
     }
 }

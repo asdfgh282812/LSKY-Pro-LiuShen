@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // 初始化系统默认配置
+        // 初始化系統預設設定
         foreach (config('convention.app') as $key => $value) {
             $content = is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value;
             Config::query()->firstOrCreate(['name' => $key], ['value' => $content]);

@@ -66,8 +66,8 @@
         type="button"
         class="theme-fab fixed right-4 floating-safe-bottom z-[19] inline-flex h-12 w-12 items-center justify-center rounded-full backdrop-blur-sm sm:right-6"
         @click="$store.theme.toggle()"
-        :aria-label="$store.theme.isDark ? '切换到浅色模式' : '切换到深色模式'"
-        :title="$store.theme.isDark ? '切换到浅色模式' : '切换到深色模式'"
+        :aria-label="$store.theme.isDark ? '切換到淺色模式' : '切換到深色模式'"
+        :title="$store.theme.isDark ? '切換到淺色模式' : '切換到深色模式'"
     >
         <i class="fas text-base" :class="$store.theme.isDark ? 'fa-sun' : 'fa-moon'"></i>
     </button>
@@ -77,7 +77,7 @@
 <script src="{{ asset('js/app.js') }}?t=20260513"></script>
 @include('common.notice')
 <script>
-    // 开关组件默认值
+    // 開關元件預設值
     let setSwitch = function (e) {
         if (e.checked) {
             $(e).closest('.switch').find('input[type=hidden]').remove();

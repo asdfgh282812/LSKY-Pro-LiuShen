@@ -20,6 +20,12 @@ class OAuthService
         return (bool) Utils::config(ConfigKey::OauthEnable, false);
     }
 
+    /** 強制 SSO 登入須同時啟用 OAuth，避免 SSO 關閉後帳號被鎖死 */
+    public function isForceLogin(): bool
+    {
+        return $this->isEnabled() && (bool) Utils::config(ConfigKey::OauthForceLogin, false);
+    }
+
     public function canRegister(): bool
     {
         return (bool) Utils::config(ConfigKey::OauthAllowRegister, false);
@@ -66,7 +72,7 @@ class OAuthService
         $stored = session()->pull(self::STATE_KEY);
 
         if (! is_string($state) || $state === '') {
-            throw new OAuthException('OAuth 状态校验失败，请重试');
+            throw new OAuthException('OAuth 狀態校驗失敗，請再試一次');
         }
 
         if (! is_array($stored)
@@ -74,14 +80,14 @@ class OAuthService
             || ! is_string($stored['value'])
             || ! hash_equals($stored['value'], $state)
             || ($stored['intent'] ?? null) !== $intent) {
-            throw new OAuthException('OAuth 状态校验失败，请重试');
+            throw new OAuthException('OAuth 狀態校驗失敗，請再試一次');
         }
     }
 
     public function fetchAccessToken(string $code, string $intent): array
     {
         if ($code === '') {
-            throw new OAuthException('OAuth 授权码缺失，请重试');
+            throw new OAuthException('OAuth 授權碼缺失，請再試一次');
         }
 
         $payload = [
@@ -96,7 +102,7 @@ class OAuthService
             $verifier = session()->pull(self::CODE_VERIFIER_KEY);
 
             if (! is_string($verifier) || $verifier === '') {
-                throw new OAuthException('OAuth PKCE 校验失败，请重新发起授权');
+                throw new OAuthException('OAuth PKCE 校驗失敗，請重新發起授權');
             }
 
             $payload['code_verifier'] = $verifier;
@@ -107,7 +113,7 @@ class OAuthService
             ->timeout(10)
             ->post($this->tokenUrl(), $payload);
 
-        return $this->decodeJson($response, 'OAuth Token 获取失败');
+        return $this->decodeJson($response, 'OAuth Token 取得失敗');
     }
 
     public function fetchUserProfile(string $accessToken): array
@@ -117,7 +123,7 @@ class OAuthService
             ->withToken($accessToken)
             ->get($this->userinfoUrl());
 
-        return $this->decodeJson($response, 'OAuth 用户信息获取失败');
+        return $this->decodeJson($response, 'OAuth 使用者資訊取得失敗');
     }
 
     public function normalizeProfile(array $profile): array
@@ -125,7 +131,7 @@ class OAuthService
         $userId = Arr::get($profile, $this->userIdField());
 
         if (! is_scalar($userId) || $userId === '') {
-            throw new OAuthException('OAuth 用户信息中缺少唯一标识字段');
+            throw new OAuthException('OAuth 使用者資訊中缺少唯一標識欄位');
         }
 
         $name = Arr::get($profile, $this->userNameField());
@@ -184,17 +190,17 @@ class OAuthService
 
     public function authorizeUrl(): string
     {
-        return $this->requireHttpsUrl((string) Utils::config(ConfigKey::OauthAuthorizeUrl, ''), 'OAuth 授权地址未配置或格式不正确');
+        return $this->requireHttpsUrl((string) Utils::config(ConfigKey::OauthAuthorizeUrl, ''), 'OAuth 授權位址未設定或格式不正確');
     }
 
     public function tokenUrl(): string
     {
-        return $this->requireHttpsUrl((string) Utils::config(ConfigKey::OauthTokenUrl, ''), 'OAuth Token 地址未配置或格式不正确');
+        return $this->requireHttpsUrl((string) Utils::config(ConfigKey::OauthTokenUrl, ''), 'OAuth Token 位址未設定或格式不正確');
     }
 
     public function userinfoUrl(): string
     {
-        return $this->requireHttpsUrl((string) Utils::config(ConfigKey::OauthUserinfoUrl, ''), 'OAuth 用户信息地址未配置或格式不正确');
+        return $this->requireHttpsUrl((string) Utils::config(ConfigKey::OauthUserinfoUrl, ''), 'OAuth 使用者資訊位址未設定或格式不正確');
     }
 
     public function clientId(): string
@@ -202,7 +208,7 @@ class OAuthService
         $clientId = trim((string) Utils::config(ConfigKey::OauthClientId, ''));
 
         if ($clientId === '') {
-            throw new OAuthException('OAuth Client ID 未配置');
+            throw new OAuthException('OAuth Client ID 未設定');
         }
 
         return $clientId;
@@ -213,7 +219,7 @@ class OAuthService
         $clientSecret = trim((string) Utils::config(ConfigKey::OauthClientSecret, ''));
 
         if ($clientSecret === '') {
-            throw new OAuthException('OAuth Client Secret 未配置');
+            throw new OAuthException('OAuth Client Secret 未設定');
         }
 
         return $clientSecret;

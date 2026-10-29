@@ -26,11 +26,11 @@ class UserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'group_id' => '角色组',
-            'name' => '昵称',
-            'capacity' => '总容量',
-            'password' => '密码',
-            'status' => '状态',
+            'group_id' => '角色組',
+            'name' => '暱稱',
+            'capacity' => '總容量',
+            'password' => '密碼',
+            'status' => '狀態',
         ];
     }
 }

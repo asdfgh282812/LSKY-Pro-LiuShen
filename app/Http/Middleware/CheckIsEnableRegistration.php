@@ -16,7 +16,7 @@ class CheckIsEnableRegistration
     {
         if (! Utils::config(ConfigKey::IsEnableRegistration)) {
             if ($request->expectsJson()) {
-                return $this->fail('站点管理员关闭了注册功能')->setStatusCode(403);
+                return $this->fail('網站管理員關閉了註冊功能')->setStatusCode(403);
             }
             abort(404);
         }

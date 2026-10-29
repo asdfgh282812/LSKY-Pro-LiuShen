@@ -16,7 +16,7 @@ class CheckIsEnableGallery
     {
         if (! Utils::config(ConfigKey::IsEnableGallery)) {
             if ($request->expectsJson()) {
-                return $this->fail('管理员未启用画廊功能')->setStatusCode(403);
+                return $this->fail('管理員未啟用畫廊功能')->setStatusCode(403);
             }
             abort(404);
         }

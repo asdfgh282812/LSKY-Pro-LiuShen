@@ -21,7 +21,7 @@ class ImageController extends Controller
     public function index(Request $request): View
     {
         $keywords = $request->query('keywords');
-        // 结构化筛选参数（可视化筛选器），与 keywords 高级语法可同时使用
+        // 結構化篩選參數（視覺化篩選器），與 keywords 進階語法可同時使用
         $filters = $request->query('filter', []);
         $images = Image::query()->with(['user' => function (BelongsTo $belongsTo) {
             $belongsTo->withSum('images', 'size');
@@ -135,6 +135,6 @@ class ImageController extends Controller
         /** @var Image $image */
         $image = Image::with('user', 'strategy', 'album')->find($request->route('id'));
         (new UserService())->deleteImages([$image->id]);
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 }

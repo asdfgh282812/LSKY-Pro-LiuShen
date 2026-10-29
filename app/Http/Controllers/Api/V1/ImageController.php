@@ -41,13 +41,13 @@ class ImageController extends Controller
         } catch (UploadException $e) {
             return $this->fail($e->getMessage());
         } catch (\Throwable $e) {
-            Utils::e($e, 'Api 上传文件时发生异常');
+            Utils::e($e, 'Api 上傳檔案時發生異常');
             if (config('app.debug')) {
                 return $this->fail($e->getMessage());
             }
-            return $this->fail('服务异常，请稍后再试');
+            return $this->fail('服務異常，請稍後再試');
         }
-        return $this->success('上传成功', $image->setAppends(['pathname', 'links'])->only(
+        return $this->success('上傳成功', $image->setAppends(['pathname', 'links'])->only(
             'key', 'name', 'pathname', 'origin_name', 'size', 'mimetype', 'extension', 'md5', 'sha1', 'links'
         ));
     }
@@ -82,6 +82,6 @@ class ImageController extends Controller
         /** @var User $user */
         $user = Auth::user();
         (new UserService())->deleteImages([$request->route('key')], $user, 'key');
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 }

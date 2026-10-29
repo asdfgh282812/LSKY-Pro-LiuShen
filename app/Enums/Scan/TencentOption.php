@@ -16,6 +16,6 @@ final class TencentOption
     /** @var string Endpoint */
     const Endpoint = 'endpoint';
 
-    /** @var string 业务场景 */
+    /** @var string 業務場景 */
     const BizType = 'biz_type';
 }

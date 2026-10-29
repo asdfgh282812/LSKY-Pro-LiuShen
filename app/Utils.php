@@ -22,7 +22,7 @@ class Utils
     }
 
     /**
-     * 获取头像地址
+     * 取得頭像位址
      *
      * @param $email
      * @param int $s
@@ -40,7 +40,7 @@ class Utils
     }
 
     /**
-     * 获取系统配置，获取全部配置时将返回
+     * 取得系統設定，取得全部設定時將返回
      *
      * @param  string  $name
      * @param  mixed|null  $default
@@ -59,6 +59,7 @@ class Utils
                     case ConfigKey::IsEnableRegistration:
                     case ConfigKey::IsUserNeedVerify:
                     case ConfigKey::OauthEnable:
+                    case ConfigKey::OauthForceLogin:
                     case ConfigKey::OauthAllowRegister:
                     case ConfigKey::OauthPkceEnable:
                         $value = (bool) $value;
@@ -87,9 +88,9 @@ class Utils
     }
 
     /**
-     * 生成连续日期.
-     * @param  string  $start  开始日期
-     * @param  string  $end  结束日期
+     * 生成連續日期.
+     * @param  string  $start  開始日期
+     * @param  string  $end  結束日期
      * @param  string  $unit  day=日，month=月，year=年
      * @return array
      */
@@ -104,9 +105,9 @@ class Utils
     }
 
     /**
-     * 转换字段单位
+     * 轉換欄位單位
      *
-     * @param  int|float  $size  字节b
+     * @param  int|float  $size  位元組b
      * @return string
      */
     public static function formatSize(int|float $size): string
@@ -126,9 +127,9 @@ class Utils
     }
 
     /**
-     * 格式化数字
+     * 格式化數字
      *
-     * @param int|string $n 数字
+     * @param int|string $n 數字
      * @param int $precision 精度
      * @return int|string
      */
@@ -148,7 +149,7 @@ class Utils
     }
 
     /**
-     * 递归过滤数组元素
+     * 遞迴過濾陣列元素
      *
      * @param  array  $array
      * @param  callable|null  $callback
@@ -166,10 +167,10 @@ class Utils
     }
 
     /**
-     * 格式化配置，设置默认配置以及将字符串数字转换为数字
+     * 格式化設定，設定預設設定以及將字串數字轉換為數字
      *
-     * @param  array  $defaults  默认配置
-     * @param  array  $configs  新配置
+     * @param  array  $defaults  預設設定
+     * @param  array  $configs  新設定
      * @return array
      */
     public static function parseConfigs(array $defaults, array $configs): array

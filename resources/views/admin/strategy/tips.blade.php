@@ -1,3 +1,3 @@
 <p class="bg-blue-500 p-2 mb-2 rounded text-sm text-white">
-    <i class="fas fa-exclamation-circle"></i> 一个策略可以关联多个角色组，一个角色组也可以关联多个策略，注意，如果某个组未设置储存策略，那么该角色组下的用户将无法上传图片。
+    <i class="fas fa-exclamation-circle"></i> 一個策略可以關聯多個角色組，一個角色組也可以關聯多個策略，注意，如果某個組未設定儲存策略，那麼該角色組下的使用者將無法上傳圖片。
 </p>

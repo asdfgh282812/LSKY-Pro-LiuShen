@@ -111,18 +111,18 @@ window.context = window.context || (function () {
     }
 
     /**
-     * 添加菜单
-     * @param selector 被右击元素
-     * @param opts 参数 {
+     * 新增選單
+     * @param selector 被右擊元素
+     * @param opts 參數 {
      *     data: Array[Object] {
-     *         text: String, // 文本
+     *         text: String, // 文字
      *         classes: Array, // class
-     *         attributes: Object, // 属性
-     *         action: Function, // 点击后的回调 function (e) {}
-     *         visible: Function, // 函数返回bool类型，表示显示或隐藏按钮 function (e) {}
+     *         attributes: Object, // 屬性
+     *         action: Function, // 點選後的回呼 function (e) {}
+     *         visible: Function, // 函式返回bool類型，表示顯示或隱藏按鈕 function (e) {}
      *     }
-     *     beforeOpen: Function, // 打开前 function (item) {}
-     *     afterOpen: Function, // 打开后 function (item, dropdown) {}
+     *     beforeOpen: Function, // 開啟前 function (item) {}
+     *     afterOpen: Function, // 開啟後 function (item, dropdown) {}
      * }
      */
     function addContext(selector, opts) {

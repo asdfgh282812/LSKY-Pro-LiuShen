@@ -1,26 +1,26 @@
-@section('title', '创建角色组')
+@section('title', '建立角色組')
 
 <x-app-layout>
     <div class="my-6 md:my-9">
         @include('admin.group.tips')
 
         <p class="bg-blue-500 p-2 mb-2 rounded text-sm text-white">
-            <i class="fas fa-exclamation-circle"></i> 角色组设置默认以后新用户注册会归属该角色组，系统只能设置一个默认角色组。设置为游客组后，未登录用户将会受游客组控制。
+            <i class="fas fa-exclamation-circle"></i> 角色組設定預設以後新使用者註冊會歸屬該角色組，系統只能設定一個預設角色組。設定為訪客組後，未登入使用者將會受訪客組控制。
         </p>
 
         <div class="mt-5 md:mt-0 md:col-span-2">
             <ul id="tabs" class="flex space-x-2 text-sm">
                 <li class="group">
-                    <a data-target="basic" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-white group-hover:bg-white">常规配置</a>
+                    <a data-target="basic" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-white group-hover:bg-white">常規設定</a>
                 </li>
                 <li class="group">
-                    <a data-target="review" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-gray-200 group-hover:bg-white">图片审核</a>
+                    <a data-target="review" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-gray-200 group-hover:bg-white">圖片審核</a>
                 </li>
                 <li class="group">
-                    <a data-target="protection" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-gray-200 group-hover:bg-white">原图保护</a>
+                    <a data-target="protection" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-gray-200 group-hover:bg-white">原圖保護</a>
                 </li>
                 <li class="group">
-                    <a data-target="watermark" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-gray-200 group-hover:bg-white">水印配置</a>
+                    <a data-target="watermark" href="javascript:void(0)" class="block rounded-t-lg px-3 py-2 bg-gray-200 group-hover:bg-white">浮水印設定</a>
                 </li>
             </ul>
             <form action="{{ route('admin.group.create') }}" method="POST">
@@ -28,66 +28,66 @@
                     <div class="px-4 py-5 bg-white sm:p-6">
                         <div data-tab="basic" class="grid grid-cols-6 gap-6">
                             <div class="col-span-6">
-                                <label for="name" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>组名称</label>
-                                <x-input type="text" name="name" id="name" autocomplete="name" placeholder="请输入组名称" />
+                                <label for="name" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>組名稱</label>
+                                <x-input type="text" name="name" id="name" autocomplete="name" placeholder="請輸入組名稱" />
                             </div>
 
                             <div class="col-span-6">
-                                <label for="maximum_file_size" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>最大文件大小(KB)</label>
-                                <x-input type="number" name="configs[maximum_file_size]" id="maximum_file_size" autocomplete="maximum_file_size" placeholder="请输入上传文件的最大限制，单位kb" value="{{ $default->get('maximum_file_size') }}" />
+                                <label for="maximum_file_size" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>最大檔案大小(KB)</label>
+                                <x-input type="number" name="configs[maximum_file_size]" id="maximum_file_size" autocomplete="maximum_file_size" placeholder="請輸入上傳檔案的最大限制，單位kb" value="{{ $default->get('maximum_file_size') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="concurrent_upload_num" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>并发上传限制</label>
-                                <x-input type="number" name="configs[concurrent_upload_num]" id="concurrent_upload_num" autocomplete="concurrent_upload_num" placeholder="请输入并发上传数量" value="{{ $default->get('concurrent_upload_num') }}" />
+                                <label for="concurrent_upload_num" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>併發上傳限制</label>
+                                <x-input type="number" name="configs[concurrent_upload_num]" id="concurrent_upload_num" autocomplete="concurrent_upload_num" placeholder="請輸入併發上傳數量" value="{{ $default->get('concurrent_upload_num') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="limit_per_minute" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每分钟上传限制</label>
-                                <x-input type="number" name="configs[limit_per_minute]" id="limit_per_minute" autocomplete="limit_per_minute" placeholder="请输入每分钟可以上传的图片数量" value="{{ $default->get('limit_per_minute') }}" />
+                                <label for="limit_per_minute" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每分鐘上傳限制</label>
+                                <x-input type="number" name="configs[limit_per_minute]" id="limit_per_minute" autocomplete="limit_per_minute" placeholder="請輸入每分鐘可以上傳的圖片數量" value="{{ $default->get('limit_per_minute') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="limit_per_hour" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每小时上传限制</label>
-                                <x-input type="number" name="configs[limit_per_hour]" id="limit_per_hour" autocomplete="limit_per_hour" placeholder="请输入每小时可以上传的图片数量" value="{{ $default->get('limit_per_hour') }}" />
+                                <label for="limit_per_hour" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每小時上傳限制</label>
+                                <x-input type="number" name="configs[limit_per_hour]" id="limit_per_hour" autocomplete="limit_per_hour" placeholder="請輸入每小時可以上傳的圖片數量" value="{{ $default->get('limit_per_hour') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="limit_per_day" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每天上传限制</label>
-                                <x-input type="number" name="configs[limit_per_day]" id="limit_per_day" autocomplete="limit_per_day" placeholder="请输入每天可以上传的图片数量" value="{{ $default->get('limit_per_day') }}" />
+                                <label for="limit_per_day" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每天上傳限制</label>
+                                <x-input type="number" name="configs[limit_per_day]" id="limit_per_day" autocomplete="limit_per_day" placeholder="請輸入每天可以上傳的圖片數量" value="{{ $default->get('limit_per_day') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="limit_per_week" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每周上传限制</label>
-                                <x-input type="number" name="configs[limit_per_week]" id="limit_per_week" autocomplete="limit_per_week" placeholder="请输入每周可以上传的图片数量" value="{{ $default->get('limit_per_week') }}" />
+                                <label for="limit_per_week" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每週上傳限制</label>
+                                <x-input type="number" name="configs[limit_per_week]" id="limit_per_week" autocomplete="limit_per_week" placeholder="請輸入每週可以上傳的圖片數量" value="{{ $default->get('limit_per_week') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="limit_per_month" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每月上传限制</label>
-                                <x-input type="number" name="configs[limit_per_month]" id="limit_per_month" autocomplete="limit_per_month" placeholder="请输入每月可以上传的图片数量" value="{{ $default->get('limit_per_month') }}" />
+                                <label for="limit_per_month" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>每月上傳限制</label>
+                                <x-input type="number" name="configs[limit_per_month]" id="limit_per_month" autocomplete="limit_per_month" placeholder="請輸入每月可以上傳的圖片數量" value="{{ $default->get('limit_per_month') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="path_naming_rule" class="block text-sm font-medium text-gray-700">路径命名规则</label>
-                                <x-input type="text" name="configs[path_naming_rule]" id="path_naming_rule" autocomplete="path_naming_rule" placeholder="请输入路径命名规则" value="{{ $default->get('path_naming_rule') }}" />
-                                <a href="javascript:void(0)" class="mt-1 text-sm text-emerald-600" id="rename-rules"><i class="fas fa-pencil-alt text-xs"></i> 命名规则对照表</a>
+                                <label for="path_naming_rule" class="block text-sm font-medium text-gray-700">路徑命名規則</label>
+                                <x-input type="text" name="configs[path_naming_rule]" id="path_naming_rule" autocomplete="path_naming_rule" placeholder="請輸入路徑命名規則" value="{{ $default->get('path_naming_rule') }}" />
+                                <a href="javascript:void(0)" class="mt-1 text-sm text-emerald-600" id="rename-rules"><i class="fas fa-pencil-alt text-xs"></i> 命名規則對照表</a>
                                 @include('admin.group.rules')
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="file_naming_rule" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>文件命名规则</label>
-                                <x-input type="text" name="configs[file_naming_rule]" id="file_naming_rule" autocomplete="file_naming_rule" placeholder="请输入文件命名规则" value="{{ $default->get('file_naming_rule') }}" />
+                                <label for="file_naming_rule" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>檔案命名規則</label>
+                                <x-input type="text" name="configs[file_naming_rule]" id="file_naming_rule" autocomplete="file_naming_rule" placeholder="請輸入檔案命名規則" value="{{ $default->get('file_naming_rule') }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="image_save_quality" class="block text-sm font-medium text-gray-700">图片保存质量</label>
-                                <x-input type="number" name="configs[image_save_quality]" id="image_save_quality" autocomplete="path_naming_rule" placeholder="请输入图片保存质量" value="{{ $default->get('image_save_quality', 100) }}" />
+                                <label for="image_save_quality" class="block text-sm font-medium text-gray-700">圖片儲存品質</label>
+                                <x-input type="number" name="configs[image_save_quality]" id="image_save_quality" autocomplete="path_naming_rule" placeholder="請輸入圖片儲存品質" value="{{ $default->get('image_save_quality', 100) }}" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="image_save_format" class="block text-sm font-medium text-gray-700">图片转换格式</label>
+                                <label for="image_save_format" class="block text-sm font-medium text-gray-700">圖片轉換格式</label>
                                 <x-select id="configs[image_save_format]" name="configs[image_save_format]" autocomplete="image_save_format">
-                                    <option value="">不转换格式</option>
+                                    <option value="">不轉換格式</option>
                                     @foreach($default->get('accepted_file_suffixes') as $extension)
                                         <option value="{{ strtolower($extension) }}">{{ strtoupper($extension) }}</option>
                                     @endforeach
@@ -95,19 +95,19 @@
                             </div>
 
                             <div class="col-span-6">
-                                <x-fieldset title="是否默认" faq="设置默认后，新用户注册以后将会属于该默认角色组，且默认组只能有一个。">
+                                <x-fieldset title="是否預設" faq="設定預設後，新使用者註冊以後將會屬於該預設角色組，且預設組只能有一個。">
                                     <x-switch id="is_default" name="is_default" value="1"></x-switch>
                                 </x-fieldset>
                             </div>
 
                             <div class="col-span-6">
-                                <x-fieldset title="是否为游客组" faq="设置为游客组后，未登录用户受该组控制，且游客组只能有一个。">
+                                <x-fieldset title="是否為訪客組" faq="設定為訪客組後，未登入使用者受該組控制，且訪客組只能有一個。">
                                     <x-switch id="is_guest" name="is_guest" value="1"></x-switch>
                                 </x-fieldset>
                             </div>
 
                             <div class="col-span-6">
-                                <x-fieldset title="允许上传的图片类型">
+                                <x-fieldset title="允許上傳的圖片類型">
                                     @foreach($default->get('accepted_file_suffixes') as $extension)
                                         <x-fieldset-checkbox id="configs[accepted_file_suffixes]_{{ $extension }}" name="configs[accepted_file_suffixes][]" value="{{ $extension }}" checked>
                                             {{ strtoupper($extension) }}
@@ -119,20 +119,20 @@
 
                         <div data-tab="review" class="hidden grid grid-cols-6 gap-6">
                             <div class="col-span-6 mb-4">
-                                <x-fieldset title="图片审核" faq="设置上传是否需要应用第三方审查，违规的图片会被标记为不健康的图片，或直接被删除。">
+                                <x-fieldset title="圖片審核" faq="設定上傳是否需要應用第三方審查，違規的圖片會被標記為不健康的圖片，或直接被刪除。">
                                     <x-switch id="configs[is_enable_scan]" name="configs[is_enable_scan]" value="1"></x-switch>
                                 </x-fieldset>
                             </div>
                             <div class="col-span-6 mb-4">
-                                <x-fieldset title="审核动作">
-                                    <x-fieldset-radio id="configs[scanned_action]_mark" name="configs[scanned_action]" value="mark" checked>标记为不健康</x-fieldset-radio>
-                                    <x-fieldset-radio id="configs[scanned_action]_delete" name="configs[scanned_action]" value="delete">直接删除</x-fieldset-radio>
+                                <x-fieldset title="審核動作">
+                                    <x-fieldset-radio id="configs[scanned_action]_mark" name="configs[scanned_action]" value="mark" checked>標記為不健康</x-fieldset-radio>
+                                    <x-fieldset-radio id="configs[scanned_action]_delete" name="configs[scanned_action]" value="delete">直接刪除</x-fieldset-radio>
                                 </x-fieldset>
                             </div>
                             <div class="col-span-6 mb-4">
-                                <x-fieldset title="审核驱动">
-                                    <x-fieldset-radio id="configs[scan_configs][driver]_tencent" name="configs[scan_configs][driver]" data-select="scan" value="tencent" checked>腾讯云</x-fieldset-radio>
-                                    <x-fieldset-radio id="configs[scan_configs][driver]_aliyun" name="configs[scan_configs][driver]" data-select="scan" value="aliyun">阿里云</x-fieldset-radio>
+                                <x-fieldset title="審核驅動">
+                                    <x-fieldset-radio id="configs[scan_configs][driver]_tencent" name="configs[scan_configs][driver]" data-select="scan" value="tencent" checked>騰訊雲</x-fieldset-radio>
+                                    <x-fieldset-radio id="configs[scan_configs][driver]_aliyun" name="configs[scan_configs][driver]" data-select="scan" value="aliyun">阿里雲</x-fieldset-radio>
                                     <x-fieldset-radio id="configs[scan_configs][driver]_nsfwjs" name="configs[scan_configs][driver]" data-select="scan" value="nsfwjs">NsfwJs</x-fieldset-radio>
                                 </x-fieldset>
                             </div>
@@ -140,45 +140,45 @@
                             <div class="hidden mb-4" data-scan-driver="tencent">
                                 <div class="col-span-6 sm:col-span-3 mb-4">
                                     <label for="configs[scan_configs][drivers][tencent][endpoint]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>Endpoint</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][endpoint]" id="configs[scan_configs][drivers][tencent][endpoint]" autocomplete="endpoint" placeholder="请输入 Endpoint" value="ims.tencentcloudapi.com" />
+                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][endpoint]" id="configs[scan_configs][drivers][tencent][endpoint]" autocomplete="endpoint" placeholder="請輸入 Endpoint" value="ims.tencentcloudapi.com" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
                                     <label for="configs[scan_configs][drivers][tencent][secret_id]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>SecretId</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][secret_id]" id="configs[scan_configs][drivers][tencent][secret_id]" autocomplete="secret_id" placeholder="请输入 SecretId" />
+                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][secret_id]" id="configs[scan_configs][drivers][tencent][secret_id]" autocomplete="secret_id" placeholder="請輸入 SecretId" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
                                     <label for="configs[scan_configs][drivers][tencent][secret_key]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>SecretKey</label>
-                                    <x-input type="password" name="configs[scan_configs][drivers][tencent][secret_key]" id="configs[scan_configs][drivers][tencent][secret_key]" autocomplete="secret_key" placeholder="请输入 SecretKey" />
+                                    <x-input type="password" name="configs[scan_configs][drivers][tencent][secret_key]" id="configs[scan_configs][drivers][tencent][secret_key]" autocomplete="secret_key" placeholder="請輸入 SecretKey" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
                                     <label for="configs[scan_configs][drivers][tencent][region]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>地域</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][region]" id="configs[scan_configs][drivers][tencent][region]" autocomplete="region" placeholder="请输入地域节点，例如：ap-beijing" />
+                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][region]" id="configs[scan_configs][drivers][tencent][region]" autocomplete="region" placeholder="請輸入地域節點，例如：ap-beijing" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <label for="configs[scan_configs][drivers][tencent][biz_type]" class="block text-sm font-medium text-gray-700">场景名称</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][biz_type]" id="configs[scan_configs][drivers][tencent][biz_type]" autocomplete="biz_type" placeholder="业务场景名称，可为空" />
+                                    <label for="configs[scan_configs][drivers][tencent][biz_type]" class="block text-sm font-medium text-gray-700">場景名稱</label>
+                                    <x-input type="text" name="configs[scan_configs][drivers][tencent][biz_type]" id="configs[scan_configs][drivers][tencent][biz_type]" autocomplete="biz_type" placeholder="業務場景名稱，可為空" />
                                 </div>
                             </div>
 
                             <div class="hidden mb-4" data-scan-driver="aliyun">
                                 <div class="col-span-6 sm:col-span-3 mb-4">
                                     <label for="configs[scan_configs][drivers][aliyun][access_key_id]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>AccessKeyId</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][aliyun][access_key_id]" id="configs[scan_configs][drivers][aliyun][access_key_id]" autocomplete="access_key_id" placeholder="请输入 AccessKeyId" />
+                                    <x-input type="text" name="configs[scan_configs][drivers][aliyun][access_key_id]" id="configs[scan_configs][drivers][aliyun][access_key_id]" autocomplete="access_key_id" placeholder="請輸入 AccessKeyId" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
                                     <label for="configs[scan_configs][drivers][aliyun][access_key_secret]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>AccessKeySecret</label>
-                                    <x-input type="password" name="configs[scan_configs][drivers][aliyun][access_key_secret]" id="configs[scan_configs][drivers][aliyun][access_key_secret]" autocomplete="access_key_id" placeholder="请输入 AccessKeySecret" />
+                                    <x-input type="password" name="configs[scan_configs][drivers][aliyun][access_key_secret]" id="configs[scan_configs][drivers][aliyun][access_key_secret]" autocomplete="access_key_id" placeholder="請輸入 AccessKeySecret" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <label for="configs[scan_configs][drivers][aliyun][region_id]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>地域节点</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][aliyun][region_id]" id="configs[scan_configs][drivers][aliyun][region_id]" autocomplete="region_id" placeholder="请输入地域节点，例如：cn-shanghai" />
+                                    <label for="configs[scan_configs][drivers][aliyun][region_id]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>地域節點</label>
+                                    <x-input type="text" name="configs[scan_configs][drivers][aliyun][region_id]" id="configs[scan_configs][drivers][aliyun][region_id]" autocomplete="region_id" placeholder="請輸入地域節點，例如：cn-shanghai" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <label for="configs[scan_configs][drivers][aliyun][biz_type]" class="block text-sm font-medium text-gray-700">场景名称</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][aliyun][biz_type]" id="configs[scan_configs][drivers][aliyun][biz_type]" autocomplete="biz_type" placeholder="请输入业务场景名称" />
+                                    <label for="configs[scan_configs][drivers][aliyun][biz_type]" class="block text-sm font-medium text-gray-700">場景名稱</label>
+                                    <x-input type="text" name="configs[scan_configs][drivers][aliyun][biz_type]" id="configs[scan_configs][drivers][aliyun][biz_type]" autocomplete="biz_type" placeholder="請輸入業務場景名稱" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <x-fieldset title="审核场景">
+                                    <x-fieldset title="審核場景">
                                         @foreach($scenes as $key => $scene)
                                             <x-fieldset-checkbox id="configs[scan_configs][drivers][aliyun][scenes][]_{{ $key }}" name="configs[scan_configs][drivers][aliyun][scenes][]" value="{{ $key }}">{{ $scene }}</x-fieldset-checkbox>
                                         @endforeach
@@ -188,60 +188,60 @@
 
                             <div class="hidden mb-4" data-scan-driver="nsfwjs">
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <label for="configs[scan_configs][drivers][nsfwjs][api_url]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>接口地址</label>
-                                    <x-input type="url" name="configs[scan_configs][drivers][nsfwjs][api_url]" id="configs[scan_configs][drivers][nsfwjs][api_url]" autocomplete="api_url" placeholder="请输入接口地址，http(s)://domain.com/classify" />
+                                    <label for="configs[scan_configs][drivers][nsfwjs][api_url]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>API 位址</label>
+                                    <x-input type="url" name="configs[scan_configs][drivers][nsfwjs][api_url]" id="configs[scan_configs][drivers][nsfwjs][api_url]" autocomplete="api_url" placeholder="請輸入API 位址，http(s)://domain.com/classify" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <label for="configs[scan_configs][drivers][nsfwjs][attr_name]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>属性名称</label>
-                                    <x-input type="text" name="configs[scan_configs][drivers][nsfwjs][attr_name]" id="configs[scan_configs][drivers][nsfwjs][attr_name]" autocomplete="attr_name" placeholder="接口的表单文件属性名" value="image" />
+                                    <label for="configs[scan_configs][drivers][nsfwjs][attr_name]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>屬性名稱</label>
+                                    <x-input type="text" name="configs[scan_configs][drivers][nsfwjs][attr_name]" id="configs[scan_configs][drivers][nsfwjs][attr_name]" autocomplete="attr_name" placeholder="API的表單檔案屬性名" value="image" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 mb-4">
-                                    <label for="configs[scan_configs][drivers][nsfwjs][threshold]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>阈值</label>
+                                    <label for="configs[scan_configs][drivers][nsfwjs][threshold]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>閾值</label>
                                     <x-input type="number" name="configs[scan_configs][drivers][nsfwjs][threshold]" id="configs[scan_configs][drivers][nsfwjs][threshold]" autocomplete="threshold" placeholder="取值 1-100" value="60" />
-                                    <small class="text-gray-500"><i class="fas fa-exclamation-circle"></i> 阈值是指图片违规程度上限，取值 1-100 之间，数值越低审核越严格</small>
+                                    <small class="text-gray-500"><i class="fas fa-exclamation-circle"></i> 閾值是指圖片違規程度上限，取值 1-100 之間，數值越低審核越嚴格</small>
                                 </div>
                             </div>
                         </div>
 
                         <div data-tab="protection" class="hidden grid grid-cols-6 gap-6">
                             <div class="col-span-6 mb-4">
-                                <x-fieldset title="原图保护" faq="设置该角色组下的用户上传的图片是否应用原图保护功能，开启后图片<b>不返回直链</b>">
+                                <x-fieldset title="原圖保護" faq="設定該角色組下的使用者上傳的圖片是否應用原圖保護功能，開啟後圖片<b>不返回直鏈</b>">
                                     <x-switch id="configs[is_enable_original_protection]" name="configs[is_enable_original_protection]" value="1"></x-switch>
                                 </x-fieldset>
                             </div>
 
                             <div class="col-span-6 mb-4">
-                                <label for="configs[image_cache_ttl]" class="block text-sm font-medium text-gray-700">图片缓存时间(秒)</label>
-                                <x-input type="number" name="configs[image_cache_ttl]" id="configs[image_cache_ttl]" autocomplete="image_cache_ttl" placeholder="请输入受保护图片的缓存时间，不填或填0表示不缓存" value="" />
+                                <label for="configs[image_cache_ttl]" class="block text-sm font-medium text-gray-700">圖片快取時間(秒)</label>
+                                <x-input type="number" name="configs[image_cache_ttl]" id="configs[image_cache_ttl]" autocomplete="image_cache_ttl" placeholder="請輸入受保護圖片的快取時間，不填或填0表示不快取" value="" />
                             </div>
                         </div>
 
                         <div data-tab="watermark" class="hidden grid grid-cols-6 gap-6">
-                            <p class="mb-3 text-red-600 text-sm"><i class="fas fa-exclamation"></i> 开启水印功能前请注意考虑图片版权问题。</p>
+                            <p class="mb-3 text-red-600 text-sm"><i class="fas fa-exclamation"></i> 開啟浮水印功能前請注意考慮圖片版權問題。</p>
                             <div class="col-span-6 mb-4">
-                                <x-fieldset title="开启水印" faq="请注意，水印模式为动态生成时，仅在开启了「原图保护」功能的情况下生效。">
+                                <x-fieldset title="開啟浮水印" faq="請注意，浮水印模式為動態生成時，僅在開啟了「原圖保護」功能的情況下生效。">
                                     <x-switch id="configs[is_enable_watermark]" name="configs[is_enable_watermark]" value="1"></x-switch>
                                 </x-fieldset>
                                 <div class="col-span-6 mt-4 mb-4">
-                                    <x-fieldset title="水印模式">
-                                        <x-fieldset-radio id="configs[watermark_configs][mode]_overlay" name="configs[watermark_configs][mode]" value="{{ \App\Enums\Watermark\Mode::Overlay }}" checked>覆盖原图</x-fieldset-radio>
-                                        <x-fieldset-radio id="configs[watermark_configs][mode]_dynamic" name="configs[watermark_configs][mode]" value="{{ \App\Enums\Watermark\Mode::Dynamic }}">动态生成</x-fieldset-radio>
+                                    <x-fieldset title="浮水印模式">
+                                        <x-fieldset-radio id="configs[watermark_configs][mode]_overlay" name="configs[watermark_configs][mode]" value="{{ \App\Enums\Watermark\Mode::Overlay }}" checked>覆蓋原圖</x-fieldset-radio>
+                                        <x-fieldset-radio id="configs[watermark_configs][mode]_dynamic" name="configs[watermark_configs][mode]" value="{{ \App\Enums\Watermark\Mode::Dynamic }}">動態生成</x-fieldset-radio>
                                     </x-fieldset>
                                 </div>
                                 <div class="col-span-6 mt-4 mb-4">
-                                    <x-fieldset title="水印类型">
-                                        <x-fieldset-radio id="configs[watermark_configs][driver]_font" name="configs[watermark_configs][driver]" data-select="watermark" value="font" checked>文字水印</x-fieldset-radio>
-                                        <x-fieldset-radio id="configs[watermark_configs][driver]_image" name="configs[watermark_configs][driver]" data-select="watermark" value="image">图片水印</x-fieldset-radio>
+                                    <x-fieldset title="浮水印類型">
+                                        <x-fieldset-radio id="configs[watermark_configs][driver]_font" name="configs[watermark_configs][driver]" data-select="watermark" value="font" checked>文字浮水印</x-fieldset-radio>
+                                        <x-fieldset-radio id="configs[watermark_configs][driver]_image" name="configs[watermark_configs][driver]" data-select="watermark" value="image">圖片浮水印</x-fieldset-radio>
                                     </x-fieldset>
                                 </div>
                                 <div class="mb-4 hidden" data-watermark-driver="font">
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][font]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>字体文件</label>
-                                        <x-input type="text" name="configs[watermark_configs][drivers][font][font]" id="configs[watermark_configs][drivers][font][font]" autocomplete="text" placeholder="请输入字体文件路径，例如：fonts/lsky.ttf" />
-                                        <small class="text-yellow-500">请将字体文件放置 {{ storage_path('app/public') }} 目录下</small>
+                                        <label for="configs[watermark_configs][drivers][font][font]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>字型檔案</label>
+                                        <x-input type="text" name="configs[watermark_configs][drivers][font][font]" id="configs[watermark_configs][drivers][font][font]" autocomplete="text" placeholder="請輸入字型檔案路徑，例如：fonts/lsky.ttf" />
+                                        <small class="text-yellow-500">請將字型檔案放置 {{ storage_path('app/public') }} 目錄下</small>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][position]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>水印位置</label>
+                                        <label for="configs[watermark_configs][drivers][font][position]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>浮水印位置</label>
                                         <x-select id="configs[watermark_configs][drivers][font][position]" name="configs[watermark_configs][drivers][font][position]" autocomplete="position">
                                             @foreach($positions as $key => $position)
                                                 <option value="{{ $key }}">{{ $position }}</option>
@@ -249,38 +249,38 @@
                                         </x-select>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][text]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>水印文字</label>
-                                        <x-input type="text" name="configs[watermark_configs][drivers][font][text]" id="configs[watermark_configs][drivers][font][text]" autocomplete="text" placeholder="请输入水印文字" />
+                                        <label for="configs[watermark_configs][drivers][font][text]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>浮水印文字</label>
+                                        <x-input type="text" name="configs[watermark_configs][drivers][font][text]" id="configs[watermark_configs][drivers][font][text]" autocomplete="text" placeholder="請輸入浮水印文字" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][color]" class="block text-sm font-medium text-gray-700">字体颜色</label>
-                                        <x-input type="text" name="configs[watermark_configs][drivers][font][color]" id="configs[watermark_configs][drivers][font][color]" autocomplete="color" placeholder="请输入字体颜色，例如：#ffffff" />
+                                        <label for="configs[watermark_configs][drivers][font][color]" class="block text-sm font-medium text-gray-700">字型顏色</label>
+                                        <x-input type="text" name="configs[watermark_configs][drivers][font][color]" id="configs[watermark_configs][drivers][font][color]" autocomplete="color" placeholder="請輸入字型顏色，例如：#ffffff" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][size]" class="block text-sm font-medium text-gray-700">字体大小</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][font][size]" id="configs[watermark_configs][drivers][font][size]" autocomplete="size" placeholder="请输入字体大小，默认 14" />
+                                        <label for="configs[watermark_configs][drivers][font][size]" class="block text-sm font-medium text-gray-700">字型大小</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][font][size]" id="configs[watermark_configs][drivers][font][size]" autocomplete="size" placeholder="請輸入字型大小，預設 14" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][angle]" class="block text-sm font-medium text-gray-700">旋转角度</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][font][angle]" id="configs[watermark_configs][drivers][font][angle]" autocomplete="angle" placeholder="请输入旋转角度，默认 0，可以为" />
+                                        <label for="configs[watermark_configs][drivers][font][angle]" class="block text-sm font-medium text-gray-700">旋轉角度</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][font][angle]" id="configs[watermark_configs][drivers][font][angle]" autocomplete="angle" placeholder="請輸入旋轉角度，預設 0，可以為" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][x]" class="block text-sm font-medium text-gray-700">X轴偏移量</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][font][x]" id="configs[watermark_configs][drivers][font][x]" autocomplete="x" placeholder="X轴偏移量" />
+                                        <label for="configs[watermark_configs][drivers][font][x]" class="block text-sm font-medium text-gray-700">X軸偏移量</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][font][x]" id="configs[watermark_configs][drivers][font][x]" autocomplete="x" placeholder="X軸偏移量" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][font][y]" class="block text-sm font-medium text-gray-700">Y轴偏移量</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][font][y]" id="configs[watermark_configs][drivers][font][y]" autocomplete="y" placeholder="Y轴偏移量" />
+                                        <label for="configs[watermark_configs][drivers][font][y]" class="block text-sm font-medium text-gray-700">Y軸偏移量</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][font][y]" id="configs[watermark_configs][drivers][font][y]" autocomplete="y" placeholder="Y軸偏移量" />
                                     </div>
                                 </div>
                                 <div class="mb-4 hidden" data-watermark-driver="image">
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][image]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>水印图片</label>
-                                        <x-input type="text" name="configs[watermark_configs][drivers][image][image]" id="configs[watermark_configs][drivers][image][image]" autocomplete="image" placeholder="请输入水印路径，例如：images/lsky.png" />
-                                        <small class="text-yellow-500">请将水印图片放置 {{ storage_path('app/public') }} 目录下</small>
+                                        <label for="configs[watermark_configs][drivers][image][image]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>浮水印圖片</label>
+                                        <x-input type="text" name="configs[watermark_configs][drivers][image][image]" id="configs[watermark_configs][drivers][image][image]" autocomplete="image" placeholder="請輸入浮水印路徑，例如：images/lsky.png" />
+                                        <small class="text-yellow-500">請將浮水印圖片放置 {{ storage_path('app/public') }} 目錄下</small>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][position]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>水印位置</label>
+                                        <label for="configs[watermark_configs][drivers][image][position]" class="block text-sm font-medium text-gray-700"><span class="text-red-600">*</span>浮水印位置</label>
                                         <x-select id="configs[watermark_configs][drivers][image][position]" name="configs[watermark_configs][drivers][image][position]" autocomplete="position">
                                             @foreach($positions as $key => $position)
                                                 <option value="{{ $key }}">{{ $position }}</option>
@@ -288,28 +288,28 @@
                                         </x-select>
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][width]" class="block text-sm font-medium text-gray-700">图片宽度</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][image][width]" id="configs[watermark_configs][drivers][image][width]" autocomplete="width" placeholder="请输入水印图片宽度" />
+                                        <label for="configs[watermark_configs][drivers][image][width]" class="block text-sm font-medium text-gray-700">圖片寬度</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][image][width]" id="configs[watermark_configs][drivers][image][width]" autocomplete="width" placeholder="請輸入浮水印圖片寬度" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][height]" class="block text-sm font-medium text-gray-700">图片高度</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][image][height]" id="configs[watermark_configs][drivers][image][height]" autocomplete="height" placeholder="请输入水印图片高度" />
+                                        <label for="configs[watermark_configs][drivers][image][height]" class="block text-sm font-medium text-gray-700">圖片高度</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][image][height]" id="configs[watermark_configs][drivers][image][height]" autocomplete="height" placeholder="請輸入浮水印圖片高度" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
                                         <label for="configs[watermark_configs][drivers][image][opacity]" class="block text-sm font-medium text-gray-700">不透明度</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][image][opacity]" id="configs[watermark_configs][drivers][image][opacity]" autocomplete="opacity" placeholder="请输入不透明度，取值 0 - 100" />
+                                        <x-input type="number" name="configs[watermark_configs][drivers][image][opacity]" id="configs[watermark_configs][drivers][image][opacity]" autocomplete="opacity" placeholder="請輸入不透明度，取值 0 - 100" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][rotate]" class="block text-sm font-medium text-gray-700">旋转角度</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][image][rotate]" id="configs[watermark_configs][drivers][image][rotate]" autocomplete="rotate" placeholder="请输入旋转角度，默认 0" />
+                                        <label for="configs[watermark_configs][drivers][image][rotate]" class="block text-sm font-medium text-gray-700">旋轉角度</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][image][rotate]" id="configs[watermark_configs][drivers][image][rotate]" autocomplete="rotate" placeholder="請輸入旋轉角度，預設 0" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][x]" class="block text-sm font-medium text-gray-700">X轴偏移量</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][image][x]" id="configs[watermark_configs][drivers][image][x]" autocomplete="x" placeholder="X轴偏移量" />
+                                        <label for="configs[watermark_configs][drivers][image][x]" class="block text-sm font-medium text-gray-700">X軸偏移量</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][image][x]" id="configs[watermark_configs][drivers][image][x]" autocomplete="x" placeholder="X軸偏移量" />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3 mb-4">
-                                        <label for="configs[watermark_configs][drivers][image][y]" class="block text-sm font-medium text-gray-700">Y轴偏移量</label>
-                                        <x-input type="number" name="configs[watermark_configs][drivers][image][y]" id="configs[watermark_configs][drivers][image][y]" autocomplete="y" placeholder="Y轴偏移量" />
+                                        <label for="configs[watermark_configs][drivers][image][y]" class="block text-sm font-medium text-gray-700">Y軸偏移量</label>
+                                        <x-input type="number" name="configs[watermark_configs][drivers][image][y]" id="configs[watermark_configs][drivers][image][y]" autocomplete="y" placeholder="Y軸偏移量" />
                                     </div>
                                 </div>
                             </div>
@@ -317,7 +317,7 @@
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                         <x-button type="button" class="bg-gray-500" onclick="history.go(-1)">取消</x-button>
-                        <x-button>确认创建</x-button>
+                        <x-button>確認建立</x-button>
                     </div>
                 </div>
             </form>
@@ -334,7 +334,7 @@
                 $(this).removeClass('bg-gray-200').addClass('bg-white');
             });
 
-            // 设置选中驱动
+            // 設定選取驅動
             let setSelected = function () {
                 $('[data-select]').each(function () {
                     $(`[data-${$(this).data('select')}-driver=${$(this).val()}]`)[this.checked ? 'show' : 'hide']();

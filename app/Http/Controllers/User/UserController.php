@@ -54,7 +54,7 @@ class UserController extends Controller
             event(new PasswordReset($user));
         }
         $user->save();
-        return $this->success('保存成功');
+        return $this->success('儲存成功');
     }
 
     public function setStrategy(Request $request): Response
@@ -62,9 +62,9 @@ class UserController extends Controller
         /** @var User $user */
         $user = Auth::user();
         if (! $strategy = $user->group->strategies()->find($request->id)) {
-            return $this->fail('没有找到该策略');
+            return $this->fail('沒有找到該策略');
         }
         $user->update(['configs->'.UserConfigKey::DefaultStrategy => $strategy->id]);
-        return $this->success('设置成功');
+        return $this->success('設定成功');
     }
 }

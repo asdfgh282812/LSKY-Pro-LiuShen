@@ -4,27 +4,27 @@ namespace App\Enums\Watermark;
 
 final class ImageOption
 {
-    /** @var string 水印图片 */
+    /** @var string 浮水印圖片 */
     const Image = 'image';
 
-    /** @var string 水印位置 */
+    /** @var string 浮水印位置 */
     const Position = 'position';
 
-    /** @var string 水印图片宽 */
+    /** @var string 浮水印圖片寬 */
     const Width = 'width';
 
-    /** @var string 水印图片高 */
+    /** @var string 浮水印圖片高 */
     const Height = 'height';
 
-    /** @var string 旋转角度 */
+    /** @var string 旋轉角度 */
     const Rotate = 'rotate';
 
     /** @var string 不透明度 */
     const Opacity = 'opacity';
 
-    /** @var string X轴偏移量 */
+    /** @var string X軸偏移量 */
     const X = 'x';
 
-    /** @var string Y轴偏移量 */
+    /** @var string Y軸偏移量 */
     const Y = 'y';
 }

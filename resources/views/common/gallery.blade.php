@@ -1,4 +1,4 @@
-@section('title', '画廊')
+@section('title', '畫廊')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/gallery.css') }}">
@@ -30,7 +30,7 @@
         </div>
         {{ $images->links() }}
         @else
-            <x-no-data message="暂时没有可展示的图片，再等等看吧～" />
+            <x-no-data message="暫時沒有可展示的圖片，再等等看吧～" />
         @endif
     </div>
 

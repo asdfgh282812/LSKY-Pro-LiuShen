@@ -4,18 +4,18 @@ namespace App\Enums;
 
 final class UserConfigKey
 {
-    /** @var string 默认相册 */
+    /** @var string 預設相簿 */
     const DefaultAlbum = 'default_album';
 
-    /** @var string 默认策略 */
+    /** @var string 預設策略 */
     const DefaultStrategy = 'default_strategy';
 
-    /** @var string 默认权限 */
+    /** @var string 預設權限 */
     const DefaultPermission = 'default_permission';
 
-    /** @var string 图片粘贴后动作 */
+    /** @var string 圖片貼上後動作 */
     const PastedAction = 'pasted_action';
 
-    /** @var string 上传是否自动清除预览 */
+    /** @var string 上傳是否自動清除預覽 */
     const IsAutoClearPreview = 'is_auto_clear_preview';
 }

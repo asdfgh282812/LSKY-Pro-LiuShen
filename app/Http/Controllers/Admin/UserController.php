@@ -28,7 +28,7 @@ class UserController extends Controller
         $users->getCollection()->each(function (User $user) {
             $user->group->setVisible(['name']);
         });
-        $statuses = [-1 => '全部', 1 => '正常', 0 => '冻结'];
+        $statuses = [-1 => '全部', 1 => '正常', 0 => '凍結'];
 
         $users->appends(compact('status', 'keywords'));
 
@@ -61,9 +61,9 @@ class UserController extends Controller
         $user->group_id = $validated['group_id'];
 
         if (!$user->save()) {
-            return $this->fail('保存失败');
+            return $this->fail('儲存失敗');
         }
-        return $this->success('保存成功');
+        return $this->success('儲存成功');
     }
 
     public function delete(Request $request): Response
@@ -76,6 +76,6 @@ class UserController extends Controller
                 $user->delete();
             });
         }
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 }

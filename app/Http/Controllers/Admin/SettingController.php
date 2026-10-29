@@ -78,11 +78,11 @@ class SettingController extends Controller
             }
             Cache::flush();
         } catch (\Throwable $e) {
-            Utils::e($e, '保存系统设置时出现异常');
+            Utils::e($e, '儲存系統設定時出現異常');
             return $this->fail($e->getMessage());
         }
 
-        return $this->success('保存成功');
+        return $this->success('儲存成功');
     }
 
     public function mailTest(Request $request): Response
@@ -92,7 +92,7 @@ class SettingController extends Controller
         } catch (\Throwable $e) {
             return $this->fail($e->getMessage());
         }
-        return $this->success('发送成功');
+        return $this->success('傳送成功');
     }
 
     public function checkUpdate(): Response

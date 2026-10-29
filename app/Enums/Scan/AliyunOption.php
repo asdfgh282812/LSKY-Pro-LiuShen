@@ -13,9 +13,9 @@ final class AliyunOption
     /** @var string RegionId */
     const RegionId = 'region_id';
 
-    /** @var string 场景 */
+    /** @var string 場景 */
     const Scenes = 'scenes';
 
-    /** @var string 业务场景 */
+    /** @var string 業務場景 */
     const BizType = 'biz_type';
 }

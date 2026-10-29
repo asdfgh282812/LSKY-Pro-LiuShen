@@ -38,6 +38,6 @@ class AlbumController extends Controller
         /** @var User $user */
         $user = Auth::user();
         $user->albums()->where('id', $request->route('id'))->delete();
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 }

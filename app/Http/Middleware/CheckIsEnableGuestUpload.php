@@ -15,7 +15,7 @@ class CheckIsEnableGuestUpload
 
     public function handle(Request $request, Closure $next)
     {
-        // 检测是否启用了游客上传，未启用、未登录情况下跳转至登录页面
+        // 檢測是否啟用了訪客上傳，未啟用、未登入情況下跳轉至登入頁面
         if (! Utils::config(ConfigKey::IsAllowGuestUpload) && Auth::guest()) {
             return redirect('login');
         }

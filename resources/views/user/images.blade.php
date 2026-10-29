@@ -1,4 +1,4 @@
-@section('title', '我的图片')
+@section('title', '我的圖片')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/justified-gallery/justifiedGallery.min.css') }}">
@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/context-js/context-js.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr/flatpickr.min.css') }}">
     <style>
-        /* flatpickr 主题适配亮/暗色变量 */
+        /* flatpickr 主題適配亮/暗色變數 */
         .flatpickr-calendar {
             background: var(--card-bg);
             border: 1px solid var(--border-strong);
@@ -58,15 +58,15 @@
     <div class="relative flex flex-wrap justify-between items-center gap-y-2 px-3 py-2 z-[3] top-0 left-0 right-0 bg-white/95 backdrop-blur-sm" style="border-bottom: 1px solid var(--toolbar-border); box-shadow: 0 1px 8px rgba(0,0,0,0.04);">
         <div class="flex items-center gap-1">
             <button class="flex items-center gap-1.5 text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" onclick="getAlbums()">
-                <i class="fas fa-layer-group text-emerald-400 text-xs"></i>相册
+                <i class="fas fa-layer-group text-emerald-400 text-xs"></i>相簿
             </button>
             <div class="flex-row hidden lg:flex gap-0.5">
-                <a data-operate="movements" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">移动到相册</a>
-                <a data-operate="remove" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">移出当前相册</a>
-                <a data-operate="permission" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">设置权限</a>
-                <a data-operate="detail" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">详细信息</a>
-                <a data-operate="rename" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">重命名</a>
-                <a data-operate="delete" class="hidden text-xs py-1.5 px-3 rounded-lg text-red-500 hover:bg-red-50 hover:text-red-600 transition-all duration-150 font-medium" href="javascript:void(0)">删除</a>
+                <a data-operate="movements" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">移動到相簿</a>
+                <a data-operate="remove" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">移出當前相簿</a>
+                <a data-operate="permission" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">設定權限</a>
+                <a data-operate="detail" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">詳細資訊</a>
+                <a data-operate="rename" class="hidden text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium" href="javascript:void(0)">重新命名</a>
+                <a data-operate="delete" class="hidden text-xs py-1.5 px-3 rounded-lg text-red-500 hover:bg-red-50 hover:text-red-600 transition-all duration-150 font-medium" href="javascript:void(0)">刪除</a>
             </div>
             <div class="block lg:hidden">
                 <x-dropdown direction="right">
@@ -78,13 +78,13 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link data-operate="refresh" href="javascript:void(0)" @click="open = false"><i class="fas fa-sync-alt w-4 text-emerald-400"></i>刷新</x-dropdown-link>
-                        <x-dropdown-link data-operate="movements" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-folder-open w-4 text-emerald-400"></i>移动到相册</x-dropdown-link>
-                        <x-dropdown-link data-operate="remove" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-folder-minus w-4 text-emerald-400"></i>移出当前相册</x-dropdown-link>
-                        <x-dropdown-link data-operate="permission" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-eye w-4 text-emerald-400"></i>设置权限</x-dropdown-link>
-                        <x-dropdown-link data-operate="detail" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-info-circle w-4 text-emerald-400"></i>详细信息</x-dropdown-link>
-                        <x-dropdown-link data-operate="rename" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-pen w-4 text-emerald-400"></i>重命名</x-dropdown-link>
-                        <x-dropdown-link data-operate="delete" class="hidden text-red-500 hover:bg-red-50 hover:text-red-600" href="javascript:void(0)" @click="open = false"><i class="fas fa-trash w-4"></i>删除</x-dropdown-link>
+                        <x-dropdown-link data-operate="refresh" href="javascript:void(0)" @click="open = false"><i class="fas fa-sync-alt w-4 text-emerald-400"></i>重新整理</x-dropdown-link>
+                        <x-dropdown-link data-operate="movements" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-folder-open w-4 text-emerald-400"></i>移動到相簿</x-dropdown-link>
+                        <x-dropdown-link data-operate="remove" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-folder-minus w-4 text-emerald-400"></i>移出當前相簿</x-dropdown-link>
+                        <x-dropdown-link data-operate="permission" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-eye w-4 text-emerald-400"></i>設定權限</x-dropdown-link>
+                        <x-dropdown-link data-operate="detail" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-info-circle w-4 text-emerald-400"></i>詳細資訊</x-dropdown-link>
+                        <x-dropdown-link data-operate="rename" class="hidden" href="javascript:void(0)" @click="open = false"><i class="fas fa-pen w-4 text-emerald-400"></i>重新命名</x-dropdown-link>
+                        <x-dropdown-link data-operate="delete" class="hidden text-red-500 hover:bg-red-50 hover:text-red-600" href="javascript:void(0)" @click="open = false"><i class="fas fa-trash w-4"></i>刪除</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -92,7 +92,7 @@
         <div class="flex items-center gap-2">
             <div class="relative hidden md:block">
                 <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                <input type="text" id="search" class="pl-8 pr-4 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 focus:bg-white transition-all duration-200 w-36 hover:w-52 focus:w-52" placeholder="搜索图片...">
+                <input type="text" id="search" class="pl-8 pr-4 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 focus:bg-white transition-all duration-200 w-36 hover:w-52 focus:w-52" placeholder="搜尋圖片...">
             </div>
             <x-dropdown direction="left">
                 <x-slot name="trigger">
@@ -112,38 +112,38 @@
             <x-dropdown direction="left">
                 <x-slot name="trigger">
                     <button id="permission" class="flex items-center gap-1.5 text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium border border-slate-200">
-                        <span>可见</span>
+                        <span>可見</span>
                         <i class="fas fa-filter text-emerald-400"></i>
                     </button>
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('all')">可见</x-dropdown-link>
-                    <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('public')">公开</x-dropdown-link>
+                    <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('all')">可見</x-dropdown-link>
+                    <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('public')">公開</x-dropdown-link>
                     <x-dropdown-link href="javascript:void(0)" @click="open = false; setPermission('private')">私有</x-dropdown-link>
                 </x-slot>
             </x-dropdown>
             <div class="relative">
                 <button type="button" id="date-range-toggle" class="flex items-center gap-1.5 text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-150 font-medium border border-slate-200">
-                    <span id="date-range-label">全部时间</span>
+                    <span id="date-range-label">全部時間</span>
                     <i class="fas fa-calendar-alt text-emerald-400"></i>
                 </button>
                 <div id="date-range-panel" class="hidden absolute right-0 mt-2 z-[6] p-3 rounded-xl" style="width: min(19rem, calc(100vw - 1.5rem)); background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: 0 12px 32px rgba(0,0,0,0.18);">
                     <div class="flex items-end gap-2">
                         <div class="flex-1">
-                            <label for="date-start" class="block text-xs font-medium text-slate-500 mb-1">开始日期</label>
+                            <label for="date-start" class="block text-xs font-medium text-slate-500 mb-1">開始日期</label>
                             <input type="text" id="date-start" readonly placeholder="不限" class="w-full text-sm px-2.5 py-1.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400" style="border-color: var(--input-border); color: var(--text-primary);">
                         </div>
                         <span class="text-slate-400 text-xs pb-2">至</span>
                         <div class="flex-1">
-                            <label for="date-end" class="block text-xs font-medium text-slate-500 mb-1">结束日期</label>
+                            <label for="date-end" class="block text-xs font-medium text-slate-500 mb-1">結束日期</label>
                             <input type="text" id="date-end" readonly placeholder="不限" class="w-full text-sm px-2.5 py-1.5 rounded-lg border focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400" style="border-color: var(--input-border); color: var(--text-primary);">
                         </div>
                     </div>
-                    <p class="mt-2 text-[11px] text-slate-400">开始日期不能晚于结束日期</p>
+                    <p class="mt-2 text-[11px] text-slate-400">開始日期不能晚於結束日期</p>
                     <div class="flex justify-end gap-2 mt-2">
                         <button type="button" id="date-range-clear" class="text-xs py-1.5 px-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-all duration-150 border border-slate-200">清除</button>
-                        <button type="button" id="date-range-apply" class="text-xs py-1.5 px-3 rounded-lg text-white font-medium transition-all duration-150" style="background: linear-gradient(135deg, #059669, #0d9488);">应用</button>
+                        <button type="button" id="date-range-apply" class="text-xs py-1.5 px-3 rounded-lg text-white font-medium transition-all duration-150" style="background: linear-gradient(135deg, #059669, #0d9488);">應用</button>
                     </div>
                 </div>
             </div>
@@ -187,9 +187,9 @@
             <div id="album-add" class="flex flex-col w-full hidden border rounded p-2">
                 <p class="error-message text-white p-2 mb-2 text-sm bg-red-500 rounded hidden"></p>
                 <form class="w-full space-y-2" action="/user/albums">
-                    <input type="text" class="w-full rounded px-2.5 py-1.5 text-sm border-0 bg-gray-200" name="name" placeholder="请输入名称">
-                    <textarea class="w-full resize-y rounded-md text-sm border-0 bg-gray-200" name="intro" placeholder="请输入简介"></textarea>
-                    <button class="w-full py-1 px-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm text-center tracking-wider font-semibold rounded-md transition-colors">创建相册</button>
+                    <input type="text" class="w-full rounded px-2.5 py-1.5 text-sm border-0 bg-gray-200" name="name" placeholder="請輸入名稱">
+                    <textarea class="w-full resize-y rounded-md text-sm border-0 bg-gray-200" name="intro" placeholder="請輸入簡介"></textarea>
+                    <button class="w-full py-1 px-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm text-center tracking-wider font-semibold rounded-md transition-colors">建立相簿</button>
                 </form>
             </div>
         </div>
@@ -210,9 +210,9 @@
         <div id="album-edit" data-id="__id__" class="flex flex-col w-full border rounded p-2">
             <p class="error-message text-white p-2 mb-2 text-sm bg-red-500 rounded hidden"></p>
             <form class="w-full space-y-2" action="/user/albums/__id__">
-                <input type="text" class="w-full rounded px-2.5 py-1.5 text-sm border-0 bg-gray-200" placeholder="请输入名称" name="name" value="__name__">
-                <textarea class="w-full resize-y rounded-md text-sm border-0 bg-gray-200" name="intro" placeholder="请输入简介">__intro__</textarea>
-                <button class="w-full py-1 px-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm text-center tracking-wider font-semibold rounded-md transition-colors">确认修改</button>
+                <input type="text" class="w-full rounded px-2.5 py-1.5 text-sm border-0 bg-gray-200" placeholder="請輸入名稱" name="name" value="__name__">
+                <textarea class="w-full resize-y rounded-md text-sm border-0 bg-gray-200" name="intro" placeholder="請輸入簡介">__intro__</textarea>
+                <button class="w-full py-1 px-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm text-center tracking-wider font-semibold rounded-md transition-colors">確認修改</button>
             </form>
         </div>
     </script>
@@ -220,7 +220,7 @@
     <script type="text/html" id="image-detail-tpl">
         <div class="my-4 px-4 space-y-3 text-[var(--text-primary)]">
             <div>
-                <span class="text-sm font-semibold">相册名称</span>
+                <span class="text-sm font-semibold">相簿名稱</span>
                 <p class="my-2 break-words text-gray-700">__album_name__</p>
             </div>
             <div>
@@ -228,19 +228,19 @@
                 <p class="my-2 break-words text-gray-600">__strategy_name__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">图片名称</div>
+                <div class="text-sm font-semibold">圖片名稱</div>
                 <p class="my-2 break-words text-gray-600">__filename__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">图片原始名称</div>
+                <div class="text-sm font-semibold">圖片原始名稱</div>
                 <p class="my-2 break-words text-gray-600">__origin_name__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">图片大小</div>
+                <div class="text-sm font-semibold">圖片大小</div>
                 <p class="my-2 break-words text-gray-600">__size__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">图片类型</div>
+                <div class="text-sm font-semibold">圖片類型</div>
                 <p class="my-2 break-words text-gray-600">__mimetype__</p>
             </div>
             <div>
@@ -256,15 +256,15 @@
                 <p class="my-2 break-words text-gray-600">__sha1__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">权限</div>
+                <div class="text-sm font-semibold">權限</div>
                 <p class="my-2 break-words text-gray-600">__permission__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">上传 IP</div>
+                <div class="text-sm font-semibold">上傳 IP</div>
                 <p class="my-2 break-words text-gray-600">__uploaded_ip__</p>
             </div>
             <div>
-                <div class="text-sm font-semibold">上传时间</div>
+                <div class="text-sm font-semibold">上傳時間</div>
                 <p class="my-2 break-words text-gray-600">__created_at__</p>
             </div>
         </div>
@@ -278,7 +278,7 @@
         <script src="{{ asset('js/clipboard/index.browser.js') }}"></script>
         <script src="{{ asset('js/clipboard/clipboard.min.js') }}"></script>
         <script src="{{ asset('js/flatpickr/flatpickr.min.js') }}"></script>
-        <script src="{{ asset('js/flatpickr/zh.js') }}"></script>
+        <script src="{{ asset('js/flatpickr/zh_tw.js') }}"></script>
         <script>
             let gridConfigs = {
                 rowHeight: 180,
@@ -288,7 +288,7 @@
                 waitThumbnailsLoad: false,
             };
 
-            let selectedAlbum = {}; // 选择的相册
+            let selectedAlbum = {}; // 選擇的相簿
 
             const HEADER_TITLE = '#header-title';
             const IMAGES_SCROLL = '#images-scroll';
@@ -359,8 +359,8 @@
                 },
                 complete: function () {
                     if ($photos.html() !== '') {
-                        // 由于 justifiedGallery 创建后占高度(无论是否有内容或内容被清空)，导致加载过程中在没有数据的情况下高度被拉开
-                        // 所以需要在重置前销毁，重置数据后重新构建 justifiedGallery
+                        // 由於 justifiedGallery 建立後佔高度(無論是否有內容或內容被清空)，導致載入過程中在沒有資料的情況下高度被拉開
+                        // 所以需要在重置前銷燬，重置資料後重新構建 justifiedGallery
                         if ($photos.hasClass('reset')) {
                             $photos.justifiedGallery(gridConfigs).removeClass('reset');
                         }
@@ -368,10 +368,10 @@
                         $photos.justifiedGallery('norewind')
                         viewer.update();
                     } else {
-                        // 没有任何数据时销毁 justifiedGallery
+                        // 沒有任何資料時銷燬 justifiedGallery
                         $photos.justifiedGallery('destroy')
                     }
-                    $headerTitle.text('我的图片')
+                    $headerTitle.text('我的圖片')
                 }
             });
 
@@ -383,7 +383,7 @@
             }
 
             const getAlbums = (options, callback) => {
-                let title = '__title__ <i class="cursor-pointer fas fa-plus text-emerald-500" onclick="$(\'#album-add\').toggleClass(\'hidden\')"></i>'.replace(/__title__/g, (options || {}).title || '我的相册');
+                let title = '__title__ <i class="cursor-pointer fas fa-plus text-emerald-500" onclick="$(\'#album-add\').toggleClass(\'hidden\')"></i>'.replace(/__title__/g, (options || {}).title || '我的相簿');
                 let content = $('#albums-container-tpl').html();
                 drawer.toggle(title, content, function () {
                     let $albums = $('#albums-container');
@@ -410,7 +410,7 @@
                                     .replace(/__image_num__/g, albums[i].image_num)
                                     .replace(/__json__/g, JSON.stringify(albums[i]))
                                 if (albums[i].id === selectedAlbum.id) {
-                                    // 选中的相册高亮
+                                    // 選取的相簿高亮
                                     item = item
                                         .replace(/bg-gray-100/g, 'bg-blue-400')
                                         .replace(/text-gray-800/g, 'text-white')
@@ -426,7 +426,7 @@
                     });
 
                     $albums.off('click', '>a').on('click', '>a', function () {
-                        // 如果当前已经为选中状态则清除
+                        // 如果當前已經為選取狀態則清除
                         if (selectedAlbum.id === $(this).data('id')) {
                             selectedAlbum = {};
                         } else {
@@ -461,13 +461,13 @@
                     $albums.off('click', '.delete').on('click', '.delete', function (e) {
                         e.stopPropagation();
                         Swal.fire({
-                            title: '确认删除该相册?',
-                            text: "删除后相册中的图片将会被移出。",
+                            title: '確認刪除該相簿?',
+                            text: "刪除後相簿中的圖片將會被移出。",
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: '确认',
+                            confirmButtonText: '確認',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 let id = $(this).closest(ALBUM_ITEM).data('id');
@@ -526,26 +526,26 @@
 
             const setPermission = function (permission) {
                 resetImages({page: 1, permission: permission})
-                $('#permission span').text({public: '公开', private: '私有', all: '可见'}[permission]);
+                $('#permission span').text({public: '公開', private: '私有', all: '可見'}[permission]);
             };
 
-            // 时间范围筛选（flatpickr）
+            // 時間範圍篩選（flatpickr）
             const dateStartPicker = flatpickr('#date-start', {
-                locale: 'zh',
+                locale: 'zh_tw',
                 dateFormat: 'Y-m-d',
                 disableMobile: true,
                 onChange: function (selectedDates, dateStr) {
-                    // 开始日期限制结束日期可选的最小值
+                    // 開始日期限制結束日期可選的最小值
                     dateEndPicker.set('minDate', dateStr || null);
                 },
             });
 
             const dateEndPicker = flatpickr('#date-end', {
-                locale: 'zh',
+                locale: 'zh_tw',
                 dateFormat: 'Y-m-d',
                 disableMobile: true,
                 onChange: function (selectedDates, dateStr) {
-                    // 结束日期限制开始日期可选的最大值
+                    // 結束日期限制開始日期可選的最大值
                     dateStartPicker.set('maxDate', dateStr || null);
                 },
             });
@@ -554,11 +554,11 @@
                 if (start && end) {
                     $('#date-range-label').text(`${start} ~ ${end}`);
                 } else if (start) {
-                    $('#date-range-label').text(`${start} 之后`);
+                    $('#date-range-label').text(`${start} 之後`);
                 } else if (end) {
                     $('#date-range-label').text(`${end} 之前`);
                 } else {
-                    $('#date-range-label').text('全部时间');
+                    $('#date-range-label').text('全部時間');
                 }
             };
 
@@ -568,7 +568,7 @@
             });
 
             $(document).click(function (e) {
-                // flatpickr 的日历挂载在 body 上，需单独排除，避免选择日期时收起面板
+                // flatpickr 的日曆掛載在 body 上，需單獨排除，避免選擇日期時收起面板
                 if (!$(e.target).closest('#date-range-panel, #date-range-toggle, .flatpickr-calendar').length) {
                     $('#date-range-panel').addClass('hidden');
                 }
@@ -578,9 +578,9 @@
                 const start = $('#date-start').val();
                 const end = $('#date-end').val();
 
-                // 前者不得晚于后者
+                // 前者不得晚於後者
                 if (start && end && start > end) {
-                    return toastr.error('开始日期不能晚于结束日期');
+                    return toastr.error('開始日期不能晚於結束日期');
                 }
 
                 resetImages({page: 1, start_date: start || '', end_date: end || ''});
@@ -619,9 +619,9 @@
             const bindOperates = () => {
                 let selected = ds.getSelection();
                 if (selected.length) {
-                    $headerTitle.text(`已选择 ${selected.length} 张图片`);
+                    $headerTitle.text(`已選擇 ${selected.length} 張圖片`);
                 } else {
-                    $headerTitle.text('我的图片');
+                    $headerTitle.text('我的圖片');
                 }
                 $('[data-operate]').hide();
                 let operates = [];
@@ -671,16 +671,16 @@
                     return $(trigger).data('copy-value');
                 }
             }).on('success', _ => {
-                toastr.success('复制成功');
+                toastr.success('複製成功');
             }).on('error', _ => {
-                toastr.warning('复制失败')
+                toastr.warning('複製失敗')
             });
 
             const methods = {
                 movements() {
-                    getAlbums({title: '选择相册'}, e => {
+                    getAlbums({title: '選擇相簿'}, e => {
                         let selected = ds.getSelection().map(item => $(item).data('id'));
-                        $headerTitle.text(`移动 ${selected.length} 张图片至...`)
+                        $headerTitle.text(`移動 ${selected.length} 張圖片至...`)
                         $(e).off('click', '>a').on('click', '>a', function () {
                             axios.put('{{ route('user.images.movement') }}', {
                                 selected: selected,
@@ -700,10 +700,10 @@
                 },
                 remove() {
                     let selected = ds.getSelection().map(item => $(item).data('id'));
-                    $headerTitle.text(`移出 ${selected.length} 张图片`)
+                    $headerTitle.text(`移出 ${selected.length} 張圖片`)
                     axios.put('{{ route('user.images.movement') }}', {
                         selected: selected,
-                        album_id: selectedAlbum.id || null, // 原相册ID
+                        album_id: selectedAlbum.id || null, // 原相簿ID
                         id: null,
                     }).then(response => {
                         if (response.data.status) {
@@ -717,20 +717,20 @@
                 },
                 permission() {
                     Swal.fire({
-                        title: '选择一个权限',
-                        text: '选择公开将会出现在画廊中(若平台开启了画廊)',
+                        title: '選擇一個權限',
+                        text: '選擇公開將會出現在畫廊中(若平臺開啟了畫廊)',
                         input: 'select',
                         inputOptions: {
-                            public: '公开',
+                            public: '公開',
                             private: '私有',
                         },
-                        confirmButtonText: '确认设置',
-                        inputPlaceholder: '请选择一个权限',
+                        confirmButtonText: '確認設定',
+                        inputPlaceholder: '請選擇一個權限',
                         showCancelButton: true,
                         inputValidator: (value) => {
                             return new Promise((resolve) => {
                                 if (value === '') {
-                                    resolve('请选择正确的权限')
+                                    resolve('請選擇正確的權限')
                                 } else {
                                     resolve();
                                 }
@@ -756,14 +756,14 @@
                 rename(e) {
                     let item = $(e).data('json');
                     Swal.fire({
-                        title: '请输入图片名称',
+                        title: '請輸入圖片名稱',
                         input: 'text',
                         inputValue: item.filename,
                         inputAttributes: {
                             autocapitalize: 'off'
                         },
                         showCancelButton: true,
-                        confirmButtonText: '确认',
+                        confirmButtonText: '確認',
                         showLoaderOnConfirm: true,
                         preConfirm: (value) => {
                             return axios.put('{{ route('user.images.rename') }}', {
@@ -774,7 +774,7 @@
                                     throw new Error(response.data.message)
                                 }
                                 return response.data;
-                            }).catch(error => Swal.showValidationMessage('服务异常，请稍后重试。'));
+                            }).catch(error => Swal.showValidationMessage('服務異常，請稍後再試。'));
                         },
                         allowOutsideClick: () => !Swal.isLoading()
                     }).then((result) => {
@@ -792,11 +792,11 @@
                 },
                 delete() {
                     Swal.fire({
-                        title: '确认要删除选中的图片？',
-                        text: "删除后不可恢复，记录和文件同时删除",
+                        title: '確認要刪除選取的圖片？',
+                        text: "刪除後不可恢復，記錄和檔案同時刪除",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonText: '确认删除',
+                        confirmButtonText: '確認刪除',
                         cancelButtonText: '取消',
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -811,7 +811,7 @@
                                         $(item).remove();
                                     });
                                     utils.setCapacityProgress(-size);
-                                    $headerTitle.text('我的图片');
+                                    $headerTitle.text('我的圖片');
                                     $photos.justifiedGallery(gridConfigs).removeClass('reset');
                                     toastr.success(response.data.message);
                                 } else {
@@ -837,7 +837,7 @@
                                 .replace(/__height__/g, image.height)
                                 .replace(/__md5__/g, image.md5)
                                 .replace(/__sha1__/g, image.sha1)
-                                .replace(/__permission__/g, image.permission === 1 ? '公开' : '私有')
+                                .replace(/__permission__/g, image.permission === 1 ? '公開' : '私有')
                                 .replace(/__uploaded_ip__/g, image.uploaded_ip)
                                 .replace(/__created_at__/g, image.created_at)
                             drawer.open(item.filename, content);
@@ -850,30 +850,30 @@
             // right click actions
             const actions = {
                 copy: {
-                    text: '复制图片',
+                    text: '複製圖片',
                     action: e => {
                         let src = $(e).find('img').attr('src');
                         CopyImageClipboard.copyImageToClipboard(src).then(() => {
-                            toastr.success('复制成功')
+                            toastr.success('複製成功')
                         }).catch(e => {
-                            toastr.warning('复制失败, ' + e.message)
+                            toastr.warning('複製失敗, ' + e.message)
                         });
                     },
                     visible: () => ds.getSelection().length === 1,
                 },
-                refresh: {text: '刷新', action: _ => resetImages()},
+                refresh: {text: '重新整理', action: _ => resetImages()},
                 rename: {
-                    text: '重命名',
+                    text: '重新命名',
                     visible: () => ds.getSelection().length === 1,
                     action: e => methods.rename(e),
                 },
                 open: {
-                    text: '新窗口打开',
+                    text: '新視窗開啟',
                     action: e => window.open($(e).data('json').url),
                     visible: () => ds.getSelection().length === 1,
                 },
                 copies: {
-                    text: '复制链接',
+                    text: '複製連結',
                     subMenu: [
                         {
                             text: 'Url',
@@ -909,25 +909,25 @@
                     visible: () => ds.getSelection().length === 1,
                 },
                 movements: {
-                    text: '移动到相册',
+                    text: '移動到相簿',
                     action: _ => methods.movements(),
                 },
                 remove: {
-                    text: '移出当前相册',
+                    text: '移出當前相簿',
                     action: _ => methods.remove(),
                     visible: _ => selectedAlbum.id !== undefined,
                 },
                 detail: {
-                    text: '详细信息',
+                    text: '詳細資訊',
                     visible: () => ds.getSelection().length === 1,
                     action: e => methods.detail(e)
                 },
                 delete: {
-                    text: '删除',
+                    text: '刪除',
                     action: _ => methods.delete(),
                 },
                 permission: {
-                    text: '设置权限',
+                    text: '設定權限',
                     action: _ => methods.permission(),
                 },
             };
@@ -939,7 +939,7 @@
             // right click image
             context.attach(IMAGES_ITEM, {
                 data: [
-                    {header: '图片操作'},
+                    {header: '圖片操作'},
                     actions.refresh,
                     actions.copy,
                     actions.copies,
@@ -953,13 +953,13 @@
                     actions.delete,
                 ],
                 beforeOpen: function (item) {
-                    // 选中当前项目
+                    // 選取當前專案
                     if (ds.getSelection().length <= 1) ds.clearSelection();
                     ds.addSelection($(item));
                 },
                 afterOpen: function (item, dropdown) {
                     let data = $(item).data('json');
-                    // 追加链接
+                    // 追加連結
                     $(dropdown).find('a.copy').each(function () {
                         $(this).data('copy-value', data.links[$(this).data('link-type')])
                     });
@@ -975,25 +975,25 @@
                 }
 
                 switch (operate) {
-                    case 'refresh': // 刷新
+                    case 'refresh': // 重新整理
                         resetImages();
                         break;
-                    case 'movements': // 移动到相册
+                    case 'movements': // 移動到相簿
                         methods.movements();
                         break;
-                    case 'remove': // 移出当前相册
+                    case 'remove': // 移出當前相簿
                         methods.remove();
                         break;
-                    case 'rename': // 重命名
+                    case 'rename': // 重新命名
                         methods.rename(selected[0]);
                         break;
-                    case 'permission': // 设置权限
+                    case 'permission': // 設定權限
                         methods.permission();
                         break;
                     case 'detail':
                         methods.detail(selected[0]);
                         break;
-                    case 'delete': // 删除
+                    case 'delete': // 刪除
                         methods.delete();
                         break;
                 }

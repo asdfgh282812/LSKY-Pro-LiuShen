@@ -20,10 +20,10 @@ class AlbumRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '名称不能为空',
-            'name.max' => '名称字符过长，最大不能超过 60',
-            'name.alpha_dash' => '名称只能是字母、数字，短破折号（-）和下划线（_）',
-            'intro.max' => '简介字符过长，最大不能超过 600'
+            'name.required' => '名稱不能為空',
+            'name.max' => '名稱字元過長，最大不能超過 60',
+            'name.alpha_dash' => '名稱只能是字母、數字，短破折號（-）和底線（_）',
+            'intro.max' => '簡介字元過長，最大不能超過 600'
         ];
     }
 }

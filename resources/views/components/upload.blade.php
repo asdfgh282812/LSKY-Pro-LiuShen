@@ -1,20 +1,20 @@
 <div class="pb-6 h-full space-y-4">
     <input type="file" id="picker" name="file" class="hidden" accept="{{ implode(',', array_map(fn ($ext) => '.'.$ext, $_group->configs->get(\App\Enums\GroupConfigKey::AcceptedFileSuffixes))) }}" multiple>
 
-    {{-- 上传主卡片 --}}
+    {{-- 上傳主卡片 --}}
     <div class="rounded-2xl overflow-hidden" style="background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: var(--card-shadow);">
 
-        {{-- 卡片顶部标题栏 --}}
+        {{-- 卡片頂部標題欄 --}}
         <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid var(--border-strong); background: var(--card-header-bg);">
             <div class="flex items-center gap-2.5">
                 <div class="flex items-center gap-2">
                     <div class="w-6 h-6 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #10b981, #0d9488);">
                         <i class="fas fa-cloud-upload-alt text-white text-xs"></i>
                     </div>
-                    <span class="font-semibold text-sm text-[var(--text-primary)]">上传图片</span>
+                    <span class="font-semibold text-sm text-[var(--text-primary)]">上傳圖片</span>
                 </div>
             </div>
-            {{-- 统计信息 --}}
+            {{-- 統計資訊 --}}
             <div class="flex items-center gap-4 text-xs text-[var(--text-muted)]">
                 <span class="flex items-center gap-1">
                     <i class="fas fa-weight-hanging text-emerald-400"></i>
@@ -22,16 +22,16 @@
                 </span>
                 <span class="flex items-center gap-1">
                     <i class="fas fa-layer-group text-emerald-400"></i>
-                    队列 <span class="font-medium text-[var(--text-secondary)]">{{ $_group->configs->get(\App\Enums\GroupConfigKey::ConcurrentUploadNum) }} 张</span>
+                    佇列 <span class="font-medium text-[var(--text-secondary)]">{{ $_group->configs->get(\App\Enums\GroupConfigKey::ConcurrentUploadNum) }} 張</span>
                 </span>
                 <span class="hidden sm:flex items-center gap-1">
                     <i class="fas fa-images text-emerald-400"></i>
-                    已托管 <span class="font-medium text-[var(--text-secondary)]">{{ \App\Models\Image::query()->count() }}</span> 张
+                    已託管 <span class="font-medium text-[var(--text-secondary)]">{{ \App\Models\Image::query()->count() }}</span> 張
                 </span>
             </div>
         </div>
 
-        {{-- 拖拽上传区域 --}}
+        {{-- 拖拽上傳區域 --}}
         <div class="p-4">
             <div class="relative rounded-xl border-2 border-dashed transition-colors duration-200 cursor-pointer"
                  id="picker-dnd"
@@ -40,16 +40,16 @@
                  onmouseenter="this.style.borderColor='var(--upload-dropzone-border-hover)'; this.style.background='var(--upload-dropzone-bg-hover)';"
                  onmouseleave="this.style.borderColor='var(--upload-dropzone-border)'; this.style.background='var(--upload-dropzone-bg)';">
                 <div id="upload-container" class="relative group flex flex-col justify-center items-center p-6 w-full min-h-[160px] sm:min-h-[300px] space-y-3">
-                    {{-- 清除按钮 --}}
+                    {{-- 清除按鈕 --}}
                     <i id="clear" class="fas fa-times absolute top-3 right-3 w-7 h-7 flex justify-center items-center cursor-pointer text-base hidden group-hover:flex text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 z-10"></i>
-                    {{-- 上传图标 --}}
-                    <div id="upload-all" title="点我上传全部" class="flex flex-col items-center gap-3">
+                    {{-- 上傳圖示 --}}
+                    <div id="upload-all" title="點我上傳全部" class="flex flex-col items-center gap-3">
                         <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-200" style="background: rgba(16,185,129,0.1);">
                             <i class="fas fa-cloud-upload-alt text-3xl" style="color: #10b981;"></i>
                         </div>
                         <div class="text-center space-y-1">
-                            <p class="text-sm font-medium text-[var(--text-secondary)]">拖拽文件到此处，或点击图标选择上传</p>
-                            <p class="text-xs text-[var(--text-muted)]">支持多文件同时上传，点击图标可上传全部已选文件</p>
+                            <p class="text-sm font-medium text-[var(--text-secondary)]">拖拽檔案到此處，或點選圖示選擇上傳</p>
+                            <p class="text-xs text-[var(--text-muted)]">支援多檔案同時上傳，點選圖示可上傳全部已選檔案</p>
                         </div>
                     </div>
                 </div>
@@ -58,28 +58,28 @@
         </div>
     </div>
 
-    {{-- 链接结果卡片 --}}
+    {{-- 連結結果卡片 --}}
     <div id="links-container" class="hidden rounded-2xl overflow-hidden relative group" style="background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: var(--card-shadow);">
-        {{-- 标题栏 --}}
+        {{-- 標題欄 --}}
         <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid var(--border-strong); background: var(--card-header-bg);">
             <div class="flex items-center gap-2.5">
                 <div class="flex items-center gap-2">
                     <div class="w-6 h-6 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #10b981, #0d9488);">
                         <i class="fas fa-link text-white text-xs"></i>
                     </div>
-                    <span class="font-semibold text-sm text-[var(--text-primary)]">图片链接</span>
+                    <span class="font-semibold text-sm text-[var(--text-primary)]">圖片連結</span>
                 </div>
             </div>
             <div class="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                 <span id="copy-all" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 dark:text-slate-200 dark:bg-slate-800 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-300 cursor-pointer transition-all duration-150">
-                    <i class="fas fa-copy mr-1"></i>复制全部
+                    <i class="fas fa-copy mr-1"></i>複製全部
                 </span>
                 <span id="clear-all" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 bg-slate-100 hover:bg-red-50 hover:text-red-500 dark:text-slate-200 dark:bg-slate-800 dark:hover:bg-red-500/10 dark:hover:text-red-300 cursor-pointer transition-all duration-150">
                     <i class="fas fa-trash-alt mr-1"></i>清除
                 </span>
             </div>
         </div>
-        {{-- Tab 切换 --}}
+        {{-- Tab 切換 --}}
         <div id="link-tabs" class="mt-2 mb-2 flex flex-nowrap overflow-x-auto scrollbar-none text-xs font-medium px-4 pt-3 pb-1 gap-1.5">
             <a href="javascript:void(0)" data-tab-name="url"
                class="flex-shrink-0 p-2 rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-700 transition-all duration-150 active">URL</a>
@@ -90,9 +90,9 @@
             <a href="javascript:void(0)" data-tab-name="markdown"
                class="flex-shrink-0 p-2 rounded-lg border border-slate-200 bg-white text-slate-500 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-150 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:border-emerald-500/40 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-300">Markdown</a>
             <a href="javascript:void(0)" data-tab-name="markdown_with_link"
-               class="flex-shrink-0 p-2 rounded-lg border border-slate-200 bg-white text-slate-500 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-150 whitespace-nowrap dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:border-emerald-500/40 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-300">Markdown 带链接</a>
+               class="flex-shrink-0 p-2 rounded-lg border border-slate-200 bg-white text-slate-500 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-150 whitespace-nowrap dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:border-emerald-500/40 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-300">Markdown 帶連結</a>
         </div>
-        {{-- 链接内容 --}}
+        {{-- 連結內容 --}}
         <div id="links" class="p-4 space-y-0">
             <div data-tab="url" class="space-y-2"></div>
             <div data-tab="html" class="hidden space-y-2"></div>
@@ -121,7 +121,7 @@
         <div class="relative flex-1 min-w-0">
             <p class="text-sm font-medium text-[var(--text-primary)] truncate">__name__</p>
             <p class="text-xs text-[var(--text-muted)] truncate mt-0.5">
-                <span>__info__</span>&nbsp;&middot;&nbsp;<span class="upload-info">等待上传</span>
+                <span>__info__</span>&nbsp;&middot;&nbsp;<span class="upload-info">等待上傳</span>
             </p>
         </div>
         <div class="relative flex items-center gap-1.5 flex-shrink-0">
@@ -162,26 +162,26 @@
         })).on('success', function(e) {
             if (! $(e.trigger).attr('disabled')) {
                 let text = $(e.trigger).text();
-                $(e.trigger).attr('disabled', true).text('复制成功');
+                $(e.trigger).attr('disabled', true).text('複製成功');
                 setTimeout(function () {
                     $(e.trigger).attr('disabled', false).text(text);
                 }, 1000);
             }
         }).on('error', function(e) {
-            toastr.warning('复制失败')
+            toastr.warning('複製失敗')
         });
     </script>
     <script>
-        const UPLOAD_WAITING = 0; // 等待上传
-        const UPLOAD_SUCCESS = 1; // 上传成功
-        const UPLOAD_ERROR = 2; // 上传失败
+        const UPLOAD_WAITING = 0; // 等待上傳
+        const UPLOAD_SUCCESS = 1; // 上傳成功
+        const UPLOAD_ERROR = 2; // 上傳失敗
         let $previews = $('#upload-preview');
         let $links = $('#links-container');
         let $picker = $('#picker');
-        let queue = []; // 文件队列
-        let excludes = ['psd', 'tif']; // 排除支持预览的格式
+        let queue = []; // 檔案佇列
+        let excludes = ['psd', 'tif']; // 排除支援預覽的格式
         /**
-         * 设置状态
+         * 設定狀態
          * @param data
          * @param status
          * @param message
@@ -193,14 +193,14 @@
             let msg = '';
             switch (status) {
                 case UPLOAD_WAITING:
-                    msg = '等待上传';
+                    msg = '等待上傳';
                     break;
                 case UPLOAD_SUCCESS:
-                    msg = '上传成功';
+                    msg = '上傳成功';
                     $info.addClass('text-green-800');
                     break;
                 case UPLOAD_ERROR:
-                    msg = '上传失败';
+                    msg = '上傳失敗';
                     $info.addClass('text-red-500')
                     break;
             }
@@ -236,17 +236,17 @@
                 let file = data.files[0];
                 let ext = file.name.substr(file.name.lastIndexOf('.') + 1);
                 if (allowSuffixes.indexOf(ext.toLowerCase()) === -1) {
-                    toastr.warning(`不支持的图片格式 ${file.name}`);
+                    toastr.warning(`不支援的圖片格式 ${file.name}`);
                     return true;
                 }
                 if (file.size > maxSize) {
-                    toastr.warning(`图片 ${file.name} 超出大小限制`);
+                    toastr.warning(`圖片 ${file.name} 超出大小限制`);
                     return true;
                 }
                 let guid = utils.guid();
                 data.guid = guid;
 
-                // 推送到队列
+                // 推送到佇列
                 let push = function (blob) {
                     let html = $('#image-preview-tpl')
                         .html()
@@ -258,7 +258,7 @@
                     queue[guid] = data;
                     setStatus(data, UPLOAD_WAITING);
 
-                    // 如果来源是否为粘贴，判断是否需要直接上传
+                    // 如果來源是否為貼上，判斷是否需要直接上傳
                     if (data.from === 'paste' && pastedAction === '{{ \App\Enums\PastedAction::Upload }}') {
                         queue[guid].submit();
                     }
@@ -269,7 +269,7 @@
                 } else {
                     loadImage(file, function (img) {
                             if (img.type === 'error') {
-                                toastr.error(`文件 ${file.name} 缩略图生成失败`);
+                                toastr.error(`檔案 ${file.name} 縮圖生成失敗`);
                                 console.error('Error loading image file')
                             }
                             push(img.toDataURL())
@@ -291,13 +291,13 @@
                 let $uploadInfo = data.$preview.find('.upload-info');
                 let $uploadProgress = data.$preview.find('.upload-progress');
                 let rate = progress + '%';
-                $uploadInfo.text('上传中...' + rate);
+                $uploadInfo.text('上傳中...' + rate);
                 $uploadProgress.css('width', rate);
             },
             done: (e, data) => {
                 let response = data.result;
                 if (response.status) {
-                    // 如果开启了自动清除缩略图功能
+                    // 如果開啟了自動清除縮圖功能
                     if ({{ (Auth::check() && Auth::user()->configs->get(\App\Enums\UserConfigKey::IsAutoClearPreview)) ? 1 : 0 }}) {
                         delete queue[data.$preview.data('id')];
                         data.$preview.remove();
@@ -306,7 +306,7 @@
                         data.$preview.attr('uploaded', true);
                     }
 
-                    // 追加链接
+                    // 追加連結
                     let links = response.data.links;
                     for (let key in links) {
                         $('#links [data-tab="' + key + '"]').append('<p class="whitespace-nowrap select-all rounded-lg px-3 py-2.5 cursor-pointer overflow-x-auto scrollbar-none text-xs font-mono text-slate-600 dark:text-slate-200 transition-all duration-150" style="background:var(--code-bg); border:1px solid var(--code-border);" onmouseenter="this.style.borderColor=\'rgba(16,185,129,0.25)\';" onmouseleave="this.style.borderColor=\'var(--code-border)\';">' + links[key].toString() + '</p>')
@@ -314,22 +314,22 @@
                     $links.show();
                     utils.setCapacityProgress(response.data.size);
                 } else {
-                    setStatus(data, UPLOAD_ERROR, "上传失败, " + response.message);
-                    // 重新显示上传按钮
+                    setStatus(data, UPLOAD_ERROR, "上傳失敗, " + response.message);
+                    // 重新顯示上傳按鈕
                     data.$preview.find('[data-operate="upload"]').show();
                 }
             },
             fail: (e, data) => {
                 if (data.errorThrown !== 'abort') {
-                    // 重新显示上传按钮
+                    // 重新顯示上傳按鈕
                     data.$preview.find('[data-operate="upload"]').show();
                     if (data.jqXHR.status === 419) {
-                        return setStatus(data, UPLOAD_ERROR, '令牌错误，请刷新网页重试');
+                        return setStatus(data, UPLOAD_ERROR, '令牌錯誤，請重新整理網頁再試');
                     }
-                    return setStatus(data, UPLOAD_ERROR, '服务端异常，请稍后重试');
+                    return setStatus(data, UPLOAD_ERROR, '服務端異常，請稍後再試');
                 }
             },
-            // 等同于jq的complete
+            // 等同於jq的complete
             always: (e, data) => {
 
             }
@@ -339,7 +339,7 @@
         $previews.click((e) => e.stopPropagation());
 
         $('#upload-all').click((e) => {
-            // 队列中没有文件，选择则继续冒泡，选择文件
+            // 佇列中沒有檔案，選擇則繼續冒泡，選擇檔案
             if (Object.values(queue).filter((item) => item.status !== UPLOAD_SUCCESS).length) {
                 e.stopPropagation();
                 for (const key in queue) {

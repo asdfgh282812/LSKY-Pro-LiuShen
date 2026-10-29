@@ -101,8 +101,8 @@ class Image extends Model
         });
 
         static::deleting(function (self $image) {
-            // TODO 检测是否启用了队列，放置队列中异步删除
-            // 在当前图片所属的策略中是否存在其他相同 md5 和 sha1 的记录，没有则可以删除物理文件
+            // TODO 檢測是否啟用了佇列，放置佇列中非同步刪除
+            // 在當前圖片所屬的策略中是否存在其他相同 md5 和 sha1 的記錄，沒有則可以刪除物理檔案
             if (!static::query()
                 ->where('strategy_id', $image->strategy_id)
                 ->where('id', '<>', $image->id)
@@ -110,15 +110,15 @@ class Image extends Model
                 ->where('sha1', $image->sha1)
                 ->exists()
             ) {
-                // 删除本地缓存文件
+                // 刪除本地快取檔案
                 try {
-                    // 删除物理文件
+                    // 刪除物理檔案
                     $image->filesystem()->delete($image->pathname);
                     @unlink(public_path($image->getThumbnailPathname()));
-                    // 删除缓存
+                    // 刪除快取
                     Cache::forget("image_{$image->key}");
                 } catch (\Throwable $e) {
-                    Utils::e($e, '删除物理文件时发生异常');
+                    Utils::e($e, '刪除物理檔案時發生異常');
                 }
             }
         });
@@ -153,7 +153,7 @@ class Image extends Model
                     break;
             }
         })->when($request->query('keyword'), function (Builder $builder, $keyword) {
-            // 分组包裹，避免 orWhere 泄漏到其他筛选条件上
+            // 分組包裹，避免 orWhere 洩漏到其他篩選條件上
             $builder->where(function (Builder $builder) use ($keyword) {
                 $builder->where('origin_name', 'like', "%{$keyword}%")
                     ->orWhere('alias_name', 'like', "%{$keyword}%");
@@ -170,7 +170,7 @@ class Image extends Model
     }
 
     /**
-     * 解析日期筛选参数，非法或空值返回 null
+     * 解析日期篩選參數，非法或空值返回 null
      */
     private function parseDateFilter(mixed $value): ?Carbon
     {
@@ -199,14 +199,14 @@ class Image extends Model
     public function url(): Attribute
     {
         return new Attribute(function () {
-            // 是否启用原图保护功能
+            // 是否啟用原圖保護功能
             if ($this->group?->configs->get(GroupConfigKey::IsEnableOriginalProtection)) {
                 $url = asset("{$this->key}.{$this->extension}");
             } else {
                 $url = rtrim($this->strategy?->configs->get('url'), '/').'/'.ltrim($this->pathname, '/');
             }
 
-            // 拼接图片 url
+            // 拼接圖片 url
             return $url.($this->strategy?->configs->get('queries') ?: '');
         });
     }
@@ -216,7 +216,7 @@ class Image extends Model
         return new Attribute(function () {
             $pathname = $this->getThumbnailPathname();
 
-            // 没有缩略图则返回原图
+            // 沒有縮圖則返回原圖
             if (! file_exists(public_path($pathname))) {
                 return $this->url;
             }

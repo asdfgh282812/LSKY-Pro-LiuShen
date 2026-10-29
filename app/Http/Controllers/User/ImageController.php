@@ -29,7 +29,7 @@ class ImageController extends Controller
 
         $images = $user->images()->filter($request)->with('group', 'strategy')->paginate(40);
         $images->getCollection()->each(function (Image $image) {
-            // 图片宽高过小会导致前端排版异常
+            // 圖片寬高過小會導致前端排版異常
             $image->width = max($image->width, 200);
             $image->height = max($image->height, 200);
 
@@ -48,7 +48,7 @@ class ImageController extends Controller
         $user = Auth::user();
         /** @var Image $image */
         if (!$image = $user->images()->find($request->route('id'))) {
-            return $this->fail('未找到该图片');
+            return $this->fail('未找到該圖片');
         }
         $image->strategy?->setVisible(['name']);
         $image->album?->setVisible(['name']);
@@ -66,12 +66,12 @@ class ImageController extends Controller
         $permission = $request->input('permission');
         $permissions = ['public' => ImagePermission::Public, 'private' => ImagePermission::Private];
         if (!in_array($permission, array_keys($permissions))) {
-            return $this->fail('设置失败');
+            return $this->fail('設定失敗');
         }
         $user->images()->whereIn('id', (array) $request->input('ids'))->update([
             'permission' => $permissions[$permission],
         ]);
-        return $this->success('设置成功');
+        return $this->success('設定成功');
     }
 
     public function rename(ImageRenameRequest $request): Response
@@ -84,7 +84,7 @@ class ImageController extends Controller
             $image->save();
         }
 
-        return $this->success('重命名成功', $image->only('id', 'filename'));
+        return $this->success('重新命名成功', $image->only('id', 'filename'));
     }
 
     public function movement(Request $request): Response
@@ -108,7 +108,7 @@ class ImageController extends Controller
                 $originAlbum->save();
             }
         });
-        return $this->success('移动成功');
+        return $this->success('移動成功');
     }
 
     public function delete(Request $request): Response
@@ -116,6 +116,6 @@ class ImageController extends Controller
         /** @var User $user */
         $user = Auth::user();
         (new UserService())->deleteImages($request->all() ?: [], $user);
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 }

@@ -68,13 +68,13 @@ Route::post('/logout', [
     AuthenticatedSessionController::class, 'destroy',
 ])->middleware('auth')->name('logout');
 
-// OAuth 登录（需游客状态）
+// OAuth 登入（需訪客狀態）
 Route::prefix('oauth')->middleware(['guest', 'oauth.enabled', 'throttle:10,1'])->group(function () {
     Route::get('redirect', [OAuthController::class, 'redirect'])->name('oauth.redirect');
     Route::get('callback', [OAuthController::class, 'callback'])->name('oauth.callback');
 });
 
-// OAuth 绑定（需登录状态）
+// OAuth 繫結（需登入狀態）
 Route::prefix('oauth')->middleware(['auth', 'throttle:10,1'])->group(function () {
     Route::get('bind', [OAuthController::class, 'bindRedirect'])->name('oauth.bind.redirect');
     Route::get('bind/callback', [OAuthController::class, 'bindCallback'])->name('oauth.bind.callback');

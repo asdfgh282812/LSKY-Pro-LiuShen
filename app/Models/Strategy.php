@@ -47,10 +47,10 @@ class Strategy extends Model
     const DRIVERS = [
         StrategyKey::Local => '本地',
         StrategyKey::S3 => 'AWS S3',
-        StrategyKey::Oss => '阿里云 OSS',
-        StrategyKey::Cos => '腾讯云 COS',
-        StrategyKey::Kodo => '七牛云 Kodo',
-        StrategyKey::Uss => '又拍云 USS',
+        StrategyKey::Oss => '阿里雲 OSS',
+        StrategyKey::Cos => '騰訊雲 COS',
+        StrategyKey::Kodo => '七牛雲 Kodo',
+        StrategyKey::Uss => '又拍雲 USS',
         StrategyKey::Sftp => 'SFTP',
         StrategyKey::Ftp => 'FTP',
         StrategyKey::Webdav => 'WebDav',
@@ -75,7 +75,7 @@ class Strategy extends Model
                 if (! is_dir(public_path($symlink))) {
                     (new Filesystem())->link($target, $symlink);
                 }
-                // 是否需要移除旧的符号链接
+                // 是否需要移除舊的符號連結
                 $url = $strategy->getOriginal('configs')['url'] ?? '';
                 if ($url) {
                     $oldSymlink = self::getRootPath($url);
@@ -87,7 +87,7 @@ class Strategy extends Model
         });
 
         static::deleted(function (self $strategy) {
-            // 如果是本地策略，删除的时候同时删除符号连接
+            // 如果是本地策略，刪除的時候同時刪除符號連線
             if ($strategy->key === StrategyKey::Local) {
                 $symlink = self::getRootPath($strategy->configs['url']);
                 @unlink(public_path($symlink));

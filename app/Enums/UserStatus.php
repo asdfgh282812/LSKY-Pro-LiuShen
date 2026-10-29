@@ -7,6 +7,6 @@ final class UserStatus
     /** @var int 正常 */
     const Normal = 1;
 
-    /** @var int 冻结 */
+    /** @var int 凍結 */
     const Frozen = 0;
 }

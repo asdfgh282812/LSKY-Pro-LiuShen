@@ -26,7 +26,7 @@ class OAuthController extends Controller
     public function redirect(OAuthService $service): RedirectResponse
     {
         if (! Schema::hasTable('oauth_accounts')) {
-            return redirect()->route('login')->withErrors(['email' => 'OAuth 数据表不存在，请先执行数据库迁移']);
+            return redirect()->route('login')->withErrors(['email' => 'OAuth 資料表不存在，請先執行資料庫遷移']);
         }
 
         try {
@@ -55,7 +55,7 @@ class OAuthController extends Controller
             $linkedUser = $oauthAccount->user;
 
             if (! $linkedUser || $linkedUser->status !== UserStatus::Normal) {
-                return redirect()->route('login')->withErrors(['email' => '该账号状态异常，暂时无法通过 OAuth 登录']);
+                return redirect()->route('login')->withErrors(['email' => '該帳號狀態異常，暫時無法透過 OAuth 登入']);
             }
 
             $oauthAccount->forceFill($service->syncOauthAccountData($tokenPayload, $profile))->save();
@@ -67,7 +67,7 @@ class OAuthController extends Controller
 
         if (! $service->canRegister()) {
             return redirect()->route('login')->withErrors([
-                'email' => '当前站点不允许通过 OAuth 自动注册，请先使用邮箱注册并在个人设置中绑定账号。',
+                'email' => '當前網站不允許透過 OAuth 自動註冊，請先使用電子郵件註冊並在個人設定中繫結帳號。',
             ]);
         }
 
@@ -75,20 +75,20 @@ class OAuthController extends Controller
 
         if ($email === '' || ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return redirect()->route('login')->withErrors([
-                'email' => 'OAuth 用户信息中的邮箱无效，无法自动注册，请先使用邮箱注册后再绑定。',
+                'email' => 'OAuth 使用者資訊中的電子郵件無效，無法自動註冊，請先使用電子郵件註冊後再繫結。',
             ]);
         }
 
         if (User::query()->where('email', $email)->exists()) {
             return redirect()->route('login')->withErrors([
-                'email' => '该邮箱已存在，请先登录现有账号并在个人设置中绑定 OAuth 账号。',
+                'email' => '該電子郵件已存在，請先登入現有帳號並在個人設定中繫結 OAuth 帳號。',
             ]);
         }
 
         $name = trim((string) $profile['provider_user_name']);
         $user = DB::transaction(function () use ($request, $profile, $tokenPayload, $service, $email, $name) {
             $user = User::create([
-                'name' => $name !== '' ? Str::limit($name, 20, '') : 'OAuth 用户',
+                'name' => $name !== '' ? Str::limit($name, 20, '') : 'OAuth 使用者',
                 'email' => $email,
                 'password' => Hash::make(Str::random(32)),
                 'registered_ip' => $request->ip(),
@@ -116,11 +116,11 @@ class OAuthController extends Controller
     public function bindRedirect(OAuthService $service): RedirectResponse
     {
         if (! $service->isEnabled()) {
-            return redirect()->route('settings')->withErrors(['oauth' => '站点管理员关闭了 OAuth 登录功能']);
+            return redirect()->route('settings')->withErrors(['oauth' => '網站管理員關閉了 OAuth 登入功能']);
         }
 
         if (! Schema::hasTable('oauth_accounts')) {
-            return redirect()->route('settings')->withErrors(['oauth' => 'OAuth 数据表不存在，请先执行数据库迁移']);
+            return redirect()->route('settings')->withErrors(['oauth' => 'OAuth 資料表不存在，請先執行資料庫遷移']);
         }
 
         try {
@@ -133,7 +133,7 @@ class OAuthController extends Controller
     public function bindCallback(Request $request, OAuthService $service): RedirectResponse
     {
         if (! $service->isEnabled()) {
-            return redirect()->route('settings')->withErrors(['oauth' => '站点管理员关闭了 OAuth 登录功能']);
+            return redirect()->route('settings')->withErrors(['oauth' => '網站管理員關閉了 OAuth 登入功能']);
         }
 
         /** @var User $user */
@@ -154,7 +154,7 @@ class OAuthController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->route('settings')->withErrors(['oauth' => '该 OAuth 账号已绑定到其他用户，无法重复绑定']);
+            return redirect()->route('settings')->withErrors(['oauth' => '該 OAuth 帳號已繫結到其他使用者，無法重複繫結']);
         }
 
         $user->oauthAccounts()->updateOrCreate(
@@ -165,7 +165,7 @@ class OAuthController extends Controller
             ]
         );
 
-        return redirect()->route('settings')->with('oauth_status', 'OAuth 账号绑定成功');
+        return redirect()->route('settings')->with('oauth_status', 'OAuth 帳號繫結成功');
     }
 
     public function unbind(Request $request, OAuthAccount $oauthAccount): Response
@@ -178,15 +178,15 @@ class OAuthController extends Controller
         ]);
 
         if ($oauthAccount->user_id !== $user->id) {
-            return $this->fail('没有找到该绑定记录');
+            return $this->fail('沒有找到該繫結記錄');
         }
 
         if (! Hash::check((string) $request->input('password'), $user->password)) {
-            return $this->fail('密码错误，请重新输入');
+            return $this->fail('密碼錯誤，請重新輸入');
         }
 
         $oauthAccount->delete();
 
-        return $this->success('解绑成功');
+        return $this->success('解綁成功');
     }
 }

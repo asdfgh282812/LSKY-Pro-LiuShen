@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\DB;
 class UserService
 {
     /**
-     * 删除图片以及物理文件，返回已删除数量
-     * 考虑到删除磁盘文件、服务器内部请求第三方删除接口比较消耗资源，传入的主键不应过多
-     * TODO 改进循环中更新数据
+     * 刪除圖片以及物理檔案，返回已刪除數量
+     * 考慮到刪除磁碟檔案、伺服器內部請求第三方刪除API比較消耗資源，傳入的主鍵不應過多
+     * TODO 改進迴圈中更新資料
      *
      * @param array $keys
-     * @param User|null $user 传入用户数据则会根据用户id过滤
+     * @param User|null $user 傳入使用者資料則會根據使用者id過濾
      * @param string $field
      * @return int
      */
@@ -29,11 +29,11 @@ class UserService
         DB::transaction(function () use ($model, $keys, &$count) {
             /** @var Image $image */
             foreach ($model->cursor() as $image) {
-                // 相册图片数量更新
+                // 相簿圖片數量更新
                 $image->album?->decrement('image_num');
-                // 更新相册图片数量
+                // 更新相簿圖片數量
                 $image->delete();
-                // 更新数量
+                // 更新數量
                 if ($image->user) {
                     $image->user->image_num = $image->user->images()->count();
                     $image->user->save();

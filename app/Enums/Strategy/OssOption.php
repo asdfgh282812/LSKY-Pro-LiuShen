@@ -4,7 +4,7 @@ namespace App\Enums\Strategy;
 
 final class OssOption
 {
-    /** @var string 访问地址 */
+    /** @var string 存取位址 */
     const Url = 'url';
 
     /** @var string AccessKeyId */
@@ -16,6 +16,6 @@ final class OssOption
     /** @var string Endpoint */
     const Endpoint = 'endpoint';
 
-    /** @var string 储存桶名称 */
+    /** @var string 儲存桶名稱 */
     const Bucket = 'bucket';
 }

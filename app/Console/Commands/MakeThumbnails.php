@@ -32,7 +32,7 @@ class MakeThumbnails extends Command
     public function handle()
     {
         $progress = new ProgressBar($this->output, Image::query()->count());
-        $progress->setMessage('获取图片处理中...');
+        $progress->setMessage('取得圖片處理中...');
         $progress->start();
 
         $service = new ImageService();
@@ -47,7 +47,7 @@ class MakeThumbnails extends Command
                 );
                 $progress->advance();
             } catch (\Throwable $e) {
-                $this->error("缩略图生成失败, {$e->getMessage()}");
+                $this->error("縮圖生成失敗, {$e->getMessage()}");
             }
         }
 

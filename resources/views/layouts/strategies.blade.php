@@ -5,7 +5,7 @@
             <div class="topbar-icon-shell h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 bg-indigo-500/10 dark:bg-slate-700/80">
                 <i class="fas fa-server text-emerald-500 text-xs"></i>
             </div>
-            <span class="text-sm font-medium hidden sm:block" id="strategy-selected" data-id="0">获取中...</span>
+            <span class="text-sm font-medium hidden sm:block" id="strategy-selected" data-id="0">取得中...</span>
             <i class="fas fa-chevron-down text-xs text-slate-400 dark:text-slate-500 hidden sm:block"></i>
         </button>
     </x-slot>

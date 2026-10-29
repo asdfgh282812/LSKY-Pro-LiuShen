@@ -27,20 +27,20 @@ class UserSettingRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '昵称不能为空',
-            'name.between' => '昵称必须在 2-20 个字符之间',
-            'url.url' => '个人主页地址格式不正确',
-            'password.between' => '密码必须在 6-32 个字符之间',
-            'configs.array' => '配置值不正确',
-            'configs.default_album.required' => '默认相册选择错误',
-            'configs.default_album.numeric' => '默认相册选择错误',
-            'configs.default_strategy.required' => '默认策略选择错误',
-            'configs.default_strategy.numeric' => '默认策略选择错误',
-            'configs.default_permission.required' => '权限值选择错误',
-            'configs.default_permission.in' => '权限值不正确',
-            'configs.pasted_action.required' => '粘贴动作值选择错误',
-            'configs.pasted_action.in' => '粘贴动作值不正确',
-            'configs.is_auto_clear_preview.boolean' => '是否自动清除预览选择错误'
+            'name.required' => '暱稱不能為空',
+            'name.between' => '暱稱必須在 2-20 個字元之間',
+            'url.url' => '個人主頁位址格式不正確',
+            'password.between' => '密碼必須在 6-32 個字元之間',
+            'configs.array' => '設定值不正確',
+            'configs.default_album.required' => '預設相簿選擇錯誤',
+            'configs.default_album.numeric' => '預設相簿選擇錯誤',
+            'configs.default_strategy.required' => '預設策略選擇錯誤',
+            'configs.default_strategy.numeric' => '預設策略選擇錯誤',
+            'configs.default_permission.required' => '權限值選擇錯誤',
+            'configs.default_permission.in' => '權限值不正確',
+            'configs.pasted_action.required' => '貼上動作值選擇錯誤',
+            'configs.pasted_action.in' => '貼上動作值不正確',
+            'configs.is_auto_clear_preview.boolean' => '是否自動清除預覽選擇錯誤'
         ];
     }
 }

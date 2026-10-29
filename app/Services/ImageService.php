@@ -79,7 +79,7 @@ class ImageService
         $file = $request->file('file');
 
         if (Auth::guest() && !Utils::config(ConfigKey::IsAllowGuestUpload, true)) {
-            throw new UploadException('管理员关闭了游客上传');
+            throw new UploadException('管理員關閉了訪客上傳');
         }
 
         $image = new Image();
@@ -88,55 +88,55 @@ class ImageService
 
         /** @var Group $group */
         $group = ! is_null($user) ? $user->group : Group::query()->where('is_guest', true)->first();
-        // 组配置
+        // 組設定
         $configs = $group->configs;
-        // 储存策略
+        // 儲存策略
         $strategies = $group->strategies()->get();
         if ($strategies->isEmpty()) {
-            throw new UploadException('没有可用的储存，请联系管理员。');
+            throw new UploadException('沒有可用的儲存，請聯絡管理員。');
         }
 
         $extension = strtolower($file->getClientOriginalExtension());
 
         if (! in_array($extension, $configs->get(GroupConfigKey::AcceptedFileSuffixes))) {
-            throw new UploadException('不支持的文件类型');
+            throw new UploadException('不支援的檔案類型');
         }
 
         if ($file->getSize() / 1024 > $configs->get(GroupConfigKey::MaximumFileSize)) {
-            throw new UploadException("图片大小超出限制");
+            throw new UploadException("圖片大小超出限制");
         }
 
-        // 图片所属组
+        // 圖片所屬組
         $image->group_id = $group->id;
-        // 图片默认权限
+        // 圖片預設權限
         $image->permission = ImagePermission::Private;
 
         if ($request->has('strategy_id')) {
             if (! $strategy = $strategies->find($request->input('strategy_id'))) {
-                throw new UploadException('选定的策略不存在');
+                throw new UploadException('選定的策略不存在');
             }
         } else {
-            // 没有指定则选择第一个策略
+            // 沒有指定則選擇第一個策略
             $strategy = $strategies->first();
         }
 
         $image->strategy_id = $strategy->id;
 
-        // 默认储存策略
+        // 預設儲存策略
         if (! is_null($user)) {
             if (Utils::config(ConfigKey::IsUserNeedVerify) && ! $user->email_verified_at) {
-                throw new UploadException('账户未验证');
+                throw new UploadException('帳戶未驗證');
             }
 
             if ($user->status !== UserStatus::Normal) {
-                throw new UploadException('账号状态异常');
+                throw new UploadException('帳號狀態異常');
             }
 
             if ($file->getSize() / 1024 + $user->images()->sum('size') > $user->capacity) {
-                throw new UploadException('储存空间不足');
+                throw new UploadException('儲存空間不足');
             }
 
-            // 图片保存至默认相册(若有)
+            // 圖片儲存至預設相簿(若有)
             if ($albumId = $user->configs->get(UserConfigKey::DefaultAlbum)) {
                 if ($user->albums()->where('id', $albumId)->exists()) {
                     $image->album_id = $albumId;
@@ -144,30 +144,30 @@ class ImageService
             }
 
             $image->user_id = $user->id;
-            // 用户设置的图片默认权限
+            // 使用者設定的圖片預設權限
             $image->permission = $user->configs->get(UserConfigKey::DefaultPermission, ImagePermission::Private);
         }
 
-        // 上传频率限制
+        // 上傳頻率限制
         $this->rateLimiter($configs, $request);
 
-        // 图片处理，跳过 ico gif svg
+        // 圖片處理，跳過 ico gif svg
         if (! in_array($extension, ['ico', 'gif', 'svg'])) {
-            // 图片保存质量与格式
+            // 圖片儲存品質與格式
             $quality = $configs->get(GroupConfigKey::ImageSaveQuality, 75);
             $format = $configs->get(GroupConfigKey::ImageSaveFormat);
             if ($quality < 100 || $format) {
-                // 获取拓展名，判断是否需要转换
+                // 取得擴充名，判斷是否需要轉換
                 $format = $format ?: $extension;
                 $filename = Str::replaceLast($extension, $format, $file->getClientOriginalName());
                 $handleImage = InterventionImage::make($file)->save('tmp_' . md5_file($file->getRealPath()), $quality);
                 $file = new UploadedFile($handleImage->basePath(), $filename, $handleImage->mime());
-                // 重新设置拓展名
+                // 重新設定擴充名
                 $extension = $format;
                 $handleImage->destroy();
             }
 
-            // 是否启用水印，覆盖原图片
+            // 是否啟用浮水印，覆蓋原圖片
             if (
                 $configs->get(GroupConfigKey::IsEnableWatermark) &&
                 collect($configs->get(GroupConfigKey::WatermarkConfigs))->get('mode', Mode::Overlay) == Mode::Overlay
@@ -203,7 +203,7 @@ class ImageService
 
         $filesystem = new Filesystem($this->getAdapter($strategy));
 
-        // 检测该策略是否存在该图片，有则只创建记录不保存文件
+        // 檢測該策略是否存在該圖片，有則只建立記錄不儲存檔案
         /** @var Image $existing */
         $existing = Image::query()->when($image->strategy_id, function (Builder $builder, $id) {
             $builder->where('strategy_id', $id);
@@ -213,15 +213,15 @@ class ImageService
             try {
                 $filesystem->writeStream($pathname, $handle);
             } catch (FilesystemException $e) {
-                Utils::e($e, '保存图片时出现异常');
-                throw new UploadException(config('app.debug', false) ? $e->getMessage() : '图片上传失败');
+                Utils::e($e, '儲存圖片時出現異常');
+                throw new UploadException(config('app.debug', false) ? $e->getMessage() : '圖片上傳失敗');
             }
             if (is_resource($handle)) @fclose($handle);
         } else {
             $image->fill($existing->only('path', 'name'));
         }
 
-        // 增加当前用户的图片数量和相册图片数量
+        // 增加當前使用者的圖片數量和相簿圖片數量
         $updateNum = function ($method) use ($user, $image) {
             DB::transaction(function () use ($method, $user, $image) {
                 if (! is_null($user)) {
@@ -234,18 +234,18 @@ class ImageService
         };
 
         try {
-            // 图片记录保存失败，删除物理文件
+            // 圖片記錄儲存失敗，刪除物理檔案
             if (! $image->save()) {
                 if (is_null($existing)) $filesystem->delete($image->pathname);
-                throw new \Exception('图片记录保存失败');
+                throw new \Exception('圖片記錄儲存失敗');
             }
             $updateNum('increment');
         } catch (\Throwable $e) {
-            Utils::e($e, '保存图片记录时出现异常');
-            throw new UploadException('图片记录保存失败');
+            Utils::e($e, '儲存圖片記錄時出現異常');
+            throw new UploadException('圖片記錄儲存失敗');
         }
 
-        // 图片检测，跳过 tif、ico、psd、svg 格式
+        // 圖片檢測，跳過 tif、ico、psd、svg 格式
         if ($configs->get(GroupConfigKey::IsEnableScan) && ! in_array($extension, ['psd', 'ico', 'tif', 'svg'])) {
             $scanConfigs = $configs->get(GroupConfigKey::ScanConfigs);
             if ($this->scan(
@@ -254,11 +254,11 @@ class ImageService
                 image: $image,
                 file: $file,
             )) {
-                // 标记 or 删除
+                // 標記 or 刪除
                 if ($configs->get(GroupConfigKey::ScannedAction) === 'delete') {
                     $image->delete();
                     $updateNum('decrement');
-                    throw new UploadException('图片涉嫌违规，禁止上传。');
+                    throw new UploadException('圖片涉嫌違規，禁止上傳。');
                 } else {
                     $image->is_unhealthy = true;
                     $image->save();
@@ -268,7 +268,7 @@ class ImageService
 
         $this->makeThumbnail($image, $file);
 
-        // 上传完成后删除临时文件
+        // 上傳完成後刪除暫存檔案
         unlink($file->getPathname());
 
         return $image;
@@ -371,8 +371,8 @@ class ImageService
         $user = $request->user();
         $carbon = Carbon::now();
         $array = [
-            'minute' => ['key' => GroupConfigKey::LimitPerMinute, 'str' => '分钟'],
-            'hours' => ['key' => GroupConfigKey::LimitPerHour, 'str' => '小时'],
+            'minute' => ['key' => GroupConfigKey::LimitPerMinute, 'str' => '分鐘'],
+            'hours' => ['key' => GroupConfigKey::LimitPerHour, 'str' => '小時'],
             'days' => ['key' => GroupConfigKey::LimitPerDay, 'str' => '天'],
             'weeks' => ['key' => GroupConfigKey::LimitPerWeek, 'str' => '周'],
             'months' => ['key' => GroupConfigKey::LimitPerMonth, 'str' => '月'],
@@ -389,19 +389,19 @@ class ImageService
             })->count();
 
             if ($value && $count >= $value) {
-                throw new UploadException("每{$item['str']}内你最多可以上传 {$value} 张图片");
+                throw new UploadException("每{$item['str']}內你最多可以上傳 {$value} 張圖片");
             }
         }
     }
 
     /**
-     * 检测图片是否违规
+     * 檢測圖片是否違規
      *
      * @param $driver
      * @param  Collection  $configs
      * @param  Image  $image
      * @param  UploadedFile $file
-     * @return bool true=违规
+     * @return bool true=違規
      * @throws UploadException
      */
     public function scan($driver, Collection $configs, Image $image, UploadedFile $file): bool
@@ -409,7 +409,7 @@ class ImageService
         $flag = false;
         try {
             if ($driver === 'tencent') {
-                // 图片大小不得超过 5mb
+                // 圖片大小不得超過 5mb
                 if ($file->getSize() >= 5242880) {
                     return false;
                 }
@@ -436,7 +436,7 @@ class ImageService
             }
 
             if ($driver === 'aliyun') {
-                // 20 mb以内、宽高不超过 30000px
+                // 20 mb以內、寬高不超過 30000px
                 if ($file->getSize() >= 20971520 || $image->width >= 30000 || $image->height >= 30000) {
                     return false;
                 }
@@ -466,7 +466,7 @@ class ImageService
             }
 
             if ($driver === 'nsfwjs') {
-                // 不支持 bmp 格式
+                // 不支援 bmp 格式
                 if ($image->extension === 'bmp') {
                     return false;
                 }
@@ -495,7 +495,7 @@ class ImageService
     }
 
     /**
-     * 合成水印
+     * 合成浮水印
      *
      * @param  mixed  $image
      * @param  Collection  $configs
@@ -513,16 +513,16 @@ class ImageService
 
         $watermark = $this->getWatermark($driver, $options);
 
-        // 原图宽高
+        // 原圖寬高
         $imageWidth = $image->width();
         $imageHeight = $image->height();
 
-        // 水印画布宽高
+        // 浮水印畫布寬高
         $watermarkWidth = $watermark->width();
         $watermarkHeight = $watermark->height();
 
         if ($position === 'tiled') {
-            // 平铺水印
+            // 平鋪浮水印
             for ($x = 0; $x < $imageWidth; $x++) {
                 for ($y = 0; $y < $imageHeight; $y++) {
                     $image->insert($watermark, '', $x, $y);
@@ -538,12 +538,12 @@ class ImageService
     }
 
     /**
-     * 生成缩略图，缩略图目录必须在 public 目录下，且该目录必须存在
+     * 生成縮圖，縮圖目錄必須在 public 目錄下，且該目錄必須存在
      *
-     * @param mixed $image 图片数据
-     * @param mixed $data 物理图片数据
-     * @param int $max 最大宽高
-     * @param bool $force 是否强制覆盖
+     * @param mixed $image 圖片資料
+     * @param mixed $data 物理圖片資料
+     * @param int $max 最大寬高
+     * @param bool $force 是否強制覆蓋
      * @return void
      */
     public function makeThumbnail(Image $image, mixed $data, int $max = 400, bool $force = false): void
@@ -552,12 +552,12 @@ class ImageService
 
         if (! file_exists($pathname) || $force) {
             try {
-                // 创建文件夹
+                // 建立資料夾
                 if (! is_dir(dirname($pathname))) {
                     @mkdir(dirname($pathname));
                 }
 
-                // 生成缩略图，svg等格式本身体积足够小且网页原生支持(比生成的png缩略图还小)，不用生成缩略图，直接复制文件
+                // 生成縮圖，svg等格式本身體積足夠小且網頁原生支援(比生成的png縮圖還小)，不用生成縮圖，直接複製檔案
                 if($image->extension ==='svg') {
                     copy($data->getPathname(), $pathname);
                 }else{
@@ -578,13 +578,13 @@ class ImageService
                     $img->destroy();
                 }
             } catch (\Throwable $e) {
-                Utils::e($e, '生成缩略图时出现异常');
+                Utils::e($e, '生成縮圖時出現異常');
             }
         }
     }
 
     /**
-     * 获取水印画布
+     * 取得浮水印畫布
      *
      * @param  string  $driver
      * @param  Collection  $options
@@ -623,7 +623,7 @@ class ImageService
                 ->file(storage_path('app/public/'.trim($options->get(FontOption::Font), '/')))
                 ->size((int) $options->get(FontOption::Size, 50))
                 ->angle((int) $options->get(FontOption::Angle, 0))
-                ->color($options->get(FontOption::Color, '000000')); // 十六进制 or rgba
+                ->color($options->get(FontOption::Color, '000000')); // 十六進位 or rgba
             $box = $font->getBoxSize();
             $canvas = $manager->canvas($box['width'], $box['height']);
             $font->applyToImage($canvas);

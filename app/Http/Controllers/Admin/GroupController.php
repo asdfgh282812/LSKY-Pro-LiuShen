@@ -66,7 +66,7 @@ class GroupController extends Controller
 
         $this->share();
 
-        return $this->success('创建成功');
+        return $this->success('建立成功');
     }
 
     public function update(GroupRequest $request): Response
@@ -78,22 +78,22 @@ class GroupController extends Controller
             $group->fill($request->validated());
             if ($group->isDirty('is_default') && ! $group->is_default) {
                 if (! Group::query()->where('is_default', true)->where('id', '<>', $group->id)->exists()) {
-                    return $this->fail('系统至少需要保留一个默认组');
+                    return $this->fail('系統至少需要保留一個預設組');
                 }
             }
             if ($group->isDirty('is_guest') && ! $group->is_guest) {
                 if (! Group::query()->where('is_guest', true)->where('id', '<>', $group->id)->exists()) {
-                    return $this->fail('系统至少需要保留一个游客组');
+                    return $this->fail('系統至少需要保留一個訪客組');
                 }
             }
             $group->save();
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-            return $this->fail('保存失败');
+            return $this->fail('儲存失敗');
         }
 
-        return $this->success('保存成功');
+        return $this->success('儲存成功');
     }
 
     public function delete(Request $request): Response
@@ -101,14 +101,14 @@ class GroupController extends Controller
         /** @var Group $group */
         if ($group = Group::query()->find($request->route('id'))) {
             if ($group->is_default || $group->is_guest) {
-                return $this->fail('默认组和游客组无法删除');
+                return $this->fail('預設組和訪客組無法刪除');
             }
             DB::transaction(function () use ($group) {
                 $group->users()->update(['group_id' => Group::query()->where('is_default', true)->value('id')]);
                 $group->delete();
             });
         }
-        return $this->success('删除成功');
+        return $this->success('刪除成功');
     }
 
     public function clearCache(Request $request): Response

@@ -49,7 +49,7 @@ class Install extends Command
      */
     public function handle(): int
     {
-        // 判断是否已经安装
+        // 判斷是否已經安裝
         if (file_exists(base_path('installed.lock'))) {
             $this->warn('Already installed. if you want to reinstall, please remove installed.lock file.');
             return 0;
@@ -67,9 +67,9 @@ class Install extends Command
         ];
         $configs = array_intersect_key($options, config($connection));
 
-        // 覆盖默认配置
+        // 覆蓋預設設定
         Config::set($connection, array_merge(config($connection), $configs));
-        // 设置默认数据库驱动
+        // 設定預設資料庫驅動
         Config::set('database.default', $driver);
 
         clearstatcache(true);
@@ -80,23 +80,23 @@ class Install extends Command
                 file_put_contents($options['database'], '');
                 Config::set('database.connections.sqlite.database', $options['database']);
             }
-            // 执行数据库迁移
+            // 執行資料庫遷移
             Artisan::call('migrate:fresh', ['--force' => true], outputBuffer: $this->output);
-            // 填充数据
+            // 填充資料
             Artisan::call('db:seed', ['--force' => true, '--class' => 'InstallSeeder'], outputBuffer: $this->output);
-            // 更新 env 文件
+            // 更新 env 檔案
             $replaces = collect($options)->transform(fn ($item, $key) => ['DB_'.strtoupper($key) => $item])->collapse();
             file_put_contents($this->laravel->environmentFilePath(), preg_replace(
                 $replaces->map(fn ($item, $key) => $this->replacementPattern($key, env($key, '')))->values()->toArray(),
                 $replaces->map(fn ($item, $key) => "{$key}={$item}")->values()->toArray(),
                 file_get_contents($this->laravel->environmentFilePath())
             ));
-            // 创建锁文件
+            // 建立鎖檔案
             file_put_contents(base_path('installed.lock'), '');
         } catch (\Throwable $e) {
             $this->warn("Installation error!\n");
             $this->error($e->getMessage());
-            Utils::e($e, '执行数据库安装程序时出现异常');
+            Utils::e($e, '執行資料庫安裝程式時出現異常');
             return 1;
         }
 

@@ -8,7 +8,7 @@
             overflow: hidden;
         }
 
-        /* 层 1：中心徑向晕染 — 中心绿色调向外渐趋白 */
+        /* 層 1：中心徑向暈染 — 中心綠色調向外漸趨白 */
         .hero-bg::before {
             content: '';
             position: absolute;
@@ -23,7 +23,7 @@
             pointer-events: none;
         }
 
-        /* 层 2：四角装饰性大光晕，增加空间层次 */
+        /* 層 2：四角裝飾性大光暈，增加空間層次 */
         .hero-bg::after {
             content: '';
             position: absolute;
@@ -36,7 +36,7 @@
             pointer-events: none;
         }
 
-        /* 层 3：圆点网格 — 中心透明、四周显现（mask 反向） */
+        /* 層 3：圓點網格 — 中心透明、四周顯現（mask 反向） */
         .grid-pattern {
             position: absolute;
             inset: 0;
@@ -59,7 +59,7 @@
             pointer-events: none;
         }
 
-        /* 层 4：SVG feTurbulence 噪点纹理，增加 paper 质感 */
+        /* 層 4：SVG feTurbulence 噪點紋理，增加 paper 質感 */
         .hero-noise {
             position: absolute;
             inset: 0;
@@ -169,7 +169,7 @@
         <div class="grid-pattern"></div>
         <div class="hero-noise"></div>
 
-        {{-- 顶部导航 --}}
+        {{-- 頂部導航 --}}
             <header class="relative z-20 w-full welcome-header" style="background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(16,185,129,0.1); box-shadow: 0 1px 12px rgba(0,0,0,0.04);">
             <div class="container mx-auto px-5 sm:px-10 2xl:px-60 h-16 flex justify-between items-center">
                 {{-- Logo --}}
@@ -180,7 +180,7 @@
                     <span class="font-bold text-lg truncate max-w-[180px]" style="background: linear-gradient(135deg, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{{ \App\Utils::config(\App\Enums\ConfigKey::AppName) }}</span>
                 </a>
 
-                {{-- 右侧按钮 --}}
+                {{-- 右側按鈕 --}}
                 <div class="flex items-center gap-3">
                     @includeWhen($_is_notice, 'layouts.notice')
                     @includeWhen($_group->strategies->isNotEmpty(), 'layouts.strategies')
@@ -190,13 +190,13 @@
                     @else
                         <a href="{{ route('login') }}"
                             class="nav-link-hover text-slate-600 text-sm font-medium px-4 py-2 rounded-lg transition-all">
-                            登录
+                            登入
                         </a>
                         @if(\App\Utils::config(\App\Enums\ConfigKey::IsEnableRegistration))
                         <a href="{{ route('register') }}"
                             class="text-white text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-200 hover:-translate-y-0.5"
                             style="background: linear-gradient(135deg, #10b981, #0d9488); box-shadow: 0 4px 14px rgba(16,185,129,0.35);">
-                            注册
+                            註冊
                         </a>
                         @endif
                     @endif
@@ -204,13 +204,13 @@
             </div>
         </header>
 
-        {{-- 主内容区 --}}
+        {{-- 主內容區 --}}
         <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-5 py-16">
             {{-- Hero文字 --}}
             <div class="text-center mb-10">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); color: #059669;">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    个人自用 &middot; 安全可靠的图片存储
+                    個人自用 &middot; 安全可靠的圖片儲存
                 </div>
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, #10b981, #0d9488); box-shadow: 0 6px 20px rgba(16,185,129,0.3);">
@@ -219,21 +219,21 @@
                     <h1 class="text-4xl sm:text-5xl font-extrabold" style="background: linear-gradient(135deg, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{{ \App\Utils::config(\App\Enums\ConfigKey::AppName) }}</h1>
                 </div>
                 <p class="text-2xl sm:text-3xl font-bold text-slate-700 mb-3">
-                    上传、管理、<span style="background: linear-gradient(135deg, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">分享您的图片</span>
+                    上傳、管理、<span style="background: linear-gradient(135deg, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">分享您的圖片</span>
                 </p>
                 <p class="text-slate-500 text-sm max-w-lg mx-auto leading-relaxed">
-                    本站为个人自用图床，图片安全存储于私有服务器。支持多种储存策略与相册管理，快速生成分享链接。
+                    本站為個人自用圖床，圖片安全儲存於私有伺服器。支援多種儲存策略與相簿管理，快速生成分享連結。
                 </p>
             </div>
 
-            {{-- 上传组件容器 --}}
+            {{-- 上傳元件容器 --}}
             <div class="w-full max-w-3xl upload-section p-6 sm:p-8">
                 <x-upload/>
             </div>
 
-            {{-- 特性标签 --}}
+            {{-- 特性標籤 --}}
             <div class="flex flex-wrap justify-center gap-3 mt-8">
-                @foreach([['fas fa-shield-alt', '安全加密'], ['fas fa-bolt', '极速上传'], ['fas fa-share-alt', '快速分享'], ['fas fa-hdd', '多种储存'], ['fas fa-images', '相册管理']] as $feature)
+                @foreach([['fas fa-shield-alt', '安全加密'], ['fas fa-bolt', '極速上傳'], ['fas fa-share-alt', '快速分享'], ['fas fa-hdd', '多種儲存'], ['fas fa-images', '相簿管理']] as $feature)
                 <div class="feature-pill flex items-center gap-1.5 px-4 py-2 rounded-full text-sm transition-all duration-200 cursor-default">
                     <i class="{{ $feature[0] }} text-xs text-emerald-500"></i>
                     <span>{{ $feature[1] }}</span>
@@ -245,9 +245,9 @@
         {{-- 底部 --}}
         <footer class="relative z-10 py-4 welcome-footer" style="background: rgba(255,255,255,0.6); border-top: 1px solid rgba(16,185,129,0.08);">
             <p class="text-center text-slate-400 text-xs">
-                初始项目:&nbsp;<a href="https://github.com/lsky-org/lsky-pro" target="_blank" rel="noreferrer" class="hover:text-emerald-500 transition-colors">兰空图床</a>
+                初始專案:&nbsp;<a href="https://github.com/lsky-org/lsky-pro" target="_blank" rel="noreferrer" class="hover:text-emerald-500 transition-colors">蘭空圖床</a>
                 &nbsp;|&nbsp;
-                UI设计:&nbsp;<a href="https://github.com/willow-god/LSKY-Pro-LiuShen" target="_blank" rel="noreferrer" class="hover:text-emerald-500 transition-colors">清羽飞扬</a>
+                UI設計:&nbsp;<a href="https://github.com/willow-god/LSKY-Pro-LiuShen" target="_blank" rel="noreferrer" class="hover:text-emerald-500 transition-colors">清羽飛揚</a>
             </p>
             <p class="text-center text-slate-400 text-xs mt-1">
                 &copy; {{ date('Y') }} {{ \App\Utils::config(\App\Enums\ConfigKey::AppName) }}. All rights reserved.

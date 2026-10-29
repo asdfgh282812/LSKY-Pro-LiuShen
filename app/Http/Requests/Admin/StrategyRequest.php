@@ -21,15 +21,15 @@ class StrategyRequest extends FormRequest
                 $folders = [config('app.thumbnail_path'), 'fonts', 'css', 'js'];
                 $symlink = Strategy::getRootPath($value);
                 if (! $symlink) {
-                    return $fail('访问域名缺少根路径');
+                    return $fail('存取網域缺少根路徑');
                 }
                 if (in_array($symlink, $folders)) {
-                    return $fail('系统保留路径：'. $symlink);
+                    return $fail('系統保留路徑：'. $symlink);
                 }
                 if (false !== strpbrk($symlink, "\\/?%*:|\"<>")) {
-                    return $fail('根路径名称不符合规则');
+                    return $fail('根路徑名稱不符合規則');
                 }
-                // 修改时单独判断
+                // 修改時單獨判斷
                 if ($this->method() === 'PUT') {
                     $symlinks = Strategy::query()
                         ->where('id', '<>', $this->route('id'))
@@ -38,11 +38,11 @@ class StrategyRequest extends FormRequest
                             return Strategy::getRootPath($configs->get('url'));
                         })->merge($folders)->values()->toArray();
                     if (in_array($symlink, $symlinks)) {
-                        return $fail('根路径已经存在');
+                        return $fail('根路徑已經存在');
                     }
                 } else {
                     if (realpath(public_path($symlink))) {
-                        return $fail('根路径已经存在');
+                        return $fail('根路徑已經存在');
                     }
                 }
             }
@@ -63,10 +63,10 @@ class StrategyRequest extends FormRequest
                 'configs.root' => ['max:1000', function ($attribute, $value, $fail) {
                     if ($value) {
                         if (! is_dir($value)) {
-                            return $fail('储存路径不存在');
+                            return $fail('儲存路徑不存在');
                         }
                         if (! is_writeable($value)) {
-                            return $fail('储存路径没有写入权限');
+                            return $fail('儲存路徑沒有寫入權限');
                         }
                     }
                 }],
@@ -141,36 +141,36 @@ class StrategyRequest extends FormRequest
     public function attributes()
     {
         $array = [
-            'name' => '名称',
-            'intro' => '简介',
+            'name' => '名稱',
+            'intro' => '簡介',
             'key' => '策略',
-            'configs.url' => '访问网址',
-            'configs.queries' => 'Url 额外参数',
+            'configs.url' => '存取網址',
+            'configs.queries' => 'Url 額外參數',
         ];
 
         return array_merge($array, match((int)$this->input('key')) {
             StrategyKey::Local => [
-                'configs.root' => '根目录路径',
+                'configs.root' => '根目錄路徑',
             ],
             StrategyKey::S3 => [
                 'configs.access_key_id' => 'AccessKeyId',
                 'configs.secret_access_key' => 'SecretAccessKey',
-                'configs.endpoint' => '连接地址',
-                'configs.region' => '区域',
-                'configs.bucket' => '储存桶名称',
+                'configs.endpoint' => '連線位址',
+                'configs.region' => '區域',
+                'configs.bucket' => '儲存桶名稱',
             ],
             StrategyKey::Oss => [
                 'configs.access_key_id' => 'AccessKeyId',
                 'configs.access_key_secret' => 'AccessKeySecret',
-                'configs.endpoint' => '地域节点域名',
-                'configs.bucket' => 'Bucket 名称',
+                'configs.endpoint' => '地域節點網域名稱',
+                'configs.bucket' => 'Bucket 名稱',
             ],
             StrategyKey::Cos => [
                 'configs.app_id' => 'AppId',
                 'configs.secret_id' => 'SecretId',
                 'configs.secret_key' => 'SecretKey',
-                'configs.region' => '所属地域',
-                'configs.bucket' => '储存桶名称',
+                'configs.region' => '所屬地域',
+                'configs.bucket' => '儲存桶名稱',
             ],
             StrategyKey::Kodo => [
                 'configs.access_key' => 'AccessKey',
@@ -178,42 +178,42 @@ class StrategyRequest extends FormRequest
                 'configs.bucket' => 'Bucket',
             ],
             StrategyKey::Uss => [
-                'configs.service' => '服务名称',
-                'configs.operator' => '操作员名称',
-                'configs.password' => '操作员密码',
+                'configs.service' => '服務名稱',
+                'configs.operator' => '操作員名稱',
+                'configs.password' => '操作員密碼',
             ],
             StrategyKey::Sftp => [
-                'configs.root' => '根目录路径',
-                'configs.host' => '主机地址',
-                'configs.port' => '连接端口',
-                'configs.username' => '用户名',
-                'configs.password' => '密码',
-                'configs.private_key' => '密钥',
-                'configs.passphrase' => '密钥口令',
+                'configs.root' => '根目錄路徑',
+                'configs.host' => '主機位址',
+                'configs.port' => '連線連接埠',
+                'configs.username' => '使用者名稱',
+                'configs.password' => '密碼',
+                'configs.private_key' => '金鑰',
+                'configs.passphrase' => '金鑰口令',
                 'configs.use_agent' => '使用代理',
             ],
             StrategyKey::Ftp => [
-                'configs.root' => '根目录路径',
-                'configs.host' => '主机地址',
-                'configs.port' => '连接端口',
-                'configs.username' => '用户名',
-                'configs.password' => '密码',
-                'configs.ssl' => '加密连接',
-                'configs.passive' => '被动模式',
+                'configs.root' => '根目錄路徑',
+                'configs.host' => '主機位址',
+                'configs.port' => '連線連接埠',
+                'configs.username' => '使用者名稱',
+                'configs.password' => '密碼',
+                'configs.ssl' => '加密連線',
+                'configs.passive' => '被動模式',
             ],
             StrategyKey::Webdav => [
-                'configs.base_uri' => '连接地址',
-                'configs.username' => '用户名',
-                'configs.password' => '密码',
-                'configs.auth_type' => '认证方式',
-                'configs.prefix' => '前缀',
+                'configs.base_uri' => '連線位址',
+                'configs.username' => '使用者名稱',
+                'configs.password' => '密碼',
+                'configs.auth_type' => '認證方式',
+                'configs.prefix' => '字首',
             ],
             StrategyKey::Minio => [
                 'configs.access_key' => 'AccessKey',
                 'configs.secret_key' => 'SecretKey',
-                'configs.endpoint' => '连接地址',
-                'configs.region' => '区域',
-                'configs.bucket' => 'Bucket 名称',
+                'configs.endpoint' => '連線位址',
+                'configs.region' => '區域',
+                'configs.bucket' => 'Bucket 名稱',
                 'configs.bucket_endpoint' => 'BucketEndpoint',
             ],
         });

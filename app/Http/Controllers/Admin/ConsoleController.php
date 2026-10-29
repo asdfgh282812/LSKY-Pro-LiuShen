@@ -28,7 +28,7 @@ class ConsoleController extends Controller
         $end = Carbon::now()->endOfDay();
         $dates = Utils::makeDateRange($start->format('Y-m-d'), $end->format('Y-m-d'));
 
-        $fields = ['游客上传', '用户上传', '新用户'];
+        $fields = ['訪客上傳', '使用者上傳', '新使用者'];
 
         $images = Image::query()
             ->whereBetween('created_at', [$start->format($format), $end->format($format)])
