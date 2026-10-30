@@ -200,6 +200,11 @@ class Controller extends BaseController
 
         return \response()->stream(function () use ($contents) {
             echo $contents;
-        }, headers: ['Content-type' => $mimetype]);
+        }, headers: [
+            'Content-type' => $mimetype,
+            // 即使內容為 SVG 等也不允許執行指令碼或被當成頁面
+            'Content-Security-Policy' => "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+            'X-Content-Type-Options' => 'nosniff',
+        ]);
     }
 }

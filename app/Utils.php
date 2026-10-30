@@ -22,21 +22,44 @@ class Utils
     }
 
     /**
-     * 取得頭像位址
+     * 取得預設頭像位址：後台設定了頭像映象時使用 Gravatar 相容服務，
+     * 否則在本機產生以姓名首字為主的 SVG，避免依賴外部服務而顯示破圖。
      *
      * @param $email
+     * @param string $name
      * @param int $s
      * @param string $d
      * @param string $r
      * @return string
      */
-    public static function getAvatar($email, int $s = 96, string $d = 'mp', string $r = 'g'): string
+    public static function getAvatar($email, string $name = '', int $s = 96, string $d = 'mp', string $r = 'g'): string
     {
         $mirror = trim((string) Utils::config(ConfigKey::AvatarMirrorUrl, ''));
-        $url = ($mirror === '' ? 'https://weavatar.com/avatar/' : rtrim($mirror, '/').'/');
-        $url .= md5(strtolower(trim($email)));
-        $url .= "?s=$s&d=$d&r=$r";
-        return $url;
+
+        if ($mirror !== '') {
+            return rtrim($mirror, '/').'/'.md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
+        }
+
+        return self::defaultAvatar($email, $name);
+    }
+
+    /**
+     * 產生本機預設頭像（data URI 形式的 SVG）
+     */
+    public static function defaultAvatar($email, string $name = ''): string
+    {
+        $seed = strtolower(trim((string) $email));
+        $hue = hexdec(substr(md5($seed), 0, 4)) % 360;
+        $label = mb_strtoupper(mb_substr(trim($name) !== '' ? trim($name) : $seed, 0, 1)) ?: '?';
+        $label = htmlspecialchars($label, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+
+        $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">'
+            ."<rect width=\"96\" height=\"96\" fill=\"hsl($hue,55%,48%)\"/>"
+            .'<text x="48" y="48" dy=".35em" text-anchor="middle" font-size="44" font-weight="600" '
+            .'font-family="-apple-system,BlinkMacSystemFont,\'Segoe UI\',\'Noto Sans TC\',sans-serif" fill="#fff">'
+            .$label.'</text></svg>';
+
+        return 'data:image/svg+xml;base64,'.base64_encode($svg);
     }
 
     /**

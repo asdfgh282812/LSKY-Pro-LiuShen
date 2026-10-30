@@ -7,6 +7,7 @@ use App\Utils;
 use Illuminate\Support\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -72,6 +73,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'configs',
         'group_id',
         'is_adminer',
+        'avatar_path',
     ];
 
     /**
@@ -95,6 +97,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected static function booted()
     {
+        static::deleting(function (self $user) {
+            if ($user->avatar_path) {
+                Storage::disk('local')->delete($user->avatar_path);
+            }
+        });
+
         static::creating(function (self $user) {
             // 預設組
             $user->group_id = Group::query()->where('is_default', true)->value('id');
@@ -106,7 +114,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function avatar(): Attribute
     {
-        return new Attribute(fn () => Utils::getAvatar($this->email));
+        return new Attribute(function () {
+            if ($this->avatar_path) {
+                return route('avatar.show', ['user' => $this->id, 'v' => substr(md5($this->avatar_path), 0, 8)]);
+            }
+
+            return Utils::getAvatar($this->email, (string) $this->name);
+        });
     }
 
     public function useCapacity(): Attribute

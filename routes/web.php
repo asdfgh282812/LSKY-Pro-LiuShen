@@ -37,6 +37,7 @@ Route::get('/', fn () => view('welcome'))
 
 Route::any('install', [Controller::class, 'install'])->name('install');
 Route::post('upload', [Controller::class, 'upload']);
+Route::get('avatar/{user}', [UserController::class, 'avatar'])->whereNumber('user')->name('avatar.show');
 Route::get('custom-code', [AdminSettingController::class, 'customCode'])->name('custom.code');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
@@ -45,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('settings')->group(function () {
         Route::get('', [UserController::class, 'settings'])->name('settings');
         Route::put('', [UserController::class, 'update'])->name('settings.update');
+        Route::post('avatar', [UserController::class, 'uploadAvatar'])->middleware('throttle:10,1')->name('settings.avatar.upload');
+        Route::delete('avatar', [UserController::class, 'deleteAvatar'])->name('settings.avatar.delete');
         Route::put('set-strategy', [UserController::class, 'setStrategy'])->name('settings.strategy.set');
     });
 

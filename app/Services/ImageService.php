@@ -106,6 +106,10 @@ class ImageService
             throw new UploadException("圖片大小超出限制");
         }
 
+        if ($extension === 'svg' && ! $this->isSafeSvg((string) file_get_contents($file->getRealPath()))) {
+            throw new UploadException('SVG 檔案包含不安全的內容（指令碼、事件處理或外部引用）');
+        }
+
         // 圖片所屬組
         $image->group_id = $group->id;
         // 圖片預設權限
@@ -365,6 +369,31 @@ class ImageService
     /**
      * @throws UploadException
      */
+    /**
+     * SVG 會以網站同源提供，含指令碼會造成儲存型 XSS，因此拒絕可執行或外部引用的內容。
+     */
+    public function isSafeSvg(string $content): bool
+    {
+        // 去除空白與控制字元、解碼實體後再比對，避免以編碼規避
+        $normalized = strtolower(html_entity_decode(preg_replace('/[\x00-\x20]+/', '', $content), ENT_QUOTES | ENT_HTML5));
+
+        if (! str_contains($normalized, '<svg')) {
+            return false;
+        }
+
+        foreach ([
+            '<script', '<foreignobject', '<iframe', '<embed', '<object', '<audio', '<video', '<animate', '<set',
+            '<!entity', '<!doctype', 'javascript:', 'vbscript:', 'data:text/html', 'data:application', '@import',
+        ] as $needle) {
+            if (str_contains($normalized, $needle)) {
+                return false;
+            }
+        }
+
+        // onload=、onclick= 等事件處理屬性
+        return ! preg_match('/[\"\'\/]on[a-z]+=/', $normalized);
+    }
+
     protected function rateLimiter(Collection $configs, Request $request)
     {
         /** @var User|null $user */

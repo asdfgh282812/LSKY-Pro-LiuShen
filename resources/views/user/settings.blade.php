@@ -36,6 +36,31 @@
 
             <div class="mb-5 flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(13,148,136,0.15));">
+                    <i class="fas fa-image text-sm" style="color: #059669;"></i>
+                </div>
+                <h2 class="font-bold text-lg text-slate-800">個人頭像</h2>
+            </div>
+
+            <div class="mb-8 rounded-2xl overflow-hidden" style="background: var(--panel-bg-strong); border: 1px solid var(--border-strong); box-shadow: var(--card-shadow);">
+                <div class="px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-5">
+                    <img id="avatar-preview" src="{{ Auth::user()->avatar }}" alt="" class="h-20 w-20 rounded-full object-cover ring-2 ring-emerald-100 dark:ring-emerald-500/20">
+                    <div class="flex-1">
+                        <p class="text-sm text-slate-500 mb-3">支援 JPG、PNG、GIF、WebP，大小不超過 2MB，將自動裁切為正方形。未上傳時顯示以姓名首字產生的預設頭像。</p>
+                        <input type="file" id="avatar-file" accept="image/jpeg,image/png,image/gif,image/webp" class="hidden">
+                        <div class="flex flex-wrap gap-3">
+                            <button type="button" id="avatar-upload" class="inline-flex items-center justify-center gap-1.5 py-2.5 px-5 text-sm font-semibold rounded-lg text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" style="background: linear-gradient(135deg, #059669, #0d9488); box-shadow: 0 2px 10px rgba(16,185,129,0.3);">
+                                <i class="fas fa-upload"></i><span>上傳頭像</span>
+                            </button>
+                            <button type="button" id="avatar-reset" class="inline-flex items-center justify-center gap-1.5 py-2.5 px-5 text-sm font-semibold rounded-lg transition-all duration-200 focus:outline-none text-slate-600 border" style="border-color: var(--border-strong);" @if(! Auth::user()->avatar_path) hidden @endif>
+                                <i class="fas fa-undo"></i><span>恢復預設</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5 flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(13,148,136,0.15));">
                     <i class="fas fa-user-cog text-sm" style="color: #059669;"></i>
                 </div>
                 <h2 class="font-bold text-lg text-slate-800">基礎設定</h2>
@@ -235,6 +260,39 @@
 
     @push('scripts')
         <script>
+            const setAvatar = (url) => {
+                $('#avatar-preview, #user-menu-button img').attr('src', url);
+            };
+
+            $('#avatar-upload').on('click', () => $('#avatar-file').trigger('click'));
+
+            $('#avatar-file').on('change', function () {
+                const file = this.files[0];
+                this.value = '';
+                if (!file) {
+                    return;
+                }
+                const data = new FormData();
+                data.append('avatar', file);
+                axios.post(@json(route('settings.avatar.upload')), data).then(response => {
+                    toastr[response.data.status ? 'success' : 'warning'](response.data.message);
+                    if (response.data.status) {
+                        setAvatar(response.data.data.avatar);
+                        $('#avatar-reset').prop('hidden', false);
+                    }
+                }).catch(() => toastr.warning('頭像上傳失敗，請稍後再試'));
+            });
+
+            $('#avatar-reset').on('click', function () {
+                axios.delete(@json(route('settings.avatar.delete'))).then(response => {
+                    toastr[response.data.status ? 'success' : 'warning'](response.data.message);
+                    if (response.data.status) {
+                        setAvatar(response.data.data.avatar);
+                        $('#avatar-reset').prop('hidden', true);
+                    }
+                });
+            });
+
             $('form').submit(function (e) {
                 e.preventDefault();
                 axios.put(this.action, $(this).serialize()).then(response => {
