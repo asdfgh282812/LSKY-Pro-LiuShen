@@ -105,7 +105,7 @@
 
 ### 前置要求
 
-- PHP >= 8.3（强烈建议使用当前最新的安全版本，目前为 8.5.12；8.2 及更早版本已不再支持。若需在反向代理后运行，请在 `.env` 中设置 `TRUSTED_PROXIES`）
+- PHP >= 8.3（强烈建议始终使用所用分支的最新安全版本，请以 [php.net](https://www.php.net/supported-versions.php) 公布的最新版为准，不要停留在旧的修补版；8.2 及更早版本已不再支持。若需在反向代理后运行，请在 `.env` 中设置 `TRUSTED_PROXIES`）
 - MySQL 5.7+ / PostgreSQL 9.6+ / SQLite 3.8.8+
 - BCMath, Ctype, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, Imagick 扩展
 - `exec`, `shell_exec`, `readlink`, `symlink`, `putenv`, `getenv`, `chmod`, `chown`, `fileperms` 函数可用

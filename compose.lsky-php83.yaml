@@ -1,0 +1,16 @@
+services:
+  lsky:
+    image: lsky-liushen-local:php8.5.13-3dcda17
+    build:
+      context: ./.update-20261030-3dcda17/runtime
+    container_name: coldpig-lskypro-docker-1
+    hostname: coldpig-lskypro-docker-1
+    ports:
+      - "2024:80"
+    volumes:
+      - /volume1/docker/lsky:/var/www/html:rw
+    network_mode: bridge
+    cpu_shares: 50
+    restart: always
+    stdin_open: true
+    tty: true
